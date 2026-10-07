@@ -1,0 +1,15 @@
+[
+  { "id": "fnpr", "name": "Федерация независимых профсоюзов России", "url": "https://fnpr.ru/", "logo": "/images/organizations/fnpr.jpg" },
+  { "id": "solidarnost", "name": "Солидарность", "url": "https://solidarnost.org/", "logo": "/images/organizations/solidarnost.png" },
+  { "id": "profkurort", "name": "Профкурорт", "url": "https://profkurort.ru/", "logo": "/images/FNPR-Profkurort.png" },
+  { "id": "habkurort", "name": "Хабаровсккурорт", "url": "https://хабаровсккурорт.рф/", "logo": "/images/habkurort.jpg" },
+  { "id": "rspp", "name": "Союз работодателей Хабаровского края", "url": "https://khab.rspp.ru/", "logo": "/images/organizations/rspp.png" },
+  { "id": "sz27", "name": "Комитет по труду и занятости", "url": "https://sz27.ru/", "logo": "/images/organizations/sz27.png" },
+  { "id": "coz27", "name": "Центр общественного здоровья", "url": "https://coz27.ru/", "logo": "/images/logo_2.png" },
+  { "id": "git27", "name": "Госинспекция труда в Хабаровском крае", "url": "https://git27.rostrud.gov.ru/", "logo": "/images/organizations/logo-prime.png" },
+  { "id": "sfr", "name": "Социальный фонд России", "url": "https://sfr.gov.ru/branches/habarovsk/", "logo": "/images/organizations/sfr.png" },
+  { "id": "atiso", "name": "Академия труда и социальных отношений", "url": "https://atiso.ru/", "logo": "/images/organizations/atiso.png" },
+  { "id": "gup", "name": "СПб Гуманитарный университет профсоюзов", "url": "https://www.gup.ru/", "logo": "/images/organizations/gup.png" },
+  { "id": "prokuratura", "name": "Прокуратура Хабаровского края", "url": "https://epp.genproc.gov.ru/web/proc_27", "logo": "/images/organizations/genproc.png" },
+  { "id": "khabkrai", "name": "Правительство Хабаровского края", "url": "https://khabkrai.ru/", "logo": "/images/organizations/logo3.png" }
+]

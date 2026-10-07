@@ -1,0 +1,47 @@
+[
+  {
+    "id": "plan-god-trudovogo-edinstva",
+    "title": "План мероприятий к Году трудового единства и солидарности",
+    "type": "plan",
+    "year": 2026,
+    "file_old": "https://habprof.ru/images/plan-osnovnykh-meropriyatij-khkoop-posvyashchennykh-godu-trudov_p20294.pdf",
+    "file_local": "/docs/plan-god-trudovogo-edinstva.pdf"
+  },
+  {
+    "id": "plan-raboty-2026",
+    "title": "План работы Хабаровского Профобъединения на 2026 год",
+    "type": "plan",
+    "year": 2026,
+    "file_old": "https://habprof.ru/images/docs/plany-raboty-khkoop-na-2026-god.pdf",
+    "file_local": "/docs/plan-raboty-2026.pdf"
+  },
+  {
+    "id": "trehstoronnee-2026-2028",
+    "title": "Краевое трёхстороннее соглашение на 2026–2028 годы",
+    "type": "soglashenie",
+    "year": 2026,
+    "old_url": "/index.php/activity/sotspartnjorstvo/193-kraevoe-trjokhstoronnee-soglashenie-na-2023-2025-gody"
+  },
+  {
+    "id": "gen-soglashenie",
+    "title": "Генеральное соглашение между профсоюзами, работодателями и правительством",
+    "type": "soglashenie",
+    "year": 2026,
+    "old_url": "/index.php/activity/sotspartnjorstvo/623-podpisano-generalnoe-soglashenie-mezhdu-profsoyuzami-rabotodatelyami-i-pravitelstvom-do-2026-goda"
+  },
+  {
+    "id": "napravleniya-2025-2030",
+    "title": "Основные направления деятельности ХКООП на 2025–2030 годы",
+    "type": "program",
+    "year": 2025,
+    "old_url": "/index.php/about-us/organy/konferentsiya/931-osnovnye-napravleniya-deyatelnosti-khabarovskogo-kraevogo-ob-edineniya-organizatsij-profsoyuzov-na-2025-2030-gody"
+  },
+  {
+    "id": "politika-konfid",
+    "title": "Политика конфиденциальности",
+    "type": "policy",
+    "year": 2026,
+    "file_old": "https://habprof.ru/images/docs/politika.pdf",
+    "file_local": "/docs/politika.pdf"
+  }
+]
