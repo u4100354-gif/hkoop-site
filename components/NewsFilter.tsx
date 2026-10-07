@@ -2,7 +2,15 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 
-type N = { id: string; title: string; date: string; category: string; tags: string[]; excerpt: string };
+type N = { id: string; title: string; date: string; category: string; tags: string[]; excerpt: string; image?: string | null };
+
+const catFallback: Record<string, string> = {
+  molodezh: "/images/i-1.webp",
+  "ohrana-truda": "/images/96ef99bb-f1ef-47a1-a6ee-9d558c479bbd.jpg",
+  novosti: "/images/год3.png",
+  mezhdunarodnoe: "/images/ccfaee06-8db0-44ca-8005-1033f511a98e.jpg",
+  podderzhka: "/images/Asset-13.png",
+};
 
 const catLabels: Record<string, string> = {
   molodezh: "Молодёжь",
@@ -39,9 +47,13 @@ export default function NewsFilter({ items }: { items: N[] }) {
       </div>
       <div className="grid">
         {filtered.map((n) => (
-          <article key={n.id} className="card doc-card">
+          <article key={n.id} className="card news-card">
+            <div className="thumb">
+              <img src={n.image || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" />
+              <span className="date-badge">{n.date}</span>
+            </div>
             <div className="card-body">
-              <small>{n.date} · {catLabels[n.category] || n.category}</small>
+              <small className="cat">{catLabels[n.category] || n.category}</small>
               <h3><Link href={`/news/${n.id}`}>{n.title}</Link></h3>
               <p>{n.excerpt}</p>
               <div><small>{n.tags.join(" · ")}</small></div>

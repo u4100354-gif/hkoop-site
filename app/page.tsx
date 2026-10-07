@@ -19,7 +19,16 @@ const typeLabels: Record<string, string> = {
   policy: "Политика",
 };
 
-const newsImages: Record<string, string> = {  "forum-profmlodezh-2026": "/images/i-1.webp",
+const catFallback: Record<string, string> = {
+  molodezh: "/images/i-1.webp",
+  "ohrana-truda": "/images/96ef99bb-f1ef-47a1-a6ee-9d558c479bbd.jpg",
+  novosti: "/images/год3.png",
+  mezhdunarodnoe: "/images/ccfaee06-8db0-44ca-8005-1033f511a98e.jpg",
+  podderzhka: "/images/Asset-13.png",
+};
+
+const newsImages: Record<string, string> = {
+  "forum-profmlodezh-2026": "/images/i-1.webp",
   "fnpr-grubaya-neostorozhnost": "/images/96ef99bb-f1ef-47a1-a6ee-9d558c479bbd.jpg",
   "den-flaga-2026": "/images/год3.png",
   "harbin-vstrecha-2026": "/images/ccfaee06-8db0-44ca-8005-1033f511a98e.jpg",
@@ -28,7 +37,7 @@ const newsImages: Record<string, string> = {  "forum-profmlodezh-2026": "/images
 };
 
 export default async function Home() {
-  const news: any[] = await q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,excerpt FROM news ORDER BY date DESC LIMIT 4");
+  const news: any[] = await q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,excerpt,image FROM news ORDER BY date DESC LIMIT 4");
   const docs: any[] = await q("SELECT id,title,type,year,file_local,file_old,old_url FROM documents ORDER BY year DESC LIMIT 4");
   const partners: any[] = await q("SELECT * FROM partners ORDER BY name");
   const docHref = (d: any) => d.file_local || d.file_old || (d.old_url ? `https://habprof.ru${d.old_url}` : "/docs");
@@ -46,7 +55,7 @@ export default async function Home() {
             {(news as any[]).slice(0, 4).map((n) => (
               <article key={n.id} className="card news-card">
                 <div className="thumb">
-                  <img src={newsImages[n.id] || "/images/i-1.webp"} alt="" loading="lazy" />
+                  <img src={n.image || newsImages[n.id] || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" />
                   <span className="date-badge">{n.date}</span>
                 </div>
                 <div className="card-body">
