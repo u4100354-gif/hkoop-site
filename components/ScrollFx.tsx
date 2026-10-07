@@ -2,6 +2,13 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+function revealVisible() {
+  document.querySelectorAll(".reveal:not(.in)").forEach((el) => {
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight * 0.95 && r.bottom > 0) el.classList.add("in");
+  });
+}
+
 export default function ScrollFx() {
   const [top, setTop] = useState(false);
   const path = usePathname();
@@ -15,10 +22,20 @@ export default function ScrollFx() {
           io.unobserve(e.target);
         }
       }),
-      { threshold: 0.12 }
+      { threshold: 0.05 }
     );
     els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    // Страховка: показать всё видимое сразу и остальное через 2.5с
+    const t1 = requestAnimationFrame(revealVisible);
+    const t2 = setTimeout(() => {
+      revealVisible();
+      document.querySelectorAll(".reveal:not(.in)").forEach((el) => el.classList.add("in"));
+    }, 2500);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(t1);
+      clearTimeout(t2);
+    };
   }, [path]);
 
   useEffect(() => {

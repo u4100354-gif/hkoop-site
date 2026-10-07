@@ -9,7 +9,7 @@ export default async function Honor() {
       <section className="section">
         <div className="grid">
           {honor.map((h) => (
-            <article key={h.id} className="card news-card">
+            <article key={h.id} className="card news-card honor-card">
               <div className="thumb">
                 {h.photo ? <img src={h.photo} alt={h.fio} loading="lazy" /> : <div style={{ height: 170, background: "linear-gradient(135deg,#252e4f,#3a4670)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 48 }}>★</div>}
                 <span className="date-badge">{h.year}</span>
