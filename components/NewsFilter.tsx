@@ -23,12 +23,14 @@ const catLabels: Record<string, string> = {
 export default function NewsFilter({ items }: { items: N[] }) {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("all");
+  const [limit, setLimit] = useState(24);
   const cats = useMemo(() => ["all", ...Array.from(new Set(items.map((i) => i.category)))], [items]);
   const filtered = items.filter((n) => {
     const okCat = cat === "all" || n.category === cat;
     const s = (n.title + " " + n.excerpt + " " + n.tags.join(" ")).toLowerCase();
     return okCat && s.includes(q.toLowerCase());
   });
+  const shown = filtered.slice(0, limit);
   return (
     <>
       <div className="toolbar">
@@ -49,10 +51,10 @@ export default function NewsFilter({ items }: { items: N[] }) {
         )}
       </div>
       <p className="result-count" aria-live="polite">
-        {filtered.length === 0 ? "Совпадений нет" : `Найдено: ${filtered.length} из ${items.length}`}
+        {filtered.length === 0 ? "Совпадений нет" : `Показано ${shown.length} из ${filtered.length}`}
       </p>
       <div className="grid">
-        {filtered.map((n) => (
+        {shown.map((n) => (
           <article key={n.id} className="card news-card">
             <div className="thumb">
               <img src={n.image || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" width={400} height={250} />
@@ -67,6 +69,13 @@ export default function NewsFilter({ items }: { items: N[] }) {
           </article>
         ))}
       </div>
+      {limit < filtered.length && (
+        <div className="load-more">
+          <button type="button" className="btn btn-primary" onClick={() => setLimit((l) => l + 24)}>
+            Показать ещё ({filtered.length - limit})
+          </button>
+        </div>
+      )}
       {filtered.length === 0 && (
         <div className="empty-state">
           <span className="es-icon">🔍</span>

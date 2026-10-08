@@ -16,11 +16,13 @@ export default function DocsFilter({ items }: { items: D[] }) {
   const [type, setType] = useState("all");
   const types = useMemo(() => ["all", ...Array.from(new Set(items.map((i) => i.type)))], [items]);
   const [preview, setPreview] = useState<string | null>(null);
+  const [limit, setLimit] = useState(24);
 
   const filtered = items.filter((d) => {
     const ok = type === "all" || d.type === type;
     return ok && d.title.toLowerCase().includes(q.toLowerCase());
   });
+  const shown = filtered.slice(0, limit);
 
   return (
     <>
@@ -36,10 +38,10 @@ export default function DocsFilter({ items }: { items: D[] }) {
         )}
       </div>
       <p className="result-count" aria-live="polite">
-        {filtered.length === 0 ? "Совпадений нет" : `Найдено: ${filtered.length} из ${items.length}`}
+        {filtered.length === 0 ? "Совпадений нет" : `Показано ${shown.length} из ${filtered.length}`}
       </p>
       <div className="grid">
-        {filtered.map((d) => (
+        {shown.map((d) => (
           <div key={d.id} className="card doc-card">
             <div className="card-body">
               <span className="doc-icon">PDF</span>
@@ -59,6 +61,13 @@ export default function DocsFilter({ items }: { items: D[] }) {
           <strong>Документы не найдены</strong>
           <p>Измените запрос или сбросьте фильтр типа.</p>
           <button type="button" className="btn btn-ghost" onClick={() => { setQ(""); setType("all"); }}>Сбросить фильтры</button>
+        </div>
+      )}
+      {limit < filtered.length && (
+        <div className="load-more">
+          <button type="button" className="btn btn-primary" onClick={() => setLimit((l) => l + 24)}>
+            Показать ещё ({filtered.length - limit})
+          </button>
         </div>
       )}
       {preview && (

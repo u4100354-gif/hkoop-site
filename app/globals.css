@@ -166,6 +166,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--navy); box-shado
 .reset { border: 1.5px solid #c3ccd9; background: #fff; color: var(--navy); border-radius: 12px; padding: 0 16px; font-weight: 700; cursor: pointer; min-height: 44px; transition: background .2s, border-color .2s; }
 .reset:hover { background: #eef3fa; border-color: var(--navy); }
 .result-count { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
+.load-more { display: flex; justify-content: center; margin-top: 22px; }
 .empty-state { text-align: center; padding: 40px 20px; border: 1px dashed #c3ccd9; border-radius: 12px; background: #fbfcfe; }
 .empty-state .es-icon { font-size: 32px; display: block; margin-bottom: 8px; }
 .empty-state strong { display: block; font-size: 18px; margin-bottom: 6px; }
