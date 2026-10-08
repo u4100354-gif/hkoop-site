@@ -2,8 +2,10 @@
 const isExport = process.env.STATIC_EXPORT === "1";
 const nextConfig = {
   reactStrictMode: true,
+  // Экспортные сборки пишут во временную папку, чтобы не ломать работающий dev-сервер
+  distDir: isExport ? ".next-export" : ".next",
   ...(isExport
-    ? { output: "export", images: { unoptimized: true }, basePath: process.env.GHPAGES_BASE || "" }
+    ? { output: "export", trailingSlash: true, images: { unoptimized: true }, basePath: process.env.GHPAGES_BASE || "" }
     : {
         async redirects() {
           return [

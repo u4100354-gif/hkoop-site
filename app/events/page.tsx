@@ -19,3 +19,10 @@ export default async function Events() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Мероприятия — ХКООП",
+  description: "Календарь мероприятий и анонсы Хабаровского Профобъединения.",
+};

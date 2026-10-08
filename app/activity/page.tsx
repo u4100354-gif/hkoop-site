@@ -27,3 +27,10 @@ export default function Activity() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Деятельность — ХКООП",
+  description: "Направления деятельности ХКООП: правозащита, охрана труда, соцпартнёрство.",
+};

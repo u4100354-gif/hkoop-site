@@ -61,3 +61,10 @@ export default function SearchPage() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Поиск — ХКООП",
+  description: "Поиск по новостям, документам и разделам сайта ХКООП.",
+};

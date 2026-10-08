@@ -13,3 +13,10 @@ export default function Orgs() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Членские организации — ХКООП",
+  description: "Каталог членских организаций и координационных советов ХКООП.",
+};

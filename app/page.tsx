@@ -55,7 +55,7 @@ export default async function Home() {
             {(news as any[]).slice(0, 4).map((n) => (
               <article key={n.id} className="card news-card">
                 <div className="thumb">
-                  <img src={n.image || newsImages[n.id] || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" />
+                  <img src={n.image || newsImages[n.id] || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" width={400} height={250} />
                   <span className="date-badge">{n.date}</span>
                 </div>
                 <div className="card-body">

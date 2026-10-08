@@ -17,3 +17,10 @@ export default async function DocsPage() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Документы — ХКООП",
+  description: "Планы, соглашения, программы и PDF-документы ХКООП.",
+};

@@ -8,6 +8,7 @@ const typeLabels: Record<string, string> = {
   soglashenie: "Соглашения",
   program: "Программы",
   policy: "Политика",
+  document: "Документы",
 };
 
 export default function DocsFilter({ items }: { items: D[] }) {
@@ -30,11 +31,18 @@ export default function DocsFilter({ items }: { items: D[] }) {
             <option key={t} value={t}>{t === "all" ? "Все типы" : (typeLabels[t] || t)}</option>
           ))}
         </select>
+        {(q || type !== "all") && (
+          <button type="button" className="reset" onClick={() => { setQ(""); setType("all"); }}>Сбросить</button>
+        )}
       </div>
+      <p className="result-count" aria-live="polite">
+        {filtered.length === 0 ? "Совпадений нет" : `Найдено: ${filtered.length} из ${items.length}`}
+      </p>
       <div className="grid">
         {filtered.map((d) => (
           <div key={d.id} className="card doc-card">
             <div className="card-body">
+              <span className="doc-icon">PDF</span>
               <strong>{d.title}</strong>
               <div><small>{typeLabels[d.type] || d.type} · {d.year}</small></div>
               <div className="btn-row">
@@ -45,6 +53,14 @@ export default function DocsFilter({ items }: { items: D[] }) {
           </div>
         ))}
       </div>
+      {filtered.length === 0 && (
+        <div className="empty-state">
+          <span className="es-icon">📄</span>
+          <strong>Документы не найдены</strong>
+          <p>Измените запрос или сбросьте фильтр типа.</p>
+          <button type="button" className="btn btn-ghost" onClick={() => { setQ(""); setType("all"); }}>Сбросить фильтры</button>
+        </div>
+      )}
       {preview && (
         <div className="preview-box">
           <div className="preview-head">

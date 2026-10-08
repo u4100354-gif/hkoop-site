@@ -13,3 +13,10 @@ export default async function Partners() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Партнёры — ХКООП",
+  description: "Организации-партнёры ХКООП: ФНПР, фонды, вузы, надзорные органы.",
+};

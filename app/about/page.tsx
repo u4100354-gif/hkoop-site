@@ -30,3 +30,10 @@ export default function About() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "О нас — ХКООП",
+  description: "История и структура Хабаровского краевого объединения организаций профсоюзов.",
+};

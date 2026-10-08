@@ -44,12 +44,18 @@ export default function NewsFilter({ items }: { items: N[] }) {
             <option key={c} value={c}>{c === "all" ? "Все категории" : (catLabels[c] || c)}</option>
           ))}
         </select>
+        {(q || cat !== "all") && (
+          <button type="button" className="reset" onClick={() => { setQ(""); setCat("all"); }}>Сбросить</button>
+        )}
       </div>
+      <p className="result-count" aria-live="polite">
+        {filtered.length === 0 ? "Совпадений нет" : `Найдено: ${filtered.length} из ${items.length}`}
+      </p>
       <div className="grid">
         {filtered.map((n) => (
           <article key={n.id} className="card news-card">
             <div className="thumb">
-              <img src={n.image || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" />
+              <img src={n.image || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" width={400} height={250} />
               <span className="date-badge">{n.date}</span>
             </div>
             <div className="card-body">
@@ -61,7 +67,14 @@ export default function NewsFilter({ items }: { items: N[] }) {
           </article>
         ))}
       </div>
-      {filtered.length === 0 && <p>Ничего не найдено.</p>}
+      {filtered.length === 0 && (
+        <div className="empty-state">
+          <span className="es-icon">🔍</span>
+          <strong>Ничего не найдено</strong>
+          <p>Попробуйте изменить запрос или сбросить фильтр{cat !== "all" ? " категории" : ""}.</p>
+          <button type="button" className="btn btn-ghost" onClick={() => { setQ(""); setCat("all"); }}>Сбросить фильтры</button>
+        </div>
+      )}
     </>
   );
 }

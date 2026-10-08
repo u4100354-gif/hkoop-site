@@ -43,7 +43,7 @@ export default function Slider() {
 
   return (
     <section
-      className="slider-apple"
+      className={`slider-apple ${paused ? "paused" : ""}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}

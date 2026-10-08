@@ -12,3 +12,10 @@ export default async function NewsPage() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Новости — ХКООП",
+  description: "Актуальные новости Хабаровского краевого объединения организаций профсоюзов.",
+};

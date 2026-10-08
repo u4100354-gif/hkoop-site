@@ -7,7 +7,7 @@ function Logo({ p }: { p: P }) {
   const [err, setErr] = useState(false);
   return (
     <span style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, width: "100%" }}>
-      <span className="plogo">{!err && <img src={p.logo} alt="" loading="lazy" onError={() => setErr(true)} />}</span>
+      <span className="plogo">{!err && <img src={p.logo} alt={p.name} loading="lazy" width={130} height={72} onError={() => setErr(true)} />}</span>
       <span style={{ fontSize: 12, fontWeight: 700, textAlign: "center", lineHeight: 1.25 }}>{p.name}</span>
     </span>
   );

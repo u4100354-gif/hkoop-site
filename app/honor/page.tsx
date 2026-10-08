@@ -10,13 +10,14 @@ export default async function Honor() {
         <div className="grid">
           {honor.map((h) => (
             <article key={h.id} className="card news-card honor-card">
-              <div className="thumb">
-                {h.photo ? <img src={h.photo} alt={h.fio} loading="lazy" /> : <div style={{ height: 170, background: "linear-gradient(135deg,#252e4f,#3a4670)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 48 }}>★</div>}
+              <a href={`/honor/${h.id}`} className="thumb">
+                {h.photo ? <img src={h.photo} alt={h.fio} loading="lazy" width={400} height={250} /> : <div style={{ height: "100%", background: "linear-gradient(135deg,#252e4f,#3a4670)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 48 }}>★</div>}
                 <span className="date-badge">{h.year}</span>
-              </div>
+              </a>
               <div className="card-body">
-                <h3>{h.fio}</h3>
-                <p><small>{h.title || h.text}</small></p>
+                <h3><a href={`/honor/${h.id}`}>{h.fio}</a></h3>
+                <p><small>{h.title || "Книга Почёта ХКООП"}</small></p>
+                <div className="btn-row"><a className="btn btn-ghost" href={`/honor/${h.id}`}>Подробнее →</a></div>
               </div>
             </article>
           ))}
@@ -25,3 +26,10 @@ export default async function Honor() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Книга Почёта — ХКООП",
+  description: "Ветераны и активисты профсоюзного движения Хабаровского края.",
+};

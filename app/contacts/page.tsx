@@ -27,3 +27,10 @@ export default async function Contacts() {
     </>
   );
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Контакты — ХКООП",
+  description: "Адрес, телефоны, почта и бесплатная консультация ХКООП.",
+};
