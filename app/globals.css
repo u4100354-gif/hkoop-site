@@ -276,6 +276,8 @@ body.vi-mode.vi-scheme-wb input, body.vi-mode.vi-scheme-wb textarea, body.vi-mod
 body.vi-mode.vi-scheme-wb .vi-panel button, body.vi-mode.vi-scheme-wb .btn,
 body.vi-mode.vi-scheme-wb .hsearch-input { background: #000 !important; color: #fff !important; border-color: #fff !important; }
 body.vi-mode.vi-scheme-wb .btn-primary { background: #fff !important; color: #000 !important; }
+body.vi-mode.vi-scheme-wb .section h2, body.vi-mode.vi-scheme-wb .brand-big,
+body.vi-mode.vi-scheme-wb .atitle, body.vi-mode.vi-scheme-wb h1 { color: #fff !important; border-color: #fff !important; }
 body.vi-mode.vi-scheme-wb .abar { background: rgba(255,255,255,.5) !important; }
 
 /* Схема: жёлтым по чёрному */
