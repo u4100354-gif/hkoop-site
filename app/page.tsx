@@ -76,7 +76,6 @@ export default async function Home() {
           <div><Counter end={19} prefix="~" /><span>координационных советов*</span></div>
           <div><Counter end={100} prefix="~" suffix=" тыс." /><span>членов профсоюза*</span></div>
         </div>
-        <p style={{ opacity: .75, fontSize: 13 }}>* Ориентировочно, точные данные на 01.01.2026 уточнить у руководства.</p>
       </section>
 
       <section className="section reveal">
