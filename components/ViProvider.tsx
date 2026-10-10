@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { lsGet, lsSet } from "../lib/storage";
 
 export default function ViProvider() {
   const [vi, setVi] = useState(false);
@@ -7,15 +8,17 @@ export default function ViProvider() {
   const [noimg, setNoimg] = useState(false);
 
   useEffect(() => {
-    const v = localStorage.getItem("hkoop-vi") === "1";
+    const v = lsGet("hkoop-vi") === "1";
     setVi(v);
     if (v) document.body.classList.add("vi-mode");
+    setBig(lsGet("hkoop-vi-big") === "1");
+    setNoimg(lsGet("hkoop-vi-noimg") === "1");
   }, []);
 
   const toggle = () => {
     const nv = !vi;
     setVi(nv);
-    localStorage.setItem("hkoop-vi", nv ? "1" : "0");
+    lsSet("hkoop-vi", nv ? "1" : "0");
     document.body.classList.toggle("vi-mode", nv);
     (window as any).__hkoop_vi = nv;
     window.dispatchEvent(new Event("hkoop-vi"));
@@ -23,7 +26,9 @@ export default function ViProvider() {
 
   useEffect(() => {
     document.body.classList.toggle("vi-big", big);
+    lsSet("hkoop-vi-big", big ? "1" : "0");
     document.body.classList.toggle("vi-noimg", noimg);
+    lsSet("hkoop-vi-noimg", noimg ? "1" : "0");
   }, [big, noimg]);
 
   useEffect(() => {
@@ -36,8 +41,8 @@ export default function ViProvider() {
     <div className="vi-panel">
       <div className="container">
         <strong>Версия для слабовидящих</strong>
-        <button onClick={() => setBig(!big)}>Шрифт: {big ? "очень крупный" : "крупный"}</button>
-        <button onClick={() => setNoimg(!noimg)}>Картинки: {noimg ? "выкл" : "вкл"}</button>
+        <button onClick={() => setBig(!big)} aria-pressed={big}>Шрифт: {big ? "очень крупный" : "крупный"}</button>
+        <button onClick={() => setNoimg(!noimg)} aria-pressed={noimg}>Картинки: {noimg ? "выкл" : "вкл"}</button>
         <button onClick={toggle}>Обычная версия</button>
       </div>
     </div>

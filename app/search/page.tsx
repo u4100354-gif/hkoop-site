@@ -31,7 +31,7 @@ function Results() {
   return (
     <>
       <div className="toolbar">
-        <input className="search" placeholder="Введите запрос… (мин. 2 символа)" defaultValue={sp.get("q") || ""} onChange={(e) => setTyped(e.target.value)} aria-label="Поиск по сайту" autoFocus />
+        <input className="search" name="q" maxLength={200} placeholder="Введите запрос… (мин. 2 символа)" defaultValue={sp.get("q") || ""} onChange={(e) => setTyped(e.target.value)} aria-label="Поиск по сайту" autoFocus />
       </div>
       {res && (
         res.length === 0 ? <p>Ничего не найдено.</p> : (

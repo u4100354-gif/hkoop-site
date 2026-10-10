@@ -26,6 +26,8 @@ export default function NewsFilter({ items }: { items: N[] }) {
       <div className="toolbar">
         <input
           className="search"
+          name="q"
+          maxLength={200}
           placeholder="Поиск по новостям…"
           value={q}
           onChange={(e) => setQ(e.target.value)}

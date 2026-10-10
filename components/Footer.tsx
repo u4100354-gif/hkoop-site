@@ -1,11 +1,13 @@
+import CookieSettings from "./CookieSettings";
+
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-grid">
         <div>
           <strong>Контакты</strong>
-          <div>ksps-priem@mail.ru</div>
-          <div>8 (4212) 32-87-18 · факс: 32-47-02</div>
+          <div><a href="mailto:ksps-priem@mail.ru">ksps-priem@mail.ru</a></div>
+          <div><a href="tel:+74212328718">8 (4212) 32-87-18</a> · факс: 32-47-02</div>
           <div>Пн-Чт: 9:00–18:00 · Пт: 9:00–16:20</div>
           <div>680000, г. Хабаровск, ул. Муравьева-Амурского, 4</div>
         </div>
@@ -24,7 +26,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container" style={{ marginTop: 12 }}>
-        Союз «Хабаровское краевое объединение организаций профсоюзов» · Локальный прототип
+        Союз «Хабаровское краевое объединение организаций профсоюзов» · Локальный прототип · <CookieSettings />
       </div>
     </footer>
   );

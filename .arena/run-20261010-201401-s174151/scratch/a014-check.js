@@ -1,0 +1,11 @@
+const fs = require('fs');
+const p = 'C:/Users/speed/OneDrive/Документы/Проект по умолчанию/hkoop-site/';
+const g = (f) => fs.readFileSync(p + f, 'utf8');
+const page = g('app/page.tsx');
+console.log('Q_SELECT_PAGE=' + page.split('q("SELECT').length);
+console.log('BANNER_DOCS_LINK=' + g('components/CookieBanner.tsx').includes('href="/docs"'));
+console.log('FORM_NET=' + (/fetch|mailto|action=/.test(g('components/ConsultForm.tsx')) ? 'FOUND' : 'ABSENT'));
+console.log('HONOR_SAFEHREF=' + g('app/honor/page.tsx').includes('safeHref'));
+console.log('STRIP_SAFEHREF_COUNT=' + g('components/PartnersStrip.tsx').split('safeHref').length);
+console.log('LAYOUT_YM_GATE=' + g('app/layout.tsx').includes('NEXT_PUBLIC_YM_ID'));
+console.log('CONSULT_LINES=' + g('components/ConsultForm.tsx').split('\n').length);

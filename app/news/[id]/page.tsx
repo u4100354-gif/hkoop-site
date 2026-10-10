@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { q, parseTags } from "../../../lib/db";
 
 const catLabels: Record<string, string> = {
@@ -13,10 +14,11 @@ export async function generateStaticParams() {
   return rows.map((n) => ({ id: n.id }));
 }
 
-export default async function NewsDetail({ params }: { params: { id: string } }) {
-  const rows: any[] = await q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,tags,excerpt,old_url FROM news WHERE id=?", [params.id]);
+export default async function NewsDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const rows: any[] = await q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,tags,excerpt,old_url FROM news WHERE id=?", [id]);
   const n = rows[0];
-  if (!n) return <><p style={{ marginTop: 22 }}><a href="/news">← Все новости</a></p><h1>Не найдено</h1></>;
+  if (!n) notFound();
   const tags = parseTags(n.tags);
   return (
     <>

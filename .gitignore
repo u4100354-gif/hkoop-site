@@ -1,6 +1,9 @@
 node_modules/
 .next/
+.next-export/
+.env
 .env.local
 *.log
 db/phpmyadmin/
 out/
+graphify-out/cache/

@@ -2,6 +2,7 @@
 const isExport = process.env.STATIC_EXPORT === "1";
 const nextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
   ...(isExport
     ? { output: "export", images: { unoptimized: true }, basePath: process.env.GHPAGES_BASE || "" }
     : {

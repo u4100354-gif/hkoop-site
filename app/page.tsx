@@ -3,6 +3,7 @@ import ConsultForm from "../components/ConsultForm";
 import PartnersStrip from "../components/PartnersStrip";
 import Counter from "../components/Counter";
 import { q, parseTags } from "../lib/db";
+import { safeHref } from "../lib/url";
 
 const catLabels: Record<string, string> = {
   molodezh: "Молодёжь",
@@ -28,10 +29,12 @@ const newsImages: Record<string, string> = {  "forum-profmlodezh-2026": "/images
 };
 
 export default async function Home() {
-  const news: any[] = await q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,excerpt FROM news ORDER BY date DESC LIMIT 4");
-  const docs: any[] = await q("SELECT id,title,type,year,file_local,file_old,old_url FROM documents ORDER BY year DESC LIMIT 4");
-  const partners: any[] = await q("SELECT * FROM partners ORDER BY name");
-  const docHref = (d: any) => d.file_local || d.file_old || (d.old_url ? `https://habprof.ru${d.old_url}` : "/docs");
+  const [news, docs, partners]: any[][] = await Promise.all([
+    q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,excerpt FROM news ORDER BY date DESC LIMIT 4"),
+    q("SELECT id,title,type,year,file_local,file_old,old_url FROM documents ORDER BY year DESC LIMIT 4"),
+    q("SELECT * FROM partners ORDER BY name"),
+  ]);
+  const docHref = (d: any) => safeHref(d.file_local) || safeHref(d.file_old) || (typeof d.old_url === "string" && d.old_url.startsWith("/") ? `https://habprof.ru${d.old_url}` : "/docs");
   return (
     <>
       <Slider />

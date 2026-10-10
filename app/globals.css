@@ -9,6 +9,9 @@
   --radius: 10px;
 }
 * { box-sizing: border-box; }
+a, button { touch-action: manipulation; }
+.skip { position: absolute; left: -9999px; top: 0; background: var(--navy); color: #fff; padding: 10px 16px; z-index: 100; border-radius: 0 0 8px 0; font-weight: 700; }
+.skip:focus-visible { left: 0; }
 html { background: var(--navy-dark); scroll-behavior: smooth; }
 body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: var(--text); background: #fff; line-height: 1.55; min-height: 100vh; display: flex; flex-direction: column; }
 main.container { flex: 1; width: 100%; }
@@ -97,7 +100,7 @@ button:active { transform: scale(.96); }
 
 /* Dense sections */
 .section { margin: 30px 0; }
-.section h2 { font-size: 24px; color: var(--navy); margin: 0 0 14px; border-left: 5px solid var(--navy); padding-left: 10px; transition: border-color .25s, padding-left .25s, filter .25s; }
+.section h2 { font-size: 24px; color: var(--navy); margin: 0 0 14px; border-left: 5px solid var(--navy); padding-left: 10px; text-wrap: balance; transition: border-color .25s, padding-left .25s, filter .25s; }
 .section h2:hover { border-color: var(--green); padding-left: 14px; filter: brightness(1.2); }
 .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .section-head h2 { margin: 0; }
@@ -106,6 +109,8 @@ button:active { transform: scale(.96); }
 .more:hover { text-decoration: underline; }
 .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin-top: 24px; align-items: start; }
 .news-card { transition: transform .2s, box-shadow .2s; }
+.news-card .thumb { aspect-ratio: 16/10; }
+.news-card .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .news-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,46,79,.15); }
 .thumb { position: relative; overflow: hidden; }
 .thumb img { transition: transform .3s, filter .3s; }
@@ -164,7 +169,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--navy); box-shado
 .consult-form { display: grid; gap: 8px; max-width: 520px; }
 .consult-form input, .consult-form textarea { padding: 10px; border: 1px solid #bbb; border-radius: 8px; font-size: 15px; width: 100%; transition: border-color .2s, box-shadow .2s, transform .15s; }
 .consult-form input:hover, .consult-form textarea:hover { border-color: var(--navy); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,46,79,.12); }
-.checkbox { font-size: 13px; color: var(--muted); }
+.checkbox { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--muted); cursor: pointer; text-align: left; }
+.checkbox input { width: 16px; height: 16px; flex-shrink: 0; margin: 2px 0 0; accent-color: var(--navy); }
 .btn-primary { background: var(--navy); color: #fff; border: 2px solid var(--navy); }
 .btn-ghost { background: #fff; color: var(--navy); border: 2px solid var(--navy); }
 .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
@@ -188,7 +194,8 @@ html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .
 html.js .reveal.in { opacity: 1; transform: none; }
 .totop { position: fixed; right: 18px; bottom: 18px; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--navy); color: #fff; font-size: 22px; cursor: pointer; box-shadow: 0 8px 22px rgba(0,0,0,.3); z-index: 40; }
 .totop:hover { background: #31497e; filter: brightness(1.15); }
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; }
 ::selection { background: var(--navy); color: #fff; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

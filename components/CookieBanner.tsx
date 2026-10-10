@@ -1,26 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
+import { readConsent, writeConsent } from "../lib/consent";
 
 export default function CookieBanner() {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    if (!localStorage.getItem("hkoop-cookie")) setShow(true);
+    if (!readConsent()) setShow(true);
+    const onChange = () => setShow(!readConsent());
+    window.addEventListener("hkoop-consent", onChange);
+    return () => window.removeEventListener("hkoop-consent", onChange);
   }, []);
   if (!show) return null;
   return (
     <div className="cookie" role="dialog" aria-label="Cookie">
       <span>
-        Наш сайт использует cookie и Яндекс.Метрику. Продолжая, вы соглашаетесь с{" "}
-        <a href="/docs">политикой конфиденциальности</a>.
+        Наш сайт использует cookie, Яндекс.Метрику и карты. Продолжая, вы соглашаетесь с{" "}
+        <a href="/policy">политикой конфиденциальности</a>.
       </span>
-      <button
-        onClick={() => {
-          localStorage.setItem("hkoop-cookie", "1");
-          setShow(false);
-        }}
-      >
-        Принять
-      </button>
+      <span style={{ display: "flex", gap: 8 }}>
+        <button onClick={() => writeConsent("denied")}>Отклонить</button>
+        <button onClick={() => writeConsent("granted")}>Принять</button>
+      </span>
     </div>
   );
 }

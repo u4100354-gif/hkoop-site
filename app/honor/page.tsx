@@ -1,4 +1,5 @@
 import PageHero from "../../components/PageHero";
+import { safeImgSrc } from "../../lib/url";
 import { q } from "../../lib/db";
 
 export default async function Honor() {
@@ -11,7 +12,7 @@ export default async function Honor() {
           {honor.map((h) => (
             <article key={h.id} className="card news-card honor-card">
               <div className="thumb">
-                {h.photo ? <img src={h.photo} alt={h.fio} loading="lazy" /> : <div style={{ height: 170, background: "linear-gradient(135deg,#252e4f,#3a4670)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 48 }}>★</div>}
+                {safeImgSrc(h.photo) ? <img src={safeImgSrc(h.photo)!} alt={h.fio} loading="lazy" /> : <div style={{ height: 170, background: "linear-gradient(135deg,#252e4f,#3a4670)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 48 }}>★</div>}
                 <span className="date-badge">{h.year}</span>
               </div>
               <div className="card-body">
@@ -20,6 +21,7 @@ export default async function Honor() {
               </div>
             </article>
           ))}
+          {honor.length === 0 && <p>Пока пусто.</p>}
         </div>
       </section>
     </>

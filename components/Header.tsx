@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import HeaderSearch from "./HeaderSearch";
+import { lsGet, lsSet } from "../lib/storage";
 
 const nav = [
   { href: "/", label: "Главная" },
@@ -21,7 +22,7 @@ export default function Header() {
   const path = usePathname();
 
   useEffect(() => {
-    setVi(localStorage.getItem("hkoop-vi") === "1");
+    setVi(lsGet("hkoop-vi") === "1");
     const h = () => setVi(document.body.classList.contains("vi-mode"));
     window.addEventListener("hkoop-vi", h);
     return () => window.removeEventListener("hkoop-vi", h);
@@ -36,7 +37,7 @@ export default function Header() {
     else {
       const nv = !vi;
       setVi(nv);
-      localStorage.setItem("hkoop-vi", nv ? "1" : "0");
+      lsSet("hkoop-vi", nv ? "1" : "0");
       document.body.classList.toggle("vi-mode", nv);
     }
   };
@@ -62,8 +63,8 @@ export default function Header() {
       </div>
       <nav className="mainnav">
         <div className="container mainnav-inner">
-          <button className="burger" onClick={() => setOpen(!open)} aria-label="Меню">☰</button>
-          <div className={`links ${open ? "open" : ""}`}>
+          <button className="burger" onClick={() => setOpen(!open)} aria-label="Меню" aria-expanded={open} aria-controls="mainnav-links">☰</button>
+          <div className={`links ${open ? "open" : ""}`} id="mainnav-links">
             {nav.map((n) => (
               <Link key={n.href} href={n.href} className={active(n.href) ? "active" : ""} onClick={() => setOpen(false)}>
                 {n.label}
