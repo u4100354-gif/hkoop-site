@@ -1,0 +1,37 @@
+1:"$Sreact.fragment"
+2:"/hkoop-site/_next/static/chunks/2z21r1ubuo341.js"
+3:I[18914,["$2"],"default"]
+4:I[70119,["$2"],"default"]
+5:I[39756,["$2"],"default"]
+6:I[37457,["$2"],"default"]
+7:I[42970,["$2"],"default"]
+8:I[25930,["$2"],"default"]
+9:I[59874,["$2"],"default"]
+a:I[54991,["$2"],"default"]
+17:"ViewportBoundary"
+18:I[97367,["$2"],"$17"]
+19:"MetadataBoundary"
+1a:I[97367,["$2"],"$19"]
+1b:"$Sreact.suspense"
+:HL["/hkoop-site/_next/static/chunks/32s6zkzyvuo7r.css","style"]
+c:X
+f:X
+f:C
+12:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[[["$","p",null,{"style":{"margin":"22px 0 0"},"children":["$","a",null,{"href":"/news","children":"← Все новости"}]}],["$","h1",null,{"style":{"margin":"10px 0 6px","lineHeight":1.25},"children":"В Харбине состоялась встреча делегации профсоюзов Хабаровского края и Федерации профсоюзов Хэйлунцзян"}],["$","p",null,{"children":["$","small",null,{"children":["2026-08-10"," · ","Международное"," · ","Харбин · Хэйлунцзян · санатории"]}]}],["$","div",null,{"className":"card","children":["$","div",null,{"className":"card-body","children":["$L13","$L14"]}]}]],null,"$L15"]}],"p":"$@16","v":null,"s":"$c"}}]]
+10:[["children",{"s":{"n":"id","t":"d","k":"harbin-vstrecha-2026","s":[]},"h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}],"notFound":[[["$","p",null,{"style":{"marginTop":22},"children":["$","a",null,{"href":"/news","children":"← Все новости"}]}],["$","h1",null,{"children":"Не найдено"}],["$","p",null,{"children":"Такой новости нет. Возможно, ссылка устарела."}]],[]]}]]}],"p":"$@11","v":"$f","s":"$c"},"c":"$Q12"}]]
+d:[["children",{"s":"news","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@e","v":"$f","s":"$c"},"c":"$Q10"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/hkoop-site/_next/static/chunks/32s6zkzyvuo7r.css","precedence":"next"}],["$","script","script-0",{"src":"/hkoop-site/_next/static/chunks/2z21r1ubuo341.js","async":true}]],["$","html",null,{"lang":"ru","suppressHydrationWarning":true,"children":["$","body",null,{"children":[["$","script",null,{"dangerouslySetInnerHTML":{"__html":"document.documentElement.classList.add('js')"}}],["$","a",null,{"className":"skip","href":"#content","children":"Перейти к содержанию"}],["$","$L3",null,{}],["$","$L4",null,{}],["$","main",null,{"className":"container","id":"content","children":["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]}],["$","footer",null,{"className":"footer","children":[["$","div",null,{"className":"container footer-grid","children":[["$","div",null,{"children":[["$","strong",null,{"children":"Контакты"}],["$","div",null,{"children":["$","a",null,{"href":"mailto:ksps-priem@mail.ru","children":"ksps-priem@mail.ru"}]}],["$","div",null,{"children":[["$","a",null,{"href":"tel:+74212328718","children":"8 (4212) 32-87-18"}]," · факс: 32-47-02"]}],["$","div",null,{"children":"Пн-Чт: 9:00–18:00 · Пт: 9:00–16:20"}],["$","div",null,{"children":"680000, г. Хабаровск, ул. Муравьева-Амурского, 4"}]]}],["$","div",null,{"children":[["$","strong",null,{"children":"Разделы"}],["$","div",null,{"children":[["$","a",null,{"href":"/news","children":"Новости"}]," · ",["$","a",null,{"href":"/events","children":"Мероприятия"}]]}],["$","div",null,{"children":["$","a",null,{"href":"/organizations","children":"Членские организации"}]}],["$","div",null,{"children":[["$","a",null,{"href":"/honor","children":"Книга Почёта"}]," · ",["$","a",null,{"href":"/partners","children":"Партнёры"}]]}],["$","div",null,{"children":[["$","a",null,{"href":"/about","children":"О нас"}]," · ",["$","a",null,{"href":"/activity","children":"Деятельность"}]]}]]}],["$","div",null,{"children":[["$","strong",null,{"children":"Мы в соцсетях"}],["$","div",null,{"children":["$","a",null,{"href":"https://vk.com/habprof_27","children":"VK"}]}],["$","div",null,{"children":["$","a",null,{"href":"https://t.me/habprof","children":"Telegram"}]}],["$","div",null,{"children":["$","a",null,{"href":"https://max.ru/id2702080071_biz","children":"MAX"}]}]]}]]}],["$","div",null,{"className":"container","style":{"marginTop":12},"children":["Союз «Хабаровское краевое объединение организаций профсоюзов» · Локальный прототип · ",["$","$L7",null,{}]]}]]}],["$","$L8",null,{}],["$","$L9",null,{}],["$","$La",null,{}]]}]}]]}],"p":"$@b","v":null,"s":"$c"},"c":"$Qd"},"h":{"r":["$","$1","h",{"children":[null,["$","$L18",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L1a",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1b",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"ХКООП — Хабаровское краевое объединение организаций профсоюзов"}],["$","meta","1",{"name":"description","content":"Официальный сайт Союза ХКООП: новости, документы, деятельность, книга почёта, бесплатная консультация."}]]}]}],null]}],null]}],"p":"$@1c","v":null,"s":"$c"}},"a":"$@1d","u":"$@1e","b":"aQtXgE_vZC5Eau2H6oyPK"}
+1f:I[97367,["$2"],"OutletBoundary"]
+13:["$","p",null,{"children":"Обсудили санаторно-курортное лечение для членов профсоюзов. Делегации: Н.Мартыненко и Луань Чжичэн."}]
+14:["$","p",null,{"children":["$","small",null,{"children":["Полный текст перенести со старого сайта: habprof.ru","/index.php/activity/mezhdunarodnoe-sotrudnichestvo/1095-v-gorode-kharbin-sostoyalas-vstrecha-delegatsii-profsoyuzov-khabarovskogo-kraya-i-federatsii-profsoyuzov-provintsii-khejluntszyan"]}]}]
+15:["$","$L1f",null,{"children":["$","$1b",null,{"name":"Next.MetadataOutlet","children":"$@20"}]}]
+c:300
+20:null
+1e:true
+c:C
+1d:0
+11:"$undefined"
+e:"$undefined"
+b:"$undefined"
+1c:"$undefined"
+16:"$undefined"
