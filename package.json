@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "admin": "node scripts/admin/server.mjs"
   },
   "dependencies": {
     "mysql2": "^3.24.5",
