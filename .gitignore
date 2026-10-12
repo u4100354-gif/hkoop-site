@@ -7,3 +7,4 @@ node_modules/
 db/phpmyadmin/
 out/
 graphify-out/cache/
+".claude/worktrees/"
