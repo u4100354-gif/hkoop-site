@@ -1,4 +1,5 @@
 :root {
+  --font-main: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --navy: #252e4f;
   --navy-dark: #1a2138;
   --navgray: #6e7484;
@@ -13,7 +14,7 @@ a, button { touch-action: manipulation; }
 .skip { position: absolute; left: -9999px; top: 0; background: var(--navy); color: #fff; padding: 10px 16px; z-index: 100; border-radius: 0 0 8px 0; font-weight: 700; }
 .skip:focus-visible { left: 0; }
 html { background: var(--navy-dark); scroll-behavior: smooth; }
-body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: var(--text); background: #fff; line-height: 1.55; min-height: 100vh; display: flex; flex-direction: column; overflow-x: clip; }
+body { margin: 0; font-family: var(--font-main); color: var(--text); background: #fff; line-height: 1.55; min-height: 100vh; display: flex; flex-direction: column; overflow-x: clip; }
 main.container { flex: 1; width: 100%; }
 a { color: #1a3a6b; }
 .container { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
@@ -202,6 +203,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--navy); box-shado
 .consult-form input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--navy); cursor: pointer; }
 .consult-form .checkbox { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; transition: color .2s; }
 .consult-form .checkbox:hover { color: var(--navy); }
+.consent-note { font-size: 13px; color: var(--muted); margin: 0; }
+.consent-note a { color: var(--muted); }
 .consult-form .btn-primary { background: linear-gradient(135deg, var(--navy), #3a4670); border: 0; padding: 13px 18px; font-size: 16px; }
 .consult-form .btn-primary:hover { filter: brightness(1.2); }
 .checkbox { font-size: 13px; color: var(--muted); }

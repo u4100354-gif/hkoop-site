@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { readConsent } from "../lib/consent";
 
 const MAP_SRC =
-  "https://yandex.ru/map-widget/v1/?ll=135.0711%2C48.4739&z=16&pt=135.0711%2C48.4739%2Cpm2rdm&text=%D0%A5%D0%B0%D0%B1%D0%B0%D1%80%D0%BE%D0%B2%D1%81%D0%BA";
-const MAP_LINK = "https://yandex.ru/maps/?ll=135.0711%2C48.4739&z=16";
+  "https://yandex.ru/map-widget/v1/?ll=135.057427%2C48.472028&z=17&pt=135.057427%2C48.472028%2Cpm2rdm&text=%D0%A5%D0%B0%D0%B1%D0%B0%D1%80%D0%BE%D0%B2%D1%81%D0%BA%2C%20%D1%83%D0%BB.%20%D0%9C%D1%83%D1%80%D0%B0%D0%B2%D1%8C%D1%91%D0%B2%D0%B0-%D0%90%D0%BC%D1%83%D1%80%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%204";
+const MAP_LINK = "https://yandex.ru/maps/?ll=135.057427%2C48.472028&z=17";
 
 // Карта Яндекса грузится только после согласия (152-ФЗ): до этого —
 // статическая ссылка без единого запроса к yandex.ru.
@@ -25,5 +25,5 @@ export default function MapGate() {
         </a>
       </div>
     );
-  return <iframe src={MAP_SRC} width="100%" height="300" frameBorder="0" title="Карта: ХКООП, Хабаровск" />;
+  return <iframe src={MAP_SRC} width="100%" height="300" frameBorder="0" title="Карта: ХКООП, Хабаровск, ул. Муравьёва-Амурского, 4" />;
 }
