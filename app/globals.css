@@ -58,7 +58,7 @@ a { color: #1a3a6b; }
 .hsearch-input::placeholder { color: rgba(255,255,255,.75); }
 .hsearch-input:hover { background: rgba(255,255,255,.22); border-color: #fff; }
 .hsearch-input:focus { background: rgba(255,255,255,.24); border-color: #fff; outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.28); }
-.hsearch-drop { position: absolute; top: 100%; right: 0; width: 320px; max-width: 86vw; background: #fff; border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.25); overflow: hidden; z-index: 50; }
+.hsearch-drop { position: absolute; top: 100%; right: 0; width: 320px; max-width: 86vw; max-height: min(60vh, 480px); overflow-y: auto; background: #fff; border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.25); z-index: 50; }
 .hsearch-drop a { display: block; padding: 10px 14px; color: var(--text); border: 0; }
 .hsearch-drop a small { display: block; color: var(--muted); text-transform: uppercase; font-size: 11px; letter-spacing: .05em; }
 .hsearch-drop a span { font-weight: 600; font-size: 14px; }

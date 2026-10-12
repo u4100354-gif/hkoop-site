@@ -65,8 +65,13 @@ export default function HeaderSearch({ onGo, placeholder, chips }: { onGo?: () =
       go(shown[hi].item.url);
       return;
     }
+    goSearch();
+  };
+
+  const goSearch = () => {
     if (dq.trim().length >= 2) {
       setOpen(false);
+      setHi(-1);
       onGo?.();
       router.push(`/search?q=${encodeURIComponent(dq.trim())}`);
     }
@@ -123,7 +128,7 @@ export default function HeaderSearch({ onGo, placeholder, chips }: { onGo?: () =
         </div>
       )}
       {showDrop && (
-        <div className="hsearch-drop" role="listbox" id={listId}>
+        <div className="hsearch-drop" role="listbox" id={listId} onMouseLeave={() => setHi(-1)}>
           {failed ? (
             <div className="hsearch-empty">Поиск временно недоступен. Откройте страницу <a href="/search">«Поиск по сайту»</a>.</div>
           ) : shown.length === 0 ? (
@@ -145,7 +150,7 @@ export default function HeaderSearch({ onGo, placeholder, chips }: { onGo?: () =
                   <span><SearchHighlight text={r.item.title} words={words} /></span>
                 </a>
               ))}
-              <button className="hsearch-all" onClick={submit}>Все результаты{all.length > shown.length ? ` (${all.length})` : ""} →</button>
+              <button className="hsearch-all" onClick={goSearch}>Все результаты{all.length > shown.length ? ` (${all.length})` : ""} →</button>
             </>
           )}
         </div>
