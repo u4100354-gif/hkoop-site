@@ -13,7 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const ym = process.env.NEXT_PUBLIC_YM_ID;
+  const ym = process.env.NEXT_PUBLIC_YM_ID ?? "";
+
   return (
     <html lang="ru" suppressHydrationWarning>
       <body>

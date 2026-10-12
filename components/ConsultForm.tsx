@@ -58,8 +58,9 @@ export default function ConsultForm() {
         <textarea name="question" maxLength={2000} value={msg} onChange={(e) => { setMsg(e.target.value); setState("idle"); }} rows={4} placeholder="Опишите ситуацию — по трудовому праву, охране труда, членству" aria-label="Вопрос" required />
       </label>
       <label className="checkbox">
-        <input type="checkbox" required /> Даю согласие на обработку персональных данных для ответа на обращение (оператор — Союз «ХКООП», <a href="/policy">политика</a>)
+        <input type="checkbox" required /> Даю согласие на обработку персональных данных
       </label>
+      <p className="consent-note">Для ответа на обращение (оператор — Союз «ХКООП», <a href="/policy">политика</a>).</p>
       {state === "error" && (
         <p className="form-error" role="alert">Заполните имя, контакт и вопрос (не короче 5 символов).</p>
       )}

@@ -43,7 +43,7 @@ export default async function Home() {
     q("SELECT id,title,type,year,file_local,file_old,old_url FROM documents ORDER BY year DESC LIMIT 4"),
     q("SELECT * FROM partners ORDER BY name"),
   ]);
-  const docHref = (d: any) => safeHref(d.file_local) || safeHref(d.file_old) || (typeof d.old_url === "string" && d.old_url.startsWith("/") ? `https://habprof.ru${d.old_url}` : "/docs");
+  const docHref = (d: any) => safeHref(d.file_local) || safeHref(d.file_old) || "/docs";
   return (
     <>
       <Slider />
@@ -58,7 +58,7 @@ export default async function Home() {
             {(news as any[]).slice(0, 4).map((n) => (
               <article key={n.id} className="card news-card">
                 <div className="thumb">
-                  <img src={safeImgSrc(n.image) || newsImages[n.id] || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" width={400} height={250} />
+                  <img src={safeImgSrc(n.image) || newsImages[n.id] || catFallback[n.category] || "/images/i-1.webp"} alt={n.title} loading="lazy" width={400} height={250} />
                   <span className="date-badge">{n.date}</span>
                 </div>
                 <div className="card-body">

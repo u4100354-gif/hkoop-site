@@ -67,7 +67,7 @@ export default function DocsFilter({ items }: { items: D[] }) {
       </div>
       {filtered.length === 0 && (
         <div className="empty-state">
-          <span className="es-icon">📄</span>
+          <span className="es-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="#3aa655"><path d="M9 11H5V5h6V3H3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5h-2v2zM15 5h2v5h2V3a1 1 0 0 0-1-1h-5v2z"/></svg></span>
           <strong>Документы не найдены</strong>
           <p>Измените запрос или сбросьте фильтр типа.</p>
           <button type="button" className="btn btn-ghost" onClick={() => { setQ(""); setType("all"); }}>Сбросить фильтры</button>

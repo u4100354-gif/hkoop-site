@@ -60,7 +60,7 @@ export default function NewsFilter({ items }: { items: N[] }) {
         {shown.map((n) => (
           <article key={n.id} className="card news-card">
             <div className="thumb">
-              <img src={safeImgSrc(n.image) || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" width={400} height={250} />
+              <img src={safeImgSrc(n.image) || catFallback[n.category] || "/images/i-1.webp"} alt={n.title} loading="lazy" width={400} height={250} />
               <span className="date-badge">{n.date}</span>
             </div>
             <div className="card-body">
@@ -81,7 +81,7 @@ export default function NewsFilter({ items }: { items: N[] }) {
       )}
       {filtered.length === 0 && (
         <div className="empty-state">
-          <span className="es-icon">🔍</span>
+          <span className="es-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="#3aa655"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
           <strong>Ничего не найдено</strong>
           <p>Попробуйте изменить запрос или сбросить фильтр{cat !== "all" ? " категории" : ""}.</p>
           <button type="button" className="btn btn-ghost" onClick={() => { setQ(""); setCat("all"); }}>Сбросить фильтры</button>
