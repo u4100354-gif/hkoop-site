@@ -8,3 +8,4 @@ db/phpmyadmin/
 out/
 graphify-out/cache/
 ".claude/worktrees/"
+scripts/parse-report.json
