@@ -31,7 +31,8 @@ node scripts/gen-search-index.mjs       # индекс поиска в public/se
 ## Структура кода
 
 - `app/` — `/`, `/news`, `/news/[id]` (await params!), `/docs`, `/about`, `/activity`, `/honor`, `/honor/[id]`, `/partners`, `/organizations`, `/events`, `/contacts`, `/search` (клиент + JSON-индекс), `/policy`, `not-found.tsx`, `icon.svg`
-- `components/` — Header (+HeaderSearch), Footer (VI-кнопка + иконки тут), Slider (пауза на ховере!), ConsultForm (mailto), NewsFilter, DocsFilter, PartnersStrip, Counter (анимация 0→end, SSR сразу итог), ScrollFx (reveal + failsafe), ViProvider (3 размера/3 схемы/интервал/без картинок), CookieBanner, CookieSettings, MapGate, MetricsGate (consent-gate!), PageHero, SearchClient
+- `components/` — Header (+HeaderSearch), Footer (VI-кнопка + иконки тут), Slider (пауза на ховере!), ConsultForm (mailto), NewsFilter, DocsFilter, PartnersStrip, Counter (анимация 0→end, SSR сразу итог), ScrollFx (reveal + failsafe), ViProvider (3 размера/3 схемы/интервал/без картинок), CookieBanner, CookieSettings, MapGate, MetricsGate (consent-gate!), PageHero, SearchClient, Crumbs
+- Админка пресс-службы: `npm run admin` → http://127.0.0.1:3101 (только локально!), пароль ADMIN_PASS в .env.local, код в scripts/admin/
 - `lib/` — db.ts, url.ts (safeHref/safeImgSrc — применять ко всему из БД!), consent.ts (POLICY_VERSION), storage.ts
 - `data/*.json` — сиды (сайт читает БД). `db/` — schema.sql, seed*.sql, fix_*.sql, README
 - `public/` — images/*, docs/*.pdf (~240МБ!), search-index.json (310 записей)
@@ -39,7 +40,7 @@ node scripts/gen-search-index.mjs       # индекс поиска в public/se
 
 ## БД `hkoop`
 
-- news(211): id, title, date, category, tags TEXT-JSON, excerpt, old_url, image
+- news(211): id, title, date, category, tags TEXT-JSON, excerpt, old_url, image, body (полный текст со старого сайта, парсер scripts/parse-old-site.mjs)
 - documents(91): id, title, type, year, file_old, file_local, old_url
 - partners(13), honor(7, полные биографии), events(3), site_settings(11)
 - Форма консультации = mailto на тестовую u4100354@gmail.com (заглушка, не backend)
