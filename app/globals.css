@@ -75,12 +75,254 @@ a { color: #1a3a6b; }
 .crumbs .cur { color: var(--muted); max-width: min(52vw, 420px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 body.vi-mode .crumbs a { background: transparent !important; border-color: currentColor !important; }
 /* Тело статьи со старого сайта */
-.article-body { display: grid; gap: 12px; font-size: 16px; line-height: 1.65; overflow-wrap: anywhere; }
-.article-body img { max-width: 100%; height: auto; border-radius: 8px; }
-.article-body table { border-collapse: collapse; display: block; overflow-x: auto; width: max-content; max-width: 100%; font-size: 14px; }
-.article-body td, .article-body th { border: 1px solid #d5dce8; padding: 6px 10px; }
-.article-body h2, .article-body h3, .article-body h4 { color: var(--navy); margin: 8px 0 0; }
-.article-body blockquote { border-left: 4px solid var(--green); margin: 0; padding: 4px 0 4px 12px; color: var(--muted); }
+.article-body {
+  display: flow-root;
+  min-width: 0;
+  max-width: 68ch;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+/* Ритм — только отступ между соседями 24 */
+.article-body > * {
+  min-width: 0;
+  max-width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  box-sizing: border-box;
+}
+.article-body > * + * { margin-top: 24px; }
+/* Секционный разрыв перед h2 из разрешённой шкалы 64–96 */
+.article-body > h2:not(:first-child) { margin-top: 64px; }
+.article-body p, .article-body div, .article-body li,
+.article-body blockquote, .article-body figcaption {
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow-wrap: break-word;
+}
+/* Пустые абзацы и одиночный <br> внутри p из старого редактора — не рвут ритм */
+.article-body p:empty, .article-body div:empty { display: none; }
+.article-body p:has(> br:only-child) { display: none; }
+.article-body br + br { display: none; }
+/* Нейтрализация мусора: центрирование, font-теги, инлайн-ширины */
+.article-body p, .article-body div, .article-body li { text-align: left; }
+.article-body font { font-family: inherit !important; font-size: inherit !important; color: inherit !important; }
+.article-body [align] { text-align: left !important; }
+.article-body [width] { max-width: 100%; }
+.article-body [style*="width"] { max-width: 100% !important; }
+.article-body div[style*="width"], .article-body p[style*="width"], .article-body table[style*="width"] { width: auto !important; max-width: 100% !important; }
+.article-body span[style*="font-size"] { font-size: inherit !important; }
+/* Страховка: ЛЮБАЯ картинка внутри статьи не wider контейнера */
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+/* Первый абзац — сдержанный lead только при честном первом ребенке */
+.article-body > p:not(:empty):first-child {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--navy);
+}
+.article-body > p:not(:empty):first-child b,
+.article-body > p:not(:empty):first-child strong {
+  font-weight: 600;
+}
+/* Весь первый абзац обёрнут в один bold со старого сайта — жирность снята */
+.article-body > p:not(:empty):first-child > b:only-child,
+.article-body > p:not(:empty):first-child > strong:only-child {
+  font-weight: 400;
+}
+.article-body > div:not(:empty):first-child > p:not(:empty):first-child {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--navy);
+}
+.article-body > div:not(:empty):first-child > p:not(:empty):first-child > b:only-child,
+.article-body > div:not(:empty):first-child > p:not(:empty):first-child > strong:only-child {
+  font-weight: 400;
+}
+/* Обычный болд в тексте — 700 */
+.article-body b, .article-body strong { font-weight: 700; }
+.article-body i, .article-body em { color: inherit; }
+.article-body a { color: #1a3a6b; text-decoration: underline; text-underline-offset: 2px; overflow-wrap: break-word; }
+.article-body a:hover { text-decoration-thickness: 2px; }
+.article-body a:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+/* Подзаголовки */
+.article-body h2, .article-body h3, .article-body h4 {
+  color: var(--navy);
+  line-height: 1.3;
+  text-wrap: balance;
+  margin: 0;
+  scroll-margin-top: 72px;
+}
+.article-body h2 {
+  font-size: 22px;
+  border-left: 5px solid var(--green);
+  padding-left: 10px;
+}
+.article-body h3 { font-size: 18px; }
+.article-body h4 { font-size: 16px; }
+/* Фото блочные: топ-уровень, div-обёртка, figure */
+.article-body > img,
+.article-body > div img,
+.article-body figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  border: 1px solid #e2e8f0;
+}
+.article-body figure {
+  margin: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+.article-body figure img { margin: 0; border: 0; border-radius: 0; width: 100%; }
+.article-body figcaption {
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  background: var(--light);
+  text-align: left;
+}
+/* Легаси-фото: только абзац из одного фото центрируется, инлайн-смайлы не трогаем */
+.article-body p:has(> img:only-child),
+.article-body div:has(> img:only-child) { text-align: center; }
+.article-body p:has(> img:only-child) > img,
+.article-body div:has(> img:only-child) > img {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+}
+/* Инлайн-картинки в тексте: не разрывать абзац */
+.article-body p img, .article-body li img,
+.article-body a img, .article-body span img {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+/* Цитата — единственный акцент */
+.article-body blockquote {
+  margin: 0;
+  padding: 8px 0 8px 12px;
+  border-left: 4px solid var(--green);
+  color: var(--navy);
+  font-size: 18px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+.article-body blockquote p + p { margin-top: 8px; }
+/* Списки */
+.article-body ul, .article-body ol {
+  margin: 0;
+  padding-left: 24px;
+  display: grid;
+  gap: 8px;
+}
+.article-body ul { list-style: disc; }
+.article-body ul ::marker { color: var(--green); }
+.article-body ol ::marker { color: var(--navy); font-weight: 700; }
+.article-body li { line-height: 1.65; }
+.article-body li::marker { font-size: 1em; }
+/* Таблицы: скролл на самом table */
+.article-body table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #d5dce8;
+  border-radius: var(--radius);
+  border-spacing: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.article-body td, .article-body th {
+  border: 1px solid #d5dce8;
+  padding: 8px 12px;
+  vertical-align: top;
+  overflow-wrap: break-word;
+}
+.article-body caption {
+  text-align: left;
+  font-weight: 700;
+  color: var(--navy);
+  padding: 8px 12px;
+}
+.article-body thead th, .article-body tr:first-child th {
+  background: var(--light);
+  color: var(--navy);
+  text-align: left;
+}
+.article-body tbody tr:nth-child(even) td { background: #f8fafc; }
+/* Видео/iframe со старого сайта */
+.article-body iframe, .article-body video {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+}
+.article-body hr { border: 0; border-top: 1px solid #d5dce8; margin: 0; }
+/* Мета-строка даты и тегов */
+.article-meta {
+  margin: 0 0 24px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.article-meta a { color: var(--navy); }
+/* VI-режим: декор off, контраст on */
+body.vi-mode .article-body { max-width: 72ch; }
+body.vi-mode .article-body > p:not(:empty):first-child,
+body.vi-mode .article-body > div:not(:empty):first-child > p:not(:empty):first-child,
+body.vi-mode .article-body blockquote,
+body.vi-mode .article-body h2,
+body.vi-mode .article-body h3,
+body.vi-mode .article-body h4,
+body.vi-mode .article-body caption,
+body.vi-mode .article-body a { color: inherit !important; }
+body.vi-mode .article-body a { text-decoration: underline !important; }
+body.vi-mode .article-body a:focus-visible { outline-color: currentColor !important; }
+body.vi-mode .article-body ul ::marker,
+body.vi-mode .article-body ol ::marker { color: currentColor !important; }
+body.vi-mode .article-body h2 { border-left-color: currentColor !important; }
+body.vi-mode .article-body blockquote { border-left-color: currentColor !important; }
+body.vi-mode .article-body figure,
+body.vi-mode .article-body > img,
+body.vi-mode .article-body table,
+body.vi-mode .article-body iframe,
+body.vi-mode .article-body video { border-color: currentColor !important; }
+body.vi-mode .article-body figcaption,
+body.vi-mode .article-body thead th,
+body.vi-mode .article-body tr:first-child th,
+body.vi-mode .article-body tbody tr:nth-child(even) td { background: transparent !important; color: inherit !important; }
+body.vi-mode .article-body [style*="color"] { color: inherit !important; }
+body.vi-mode .article-body [style*="background"] { background: transparent !important; }
+body.vi-mode .article-meta, body.vi-mode .article-meta a { color: inherit !important; }
+@media (max-width: 860px) {
+  .article-body { font-size: 16px; }
+  .article-body > p:not(:empty):first-child,
+  .article-body > div:not(:empty):first-child > p:not(:empty):first-child { font-size: 17px; }
+  .article-body > h2:not(:first-child) { margin-top: 64px; }
+  .article-body h2 { font-size: 20px; }
+  .article-body blockquote { font-size: 17px; }
+}
 .hsearch-drop a.hactive { background: var(--light); }
 .hsearch-empty { padding: 12px 14px; color: var(--muted); font-size: 14px; }
 .hsearch-empty a { color: var(--navy); }

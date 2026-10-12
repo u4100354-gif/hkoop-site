@@ -35,7 +35,7 @@ export default async function NewsDetail({ params }: { params: Promise<{ id: str
     <>
       <Crumbs items={[{ href: "/news", label: "Новости" }, { label: n.title }]} />
       <h1 style={{ margin: "10px 0 6px", lineHeight: 1.25 }}>{n.title}</h1>
-      <p><small>{n.date} · {catLabels[n.category] || n.category} · {tags.join(" · ")}</small></p>
+      <p className="article-meta"><time dateTime={n.date}>{n.date}</time> · {catLabels[n.category] || n.category}{tags.length ? <> · {tags.join(" · ")}</> : null}</p>
       <div className="card"><div className="card-body">
         {img && <img src={img} alt="" className="article-img" width={1200} height={675} />}
         {n.body ? (
