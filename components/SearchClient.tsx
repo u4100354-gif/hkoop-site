@@ -1,15 +1,16 @@
 "use client";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-
-type Item = { title: string; url: string; tag: string; text: string };
+import { queryWords, searchAll, type SearchItem } from "../lib/search";
+import SearchHighlight from "./SearchHighlight";
 
 function Results() {
   const sp = useSearchParams();
-  const [index, setIndex] = useState<Item[]>([]);
+  const [index, setIndex] = useState<SearchItem[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [typed, setTyped] = useState("");
   const query = typed || sp.get("q") || "";
+  const words = useMemo(() => queryWords(query), [query]);
 
   useEffect(() => {
     fetch("/search-index.json")
@@ -19,10 +20,9 @@ function Results() {
   }, []);
 
   const res = useMemo(() => {
-    const s = query.trim().toLowerCase();
-    if (s.length < 2) return null;
-    return index.filter((i) => i.text.includes(s)).slice(0, 60);
-  }, [query, index]);
+    if (words.length === 0) return null;
+    return searchAll(index, query, 60);
+  }, [query, index, words]);
 
   return (
     <>
@@ -43,8 +43,8 @@ function Results() {
             <div className="grid">
               {res.map((r, k) => (
                 <div key={k} className="card"><div className="card-body">
-                  <small className="cat">{r.tag}</small>
-                  <h3><a href={r.url}>{r.title}</a></h3>
+                  <small className="cat">{r.item.tag}</small>
+                  <h3><a href={r.item.url}><SearchHighlight text={r.item.title} words={words} /></a></h3>
                 </div></div>
               ))}
             </div>

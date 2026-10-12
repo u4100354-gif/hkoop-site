@@ -11,6 +11,9 @@ const pool = await mysql.createPool({
 
 const [news] = await pool.query("SELECT id, title, excerpt, tags FROM news");
 const [docs] = await pool.query("SELECT id, title, file_local FROM documents");
+const [honor] = await pool.query("SELECT id, fio, title, year FROM honor");
+const [events] = await pool.query("SELECT id, title, date, type FROM events");
+const [partners] = await pool.query("SELECT id, name, url FROM partners");
 
 const idx = [
   ...news.map((n) => ({
@@ -24,6 +27,24 @@ const idx = [
     url: d.file_local ? d.file_local : "/docs",
     tag: "документ",
     text: `${d.title}`.toLowerCase(),
+  })),
+  ...honor.map((h) => ({
+    title: `${h.fio}${h.title ? ` — ${h.title}` : ""}`,
+    url: `/honor/${h.id}`,
+    tag: "книга почёта",
+    text: `${h.fio} ${h.title || ""} ${h.year || ""} книга почета ветераны награды`.toLowerCase(),
+  })),
+  ...events.map((e) => ({
+    title: e.title,
+    url: "/events",
+    tag: "мероприятие",
+    text: `${e.title} ${e.date || ""} ${e.type || ""} мероприятия календарь`.toLowerCase(),
+  })),
+  ...partners.map((p) => ({
+    title: p.name,
+    url: "/partners",
+    tag: "партнёр",
+    text: `${p.name} партнеры сотрудничество`.toLowerCase(),
   })),
   ...[
     ["О нас", "/about", "история союз профобъединение 1948 органы конференция"],
