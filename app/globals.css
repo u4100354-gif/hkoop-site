@@ -47,6 +47,8 @@ a { color: #1a3a6b; }
 .links a:active { transform: scale(.96); }
 .links .hsearch { display: none; }
 .drawer-head, .drawer-close, .drawer-overlay { display: none; }
+.drawer-close { transition: transform .25s ease, background .2s; }
+.drawer-close:hover { background: rgba(255,255,255,.15); transform: rotate(90deg); }
 .links a { color: #fff; text-decoration: none; font-weight: 700; transition: background .2s, transform .15s; }
 .links a:hover { background: rgba(255,255,255,.08); }
 .links a:active { transform: scale(.96); }
@@ -261,6 +263,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: non
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .drawer-close { transition: none; }
+  .drawer-close:hover { transform: none; }
 }
 /* VI */
 /* ===== Версия для слабовидящих (ГОСТ Р 52872) ===== */
