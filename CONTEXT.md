@@ -1,73 +1,74 @@
-# CONTEXT.md — контекст проекта «Новый сайт ХКООП»
+# CONTEXT.md — контекст проекта «Новый сайт ХКООП» (обновлено 12.10.2026)
 
-Перенеси этот файл в новый чат (мне или другой нейронке) + ветку `skills-only` из репозитория.
+Перенеси этот файл в новый чат + ветку `skills-only` из репозитория.
 Без секретов: пароли только в `db/README.md` и `.env.local` (не коммитить, не вставлять в чат).
 
 ## Что это
 
 Новый сайт Союза «Хабаровское краевое объединение организаций профсоюзов» (ХКООП).
-Старый сайт habprof.ru (Joomla 3.10, EOL) не трогаем. Разработка локально, демо на GitHub Pages.
+Старый habprof.ru (Joomla 3.10, EOL) не трогаем. Разработка локально, демо на GitHub Pages.
 
-## Стек
+## Стек (после мержа for-mac, 12.10)
 
-- Next.js 14 App Router + React 18 + TypeScript, CSS без фреймворков (`app/globals.css`, токены в `:root`)
-- MariaDB (MySQL-совместимая), доступ через `lib/db.ts` (mysql2 pool, серверные компоненты)
+- Next.js 16 App Router + React 19 + TypeScript, `poweredByHeader: false`
+- Шрифт Manrope через next/font (кириллица+латиница); VI-режим — Arial
+- CSS без фреймворков (`app/globals.css`, токены в `:root`), Turbopack dev
+- MariaDB, доступ через `lib/db.ts` (mysql2 pool, только SELECT у юзера сайта; миграции через root)
 - Локально: http://localhost:3100 (dev), phpMyAdmin http://127.0.0.1:8081, БД `hkoop`
-- Прод-слепок: https://u4100354-gif.github.io/ (статика из `.next-export`, деплой `bash /tmp/deploy.sh`)
-- Репозиторий: `u4100354-gif/hkoop-site`, ветки: `main` (исходники), `gh-pages`-аналог `u4100354-gif.github.io:main` (статика), `skills-only` (скиллы + граф)
+- Прод-слепок: https://u4100354-gif.github.io/ (статика из `.next-export`, деплой вручную из папки)
+- Репозиторий `u4100354-gif/hkoop-site`, ветки: `main` (всё), `skills-only` (скиллы+правила+граф для переноса), корень `u4100354-gif.github.io:main` (голая статика)
 
 ## Команды
 
 ```bash
-npm run dev -- -p 3100        # разработка
-npx tsc --noEmit              # проверка перед сборкой (обязательно)
-STATIC_EXPORT=1 npm run build  # экспорт в .next-export (dev в .next не трогает)
-bash /tmp/deploy.sh           # сборка + пуш статики на Pages
+export PATH="/opt/homebrew/bin:$PATH"   # node/mysql живут в brew
+npm run dev -- -p 3100
+npx tsc --noEmit                        # обязательно перед сборкой
+STATIC_EXPORT=1 npm run build           # экспорт в .next-export (dev в .next не трогает!)
+node scripts/gen-search-index.mjs       # индекс поиска в public/search-index.json
 ```
 
 ## Структура кода
 
-- `app/` — страницы: `/`, `/news`, `/news/[id]`, `/docs`, `/about`, `/activity`, `/honor`, `/honor/[id]`, `/partners`, `/organizations`, `/events`, `/contacts`, `/search`
-- `components/` — Header (+HeaderSearch), Footer, Slider (Apple-style), ConsultForm, NewsFilter, DocsFilter, PartnersStrip, Counter, ScrollFx, ViProvider, CookieBanner, PageHero, SearchClient
-- `lib/db.ts` — пул MySQL + `q()` + `parseTags()`
-- `data/*.json` — исходные сиды (сайт читает БД, не их)
-- `db/` — schema.sql, seed*.sql, fix_*.sql, README (доступы)
-- `public/` — images/*, docs/*.pdf, search-index.json (генерируется `scripts/gen-search-index.mjs`)
-- `docs/` — ПАМЯТКА-РАЗРАБОТКИ.md, ИНСТРУКЦИЯ-ПРЕСС-СЛУЖБЕ.md
-- `AGENTS.md` — правила (вайб-кодинг, стоп-лист, процесс), `DESIGN.md` — дизайн-система
+- `app/` — `/`, `/news`, `/news/[id]` (await params!), `/docs`, `/about`, `/activity`, `/honor`, `/honor/[id]`, `/partners`, `/organizations`, `/events`, `/contacts`, `/search` (клиент + JSON-индекс), `/policy`, `not-found.tsx`, `icon.svg`
+- `components/` — Header (+HeaderSearch), Footer (VI-кнопка + иконки тут), Slider (пауза на ховере!), ConsultForm (mailto), NewsFilter, DocsFilter, PartnersStrip, Counter (анимация 0→end, SSR сразу итог), ScrollFx (reveal + failsafe), ViProvider (3 размера/3 схемы/интервал/без картинок), CookieBanner, CookieSettings, MapGate, MetricsGate (consent-gate!), PageHero, SearchClient
+- `lib/` — db.ts, url.ts (safeHref/safeImgSrc — применять ко всему из БД!), consent.ts (POLICY_VERSION), storage.ts
+- `data/*.json` — сиды (сайт читает БД). `db/` — schema.sql, seed*.sql, fix_*.sql, README
+- `public/` — images/*, docs/*.pdf (~240МБ!), search-index.json (310 записей)
+- `docs/` — ПАМЯТКА-РАЗРАБОТКИ.md, ИНСТРУКЦИЯ-ПРЕСС-СЛУЖБЕ.md; `AGENTS.md` (+блок Next 16), `DESIGN.md`, `MAC-ПАМЯТКА.md`, `CLAUDE-AUDIT.md`
 
-## БД `hkoop` (таблицы, строк на 09.10.2026)
+## БД `hkoop`
 
-- news(211): id, title, date, category (novosti/molodezh/ohrana-truda/mezhdunarodnoe/podderzhka), tags TEXT-JSON, excerpt, old_url, image
-- documents(91): id, title, type (plan/soglashenie/program/policy/document), year, file_old, file_local, old_url
-- partners(13): id, name, url, logo
-- honor(7): id, fio, title, year, photo, text (полные биографии)
-- events(3): id, title, date, type, old_url
-- site_settings(11): org/short/address/phone/fax/email/hours/stats_note/social_vk/social_tg/social_max
+- news(211): id, title, date, category, tags TEXT-JSON, excerpt, old_url, image
+- documents(91): id, title, type, year, file_old, file_local, old_url
+- partners(13), honor(7, полные биографии), events(3), site_settings(11)
+- Форма консультации = mailto на тестовую u4100354@gmail.com (заглушка, не backend)
 
-## Схемка: граф знаний проекта (graphify)
+## Схемка: граф знаний (graphify)
 
-- Построен `graphify . --code-only` (без API-ключа; полный с PDF/картинками требует GEMINI/ANTHROPIC/OPENAI-ключ)
-- Ветка `skills-only`: `graphify-out/graph.json` (1934 узла, 4970 рёбер, 113 сообществ), `GRAPH_REPORT.md`, `manifest.json`
-- Обновление после правок: `graphify update .` (код — бесплатно), отчёт: `graphify cluster-only .`
-- Скилл: `.agents/skills/graphify/` (вопросы по архитектуре — сначала как graphify-запрос)
-- Состав: код приложения (app/components/lib/scripts) + шум из node_modules/.next-export (игнора у graphify нет)
-- Хабы: layout/Header/Slider/фильтры, lib/db.ts — центр связей данных
+- `graphify . --code-only` (без ключа); полный с PDF/картинками требует API-ключ
+- Ветка `skills-only`: graph.json (~1900 узлов), GRAPH_REPORT.md, manifest.json, CONTEXT.md, 23 скилла
+- После правок: `graphify update .`, отчёт: `graphify cluster-only .`
 
 ## Решения (не менять молча)
 
-- Дизайн: тёмно-синий + серое меню как оригинал, Apple-приёмы (слайдер кроссфейд+Ken Burns), новый логотип сохранён
-- Все правки сначала на localhost, на Pages только по команде «обнови сайт»
-- Контент правит пресс-служба (потом своя админка, пока phpMyAdmin + инструкция)
-- Форма консультации шлёт на тестовую почту u4100354@gmail.com (mailto-заглушка)
-- Статистика «в цифрах» — ориентиры (~22/~19/~100 тыс.), точные цифры запрошены у руководства
-- Подпись «* Ориентировочно…» убрана с главной (10.10.2026); цифры остаются ориентирами до ответа руководства
->>>>>>> origin/for-mac
-- EN+CN версии, тёмная тема, Метрика (новый счётчик), ежедневные бэкапы — запланировано, не сделано
+- Дизайн: тёмно-синий + серое меню как оригинал; Manrope; редизайн-риф: VARIANCE 4 / MOTION 5 / DENSITY 4
+- Все правки сначала на localhost, на Pages только по команде (пересборка + пуш out/)
+- Форма — mailto-заглушка; статистика «в цифрах» — ориентиры (~22/~19/~100 тыс.), точных цифр нет
+- EN+CN, тёмная тема, Метрика (новый счётчик), ежедневные бэкапы, своя админка — запланировано
 - Каталог организаций: на старом сайте грузится скриптом, нужен список от аппарата
+- Бэкапы: `~/site-backups/hkoop-ДАТА/` (db.sql + code.tgz), метка в `~/site-backups/LATEST`
 
-## Известные грабли
+## Открытые вопросы юзеру (на 12.10)
 
-- Dev-сервер + сборка делят `.next` → экспорт только в `.next-export` (уже в next.config.js)
-- После рестарта dev-сервера во вкладке жёсткая перезагрузка (Cmd+Shift+R), иначе 404 чанков
-- Кириллица в именах файлов URL-кодируется; даты на старом сайте текстом («15 сентября»)
+- Мобильный подвал: юзер хочет «в строчку», текущий вариант — 2 колонки (контакты сверху на всю ширину). Статус: спорно, ждёт оценки
+- Поведение паузы слайдера на ховере: предложены 3 варианта, ответа нет
+- Форма: просил центрирование — сделано (margin auto), ждёт проверки
+
+## Грабли (все уже ловили)
+
+- Dev и сборка делили `.next` → экспорт только в `.next-export`
+- После рестарта dev — жёсткая перезагрузка вкладки (Cmd+Shift+R), иначе 404 чанков и «поломанный» вид
+- В Next 16 `params` в страницах — только через `await params`, иначе 500
+- Кириллица в путях/именах URL-кодируется; даты на старом сайте текстом
+- Не коммитить: `.env.local`, пароли, `.claude/worktrees` (уже в .gitignore), graphify-out/cache
