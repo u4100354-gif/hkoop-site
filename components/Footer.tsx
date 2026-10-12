@@ -45,29 +45,29 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-grid">
-        <div>
-          <strong>Контакты</strong>
+        <div className="footer-col">
+          <strong className="footer-title">Контакты</strong>
           <div className="frow"><Icon d={IC.mail} /><a href="mailto:ksps-priem@mail.ru">ksps-priem@mail.ru</a></div>
           <div className="frow"><Icon d={IC.phone} /><a href="tel:+74212328718">8 (4212) 32-87-18</a><span> · факс: 32-47-02</span></div>
           <div className="frow"><Icon d={IC.clock} /><span>Пн-Чт: 9:00–18:00 · Пт: 9:00–16:20</span></div>
           <div className="frow"><Icon d={IC.pin} /><span>680000, г. Хабаровск, ул. Муравьева-Амурского, 4</span></div>
         </div>
-        <div>
-          <strong>Разделы</strong>
-          <div><a href="/news">Новости</a> · <a href="/events">Мероприятия</a></div>
-          <div><a href="/organizations">Членские организации</a></div>
-          <div><a href="/honor">Книга Почёта</a> · <a href="/partners">Партнёры</a></div>
-          <div><a href="/about">О нас</a> · <a href="/activity">Деятельность</a></div>
+        <div className="footer-col">
+          <strong className="footer-title">Разделы</strong>
+          <div className="footer-links"><a href="/news">Новости</a> · <a href="/events">Мероприятия</a></div>
+          <div className="footer-links"><a href="/organizations">Членские организации</a></div>
+          <div className="footer-links"><a href="/honor">Книга Почёта</a> · <a href="/partners">Партнёры</a></div>
+          <div className="footer-links"><a href="/about">О нас</a> · <a href="/activity">Деятельность</a></div>
         </div>
-        <div>
-          <strong>Мы в соцсетях</strong>
+        <div className="footer-col">
+          <strong className="footer-title">Мы в соцсетях</strong>
           <div className="frow"><Icon d={IC.send} /><a href="https://vk.com/habprof_27">VK</a></div>
           <div className="frow"><Icon d={IC.send} /><a href="https://t.me/habprof">Telegram</a></div>
           <div className="frow"><Icon d={IC.send} /><a href="https://max.ru/id2702080071_biz">MAX</a></div>
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>Союз «Хабаровское краевое объединение организаций профсоюзов» · Локальный прототип · <CookieSettings /></span>
+        <span className="footer-copy">Союз «Хабаровское краевое объединение организаций профсоюзов» · Локальный прототип · <CookieSettings /></span>
         <button onClick={toggleVi} className="vi-btn-footer">
           <Icon d={IC.eye} />{vi ? "Обычная версия" : "Версия для слабовидящих"}
         </button>

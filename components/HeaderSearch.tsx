@@ -14,7 +14,7 @@ const pages = [
   { title: "Членские организации", url: "/organizations", text: "реестр первички советы" },
 ];
 
-export default function HeaderSearch({ onGo }: { onGo?: () => void }) {
+export default function HeaderSearch({ onGo, placeholder, chips }: { onGo?: () => void; placeholder?: string; chips?: string[] }) {
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
   const box = useRef<HTMLDivElement>(null);
@@ -51,7 +51,7 @@ export default function HeaderSearch({ onGo }: { onGo?: () => void }) {
     <div className="hsearch" ref={box}>
       <input
         className="hsearch-input"
-        placeholder="🔍 Поиск"
+        placeholder={placeholder ?? "🔍 Поиск"}
         value={q}
         maxLength={200}
         aria-label="Поиск по сайту"
@@ -62,6 +62,14 @@ export default function HeaderSearch({ onGo }: { onGo?: () => void }) {
           if (e.key === "Escape") setOpen(false);
         }}
       />
+      {chips && chips.length > 0 && (
+        <div className="hsearch-hints">
+          <span className="hsearch-hints-label">Часто ищут:</span>
+          {chips.map((c) => (
+            <button key={c} type="button" className="hsearch-chip" onClick={() => { setQ(c); setOpen(true); }}>{c}</button>
+          ))}
+        </div>
+      )}
       {open && res.length > 0 && (
         <div className="hsearch-drop">
           {res.map((r, k) => (
