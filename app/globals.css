@@ -74,6 +74,13 @@ a { color: #1a3a6b; }
 .crumb-sep { color: #9aa5b5; font-weight: 400; padding: 0 2px; }
 .crumbs .cur { color: var(--muted); max-width: min(52vw, 420px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 body.vi-mode .crumbs a { background: transparent !important; border-color: currentColor !important; }
+/* Тело статьи со старого сайта */
+.article-body { display: grid; gap: 12px; font-size: 16px; line-height: 1.65; overflow-wrap: anywhere; }
+.article-body img { max-width: 100%; height: auto; border-radius: 8px; }
+.article-body table { border-collapse: collapse; display: block; overflow-x: auto; width: max-content; max-width: 100%; font-size: 14px; }
+.article-body td, .article-body th { border: 1px solid #d5dce8; padding: 6px 10px; }
+.article-body h2, .article-body h3, .article-body h4 { color: var(--navy); margin: 8px 0 0; }
+.article-body blockquote { border-left: 4px solid var(--green); margin: 0; padding: 4px 0 4px 12px; color: var(--muted); }
 .hsearch-drop a.hactive { background: var(--light); }
 .hsearch-empty { padding: 12px 14px; color: var(--muted); font-size: 14px; }
 .hsearch-empty a { color: var(--navy); }

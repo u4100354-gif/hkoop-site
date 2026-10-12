@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 
 export default async function NewsDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const rows: any[] = await q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,tags,excerpt,old_url,image FROM news WHERE id=?", [id]);
+  const rows: any[] = await q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,tags,excerpt,old_url,image,body FROM news WHERE id=?", [id]);
   const n = rows[0];
   if (!n) notFound();
   const tags = parseTags(n.tags);
@@ -38,8 +38,14 @@ export default async function NewsDetail({ params }: { params: Promise<{ id: str
       <p><small>{n.date} · {catLabels[n.category] || n.category} · {tags.join(" · ")}</small></p>
       <div className="card"><div className="card-body">
         {img && <img src={img} alt="" className="article-img" width={1200} height={675} />}
-        <p>{n.excerpt}</p>
-        <p><small>Полный текст перенести со старого сайта: habprof.ru{n.old_url}</small></p>
+        {n.body ? (
+          <div className="article-body" dangerouslySetInnerHTML={{ __html: String(n.body) }} />
+        ) : (
+          <>
+            <p>{n.excerpt}</p>
+            <p><small>Полный текст перенести со старого сайта: habprof.ru{n.old_url}</small></p>
+          </>
+        )}
       </div></div>
     </>
   );
