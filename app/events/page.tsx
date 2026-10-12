@@ -14,6 +14,7 @@ export default async function Events() {
               <h3 style={{ margin: "8px 0" }}>{e.title}</h3>
             </div></div>
           ))}
+          {events.length === 0 && <p>Анонсов пока нет.</p>}
         </div>
       </section>
     </>

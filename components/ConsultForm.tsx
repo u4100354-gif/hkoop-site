@@ -47,18 +47,18 @@ export default function ConsultForm() {
     <form className="consult-form" onSubmit={submit} noValidate>
       <label className="field">
         <span className="field-label">Ваше имя *</span>
-        <input value={name} onChange={(e) => { setName(e.target.value); setState("idle"); }} placeholder="Иван Иванович" aria-label="Ваше имя" required />
+        <input name="name" autoComplete="name" maxLength={100} value={name} onChange={(e) => { setName(e.target.value); setState("idle"); }} placeholder="Иван Иванович" aria-label="Ваше имя" required />
       </label>
       <label className="field">
         <span className="field-label">Телефон или email *</span>
-        <input value={contact} onChange={(e) => { setContact(e.target.value); setState("idle"); }} placeholder="+7 ... или mail@..." aria-label="Телефон или email" required />
+        <input name="contact" autoComplete="off" maxLength={100} value={contact} onChange={(e) => { setContact(e.target.value); setState("idle"); }} placeholder="+7 ... или mail@..." aria-label="Телефон или email" required />
       </label>
       <label className="field">
         <span className="field-label">Вопрос *</span>
-        <textarea value={msg} onChange={(e) => { setMsg(e.target.value); setState("idle"); }} rows={4} placeholder="Опишите ситуацию — по трудовому праву, охране труда, членству" aria-label="Вопрос" required />
+        <textarea name="question" maxLength={2000} value={msg} onChange={(e) => { setMsg(e.target.value); setState("idle"); }} rows={4} placeholder="Опишите ситуацию — по трудовому праву, охране труда, членству" aria-label="Вопрос" required />
       </label>
       <label className="checkbox">
-        <input type="checkbox" required /> Даю согласие на обработку персональных данных
+        <input type="checkbox" required /> Даю согласие на обработку персональных данных для ответа на обращение (оператор — Союз «ХКООП», <a href="/policy">политика</a>) для ответа на обращение (оператор — Союз ХКООП)
       </label>
       {state === "error" && (
         <p className="form-error" role="alert">Заполните имя, контакт и вопрос (не короче 5 символов).</p>

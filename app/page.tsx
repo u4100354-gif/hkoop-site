@@ -3,6 +3,7 @@ import ConsultForm from "../components/ConsultForm";
 import PartnersStrip from "../components/PartnersStrip";
 import Counter from "../components/Counter";
 import { q, parseTags } from "../lib/db";
+import { safeHref, safeImgSrc } from "../lib/url";
 
 const catLabels: Record<string, string> = {
   molodezh: "Молодёжь",
@@ -37,10 +38,12 @@ const newsImages: Record<string, string> = {
 };
 
 export default async function Home() {
-  const news: any[] = await q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,excerpt,image FROM news ORDER BY date DESC LIMIT 4");
-  const docs: any[] = await q("SELECT id,title,type,year,file_local,file_old,old_url FROM documents ORDER BY year DESC LIMIT 4");
-  const partners: any[] = await q("SELECT * FROM partners ORDER BY name");
-  const docHref = (d: any) => d.file_local || d.file_old || (d.old_url ? `https://habprof.ru${d.old_url}` : "/docs");
+  const [news, docs, partners]: any[][] = await Promise.all([
+    q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,excerpt,image FROM news ORDER BY date DESC LIMIT 4"),
+    q("SELECT id,title,type,year,file_local,file_old,old_url FROM documents ORDER BY year DESC LIMIT 4"),
+    q("SELECT * FROM partners ORDER BY name"),
+  ]);
+  const docHref = (d: any) => safeHref(d.file_local) || safeHref(d.file_old) || (typeof d.old_url === "string" && d.old_url.startsWith("/") ? `https://habprof.ru${d.old_url}` : "/docs");
   return (
     <>
       <Slider />
@@ -55,7 +58,7 @@ export default async function Home() {
             {(news as any[]).slice(0, 4).map((n) => (
               <article key={n.id} className="card news-card">
                 <div className="thumb">
-                  <img src={n.image || newsImages[n.id] || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" width={400} height={250} />
+                  <img src={safeImgSrc(n.image) || newsImages[n.id] || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" width={400} height={250} />
                   <span className="date-badge">{n.date}</span>
                 </div>
                 <div className="card-body">
@@ -85,7 +88,6 @@ export default async function Home() {
           <div><Counter end={19} prefix="~" /><span>координационных советов*</span></div>
           <div><Counter end={100} prefix="~" suffix=" тыс." /><span>членов профсоюза*</span></div>
         </div>
-        <p style={{ opacity: .75, fontSize: 13 }}>* Ориентировочно, точные данные на 01.01.2026 уточнить у руководства.</p>
       </section>
 
       <section className="section reveal">

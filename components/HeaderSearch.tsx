@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import news from "../data/news.json";
 import docs from "../data/documents.json";
@@ -20,14 +20,16 @@ export default function HeaderSearch({ onGo }: { onGo?: () => void }) {
   const box = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  const dq = useDeferredValue(q);
+
   const res = useMemo(() => {
-    const s = q.trim().toLowerCase();
+    const s = dq.trim().toLowerCase();
     if (s.length < 2) return [];
     const rn = (news as any[]).filter((n) => (n.title + " " + n.excerpt).toLowerCase().includes(s)).map((n) => ({ title: n.title, url: `/news/${n.id}`, tag: "новость" }));
     const rd = (docs as any[]).filter((d) => d.title.toLowerCase().includes(s)).map((d) => ({ title: d.title, url: "/docs", tag: "документ" }));
     const rp = pages.filter((p) => (p.title + " " + p.text).toLowerCase().includes(s)).map((p) => ({ title: p.title, url: p.url, tag: "раздел" }));
     return [...rp, ...rn, ...rd].slice(0, 8);
-  }, [q]);
+  }, [dq]);
 
   useEffect(() => {
     const close = (e: MouseEvent) => {
@@ -51,6 +53,7 @@ export default function HeaderSearch({ onGo }: { onGo?: () => void }) {
         className="hsearch-input"
         placeholder="🔍 Поиск"
         value={q}
+        maxLength={200}
         aria-label="Поиск по сайту"
         onChange={(e) => { setQ(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}

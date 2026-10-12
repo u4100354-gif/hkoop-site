@@ -2,6 +2,7 @@
 const isExport = process.env.STATIC_EXPORT === "1";
 const nextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
   // Экспортные сборки пишут во временную папку, чтобы не ломать работающий dev-сервер
   distDir: isExport ? ".next-export" : ".next",
   ...(isExport

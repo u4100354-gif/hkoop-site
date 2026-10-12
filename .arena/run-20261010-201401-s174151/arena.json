@@ -1,0 +1,997 @@
+{
+ "version": 1,
+ "created": "2026-10-10 20:14:01",
+ "seed": 174151,
+ "agents_n": 20,
+ "cards_available": 2160,
+ "wave": 10,
+ "dir": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151",
+ "has_baseline": false,
+ "agents": {
+  "a001": {
+   "card": {
+    "reasoning": {
+     "id": "contrarian",
+     "name": "Contrarian",
+     "how": "Write down the obvious default answer, then argue seriously against it. Keep only what survives the argument, even if that takes you the unpopular way."
+    },
+    "workflow": {
+     "id": "open-questions-first",
+     "name": "Open questions first",
+     "how": "List every open question the task leaves. Resolve each one with reasoning or a stated assumption, then answer."
+    },
+    "strategy": {
+     "id": "completeness",
+     "name": "Completeness",
+     "how": "Leave out nothing the task asks for or clearly implies. Cover every requirement explicitly."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m07.a001.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a018",
+   "byes": 0
+  },
+  "a002": {
+   "card": {
+    "reasoning": {
+     "id": "dialectical",
+     "name": "Dialectical",
+     "how": "State the strongest version of one answer, then the strongest opposing answer, then write the synthesis that keeps what is true in both."
+    },
+    "workflow": {
+     "id": "research-then-synthesise",
+     "name": "Research, then synthesise",
+     "how": "Gather every relevant fact first: the task, any files or context it points to, what is known about the domain. Write nothing until the research is done, then synthesise."
+    },
+    "strategy": {
+     "id": "explicit-trade-offs",
+     "name": "Explicit trade-offs",
+     "how": "Name the real trade-offs, choose for the user's most likely constraints, and say plainly what that choice gives up."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r4\\r4-m01.a002.solution.md",
+   "alive": false,
+   "eliminated_in": 4,
+   "eliminated_by": "a019",
+   "byes": 1
+  },
+  "a003": {
+   "card": {
+    "reasoning": {
+     "id": "expert-panel",
+     "name": "Expert panel",
+     "how": "Answer the task as three different experts would, picking roles that fit it. Take the strongest idea from each and settle every point where they disagree."
+    },
+    "workflow": {
+     "id": "draft-critique-rewrite",
+     "name": "Draft, critique, rewrite",
+     "how": "Write a complete first draft. Critique it line by line against the task as if someone else wrote it. Then rewrite it from scratch using the critique."
+    },
+    "strategy": {
+     "id": "defensive",
+     "name": "Defensive",
+     "how": "Assume the inputs are bad and the conditions are hostile. Make the answer fail safely and loudly rather than quietly."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m04.a003.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a002",
+   "byes": 0
+  },
+  "a004": {
+   "card": {
+    "reasoning": {
+     "id": "constraint-first",
+     "name": "Constraint first",
+     "how": "List every hard constraint, stated and implied: time, budget, tools, format, audience, platform. Solve strictly inside that box and let the tightest constraint drive the design."
+    },
+    "workflow": {
+     "id": "outline-first",
+     "name": "Outline first",
+     "how": "Write a skeleton outline, check the outline against every requirement in the task, fix it, and only then fill it in."
+    },
+    "strategy": {
+     "id": "maximal-rigour",
+     "name": "Maximal rigour",
+     "how": "Be exhaustive and exact. Check every step, verify every claim, and leave no hand-waving anywhere."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m03.a004.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a012",
+   "byes": 0
+  },
+  "a005": {
+   "card": {
+    "reasoning": {
+     "id": "systems-thinking",
+     "name": "Systems thinking",
+     "how": "Map the moving parts, how they affect each other, and what happens second and third order. Optimise the whole system, not just the one part the task points at."
+    },
+    "workflow": {
+     "id": "smallest-version-first",
+     "name": "Smallest version first",
+     "how": "Produce the smallest complete version that actually works. Then extend it one step at a time, keeping it working after every step."
+    },
+    "strategy": {
+     "id": "concrete-specifics",
+     "name": "Concrete specifics",
+     "how": "Exact numbers, names, commands, file paths and steps. Zero generic advice."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m06.a005.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a019",
+   "byes": 0
+  },
+  "a006": {
+   "card": {
+    "reasoning": {
+     "id": "adversarial",
+     "name": "Adversarial",
+     "how": "Picture the harshest expert reviewer trying to tear the answer apart. Write their attacks down first and build the answer backwards from them."
+    },
+    "workflow": {
+     "id": "requirements-checklist",
+     "name": "Requirements checklist",
+     "how": "Pull every requirement out of the task into a numbered list. Solve, then tick each item off and say exactly where it is met."
+    },
+    "strategy": {
+     "id": "built-to-last",
+     "name": "Built to last",
+     "how": "Optimise for how this holds up in six months: easy to maintain, easy to extend, no traps for the next person."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r5\\r5-m01.a006.solution.md",
+   "alive": false,
+   "eliminated_in": 5,
+   "eliminated_by": "a019",
+   "byes": 1
+  },
+  "a007": {
+   "card": {
+    "reasoning": {
+     "id": "socratic",
+     "name": "Socratic",
+     "how": "Interrogate the task with the questions a sharp expert would ask before starting. Answer each one explicitly and let the answers decide the shape of the solution."
+    },
+    "workflow": {
+     "id": "build-then-break",
+     "name": "Build, then break",
+     "how": "Build the answer. Then throw five hostile inputs or scenarios at it, write down what breaks, and patch every break."
+    },
+    "strategy": {
+     "id": "fewest-moving-parts",
+     "name": "Fewest moving parts",
+     "how": "Remove things until it breaks, then put the last one back. Fewer steps, fewer dependencies, fewer words."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m05.a007.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a017",
+   "byes": 0
+  },
+  "a008": {
+   "card": {
+    "reasoning": {
+     "id": "first-principles",
+     "name": "First principles",
+     "how": "Strip the task down to the facts and requirements nobody can argue with. Rebuild the answer from those alone, and keep a convention only if it earns its place again."
+    },
+    "workflow": {
+     "id": "draft-critique-rewrite",
+     "name": "Draft, critique, rewrite",
+     "how": "Write a complete first draft. Critique it line by line against the task as if someone else wrote it. Then rewrite it from scratch using the critique."
+    },
+    "strategy": {
+     "id": "edge-cases-first",
+     "name": "Edge cases first",
+     "how": "Hunt the edge cases, failure modes and weird inputs first, and design the answer around surviving them."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m02.a008.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a013",
+   "byes": 0
+  },
+  "a009": {
+   "card": {
+    "reasoning": {
+     "id": "probabilistic",
+     "name": "Probabilistic",
+     "how": "Treat every claim and choice as uncertain. Weigh what is likely, prefer what holds up across most scenarios, and state your confidence where it changes the decision."
+    },
+    "workflow": {
+     "id": "smallest-version-first",
+     "name": "Smallest version first",
+     "how": "Produce the smallest complete version that actually works. Then extend it one step at a time, keeping it working after every step."
+    },
+    "strategy": {
+     "id": "simplest",
+     "name": "Simplest thing that works",
+     "how": "Pick the least complicated answer that fully does the job. Every extra part has to justify itself."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m09.a009.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a020",
+   "byes": 0
+  },
+  "a010": {
+   "card": {
+    "reasoning": {
+     "id": "worked-example",
+     "name": "Worked example",
+     "how": "Solve one concrete, realistic instance end to end first, with real values. Generalise only from what that example actually taught you."
+    },
+    "workflow": {
+     "id": "three-drafts",
+     "name": "Three drafts, pick one",
+     "how": "Write three short, genuinely different approaches. Pick the strongest on the task's own terms and develop only that one fully."
+    },
+    "strategy": {
+     "id": "fewest-moving-parts",
+     "name": "Fewest moving parts",
+     "how": "Remove things until it breaks, then put the last one back. Fewer steps, fewer dependencies, fewer words."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m10.a010.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a006",
+   "byes": 0
+  },
+  "a011": {
+   "card": {
+    "reasoning": {
+     "id": "socratic",
+     "name": "Socratic",
+     "how": "Interrogate the task with the questions a sharp expert would ask before starting. Answer each one explicitly and let the answers decide the shape of the solution."
+    },
+    "workflow": {
+     "id": "write-then-restructure",
+     "name": "Write, then restructure",
+     "how": "Write freely and fast. Then outline what you actually wrote, fix the structure, and rewrite it to the new outline."
+    },
+    "strategy": {
+     "id": "user-empathy",
+     "name": "User empathy first",
+     "how": "Start from the person who will use this: their situation, their skill level, and what they will actually do next. Shape everything around that."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r2\\r2-m01.a011.solution.md",
+   "alive": false,
+   "eliminated_in": 2,
+   "eliminated_by": "a016",
+   "byes": 0
+  },
+  "a012": {
+   "card": {
+    "reasoning": {
+     "id": "analogy",
+     "name": "Analogy",
+     "how": "Find a problem in a different field that has already been solved and has the same shape. Port its solution over, then fix every place where the analogy breaks."
+    },
+    "workflow": {
+     "id": "iterative-deepening",
+     "name": "Iterative deepening",
+     "how": "Write a one-paragraph answer first. Then expand the parts that matter most in two more passes, each one deeper than the last."
+    },
+    "strategy": {
+     "id": "defensive",
+     "name": "Defensive",
+     "how": "Assume the inputs are bad and the conditions are hostile. Make the answer fail safely and loudly rather than quietly."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r3\\r3-m02.a012.solution.md",
+   "alive": false,
+   "eliminated_in": 3,
+   "eliminated_by": "a006",
+   "byes": 0
+  },
+  "a013": {
+   "card": {
+    "reasoning": {
+     "id": "working-backwards",
+     "name": "Working backwards",
+     "how": "Describe the finished result precisely, as if it already exists. Then work backwards, step by step, to where the user is right now."
+    },
+    "workflow": {
+     "id": "options-matrix",
+     "name": "Options matrix",
+     "how": "List the realistic options, score them in a small matrix against the criteria that matter for this task, choose one, and write up the choice."
+    },
+    "strategy": {
+     "id": "speed",
+     "name": "Speed",
+     "how": "Optimise for the fastest route to something usable today. Cut anything that does not move the result."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r2\\r2-m03.a013.solution.md",
+   "alive": false,
+   "eliminated_in": 2,
+   "eliminated_by": "a002",
+   "byes": 0
+  },
+  "a014": {
+   "card": {
+    "reasoning": {
+     "id": "decomposition",
+     "name": "Decomposition",
+     "how": "Break the task into independent sub-problems. Solve each one completely, then integrate them and test the seams where they meet."
+    },
+    "workflow": {
+     "id": "research-then-synthesise",
+     "name": "Research, then synthesise",
+     "how": "Gather every relevant fact first: the task, any files or context it points to, what is known about the domain. Write nothing until the research is done, then synthesise."
+    },
+    "strategy": {
+     "id": "simplest",
+     "name": "Simplest thing that works",
+     "how": "Pick the least complicated answer that fully does the job. Every extra part has to justify itself."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m08.a014.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a011",
+   "byes": 0
+  },
+  "a015": {
+   "card": {
+    "reasoning": {
+     "id": "inversion",
+     "name": "Inversion",
+     "how": "Ask what would make this answer fail. List every way it could, then build the answer that makes each of those failures impossible."
+    },
+    "workflow": {
+     "id": "build-then-break",
+     "name": "Build, then break",
+     "how": "Build the answer. Then throw five hostile inputs or scenarios at it, write down what breaks, and patch every break."
+    },
+    "strategy": {
+     "id": "edge-cases-first",
+     "name": "Edge cases first",
+     "how": "Hunt the edge cases, failure modes and weird inputs first, and design the answer around surviving them."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r1\\r1-m01.a015.solution.md",
+   "alive": false,
+   "eliminated_in": 1,
+   "eliminated_by": "a016",
+   "byes": 0
+  },
+  "a016": {
+   "card": {
+    "reasoning": {
+     "id": "expert-panel",
+     "name": "Expert panel",
+     "how": "Answer the task as three different experts would, picking roles that fit it. Take the strongest idea from each and settle every point where they disagree."
+    },
+    "workflow": {
+     "id": "write-then-restructure",
+     "name": "Write, then restructure",
+     "how": "Write freely and fast. Then outline what you actually wrote, fix the structure, and rewrite it to the new outline."
+    },
+    "strategy": {
+     "id": "clarity",
+     "name": "Clarity above all",
+     "how": "Make it the easiest answer to read and act on: plain words, obvious structure, nothing the reader has to decode."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r3\\r3-m01.a016.solution.md",
+   "alive": false,
+   "eliminated_in": 3,
+   "eliminated_by": "a019",
+   "byes": 0
+  },
+  "a017": {
+   "card": {
+    "reasoning": {
+     "id": "evidence-first",
+     "name": "Evidence first",
+     "how": "Ground every claim in something checkable: the task text, the files it points to, the numbers given, documentation. Anything you cannot check gets labelled as an assumption."
+    },
+    "workflow": {
+     "id": "test-first",
+     "name": "Test first",
+     "how": "Before writing the answer, write the checks it must pass: acceptance tests for code, pass or fail criteria for anything else. Then write the answer and run every check against it."
+    },
+    "strategy": {
+     "id": "user-empathy",
+     "name": "User empathy first",
+     "how": "Start from the person who will use this: their situation, their skill level, and what they will actually do next. Shape everything around that."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r2\\r2-m05.a017.solution.md",
+   "alive": false,
+   "eliminated_in": 2,
+   "eliminated_by": "a006",
+   "byes": 0
+  },
+  "a018": {
+   "card": {
+    "reasoning": {
+     "id": "dialectical",
+     "name": "Dialectical",
+     "how": "State the strongest version of one answer, then the strongest opposing answer, then write the synthesis that keeps what is true in both."
+    },
+    "workflow": {
+     "id": "requirements-checklist",
+     "name": "Requirements checklist",
+     "how": "Pull every requirement out of the task into a numbered list. Solve, then tick each item off and say exactly where it is met."
+    },
+    "strategy": {
+     "id": "speed",
+     "name": "Speed",
+     "how": "Optimise for the fastest route to something usable today. Cut anything that does not move the result."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r2\\r2-m02.a018.solution.md",
+   "alive": false,
+   "eliminated_in": 2,
+   "eliminated_by": "a012",
+   "byes": 0
+  },
+  "a019": {
+   "card": {
+    "reasoning": {
+     "id": "evidence-first",
+     "name": "Evidence first",
+     "how": "Ground every claim in something checkable: the task text, the files it points to, the numbers given, documentation. Anything you cannot check gets labelled as an assumption."
+    },
+    "workflow": {
+     "id": "options-matrix",
+     "name": "Options matrix",
+     "how": "List the realistic options, score them in a small matrix against the criteria that matter for this task, choose one, and write up the choice."
+    },
+    "strategy": {
+     "id": "built-to-last",
+     "name": "Built to last",
+     "how": "Optimise for how this holds up in six months: easy to maintain, easy to extend, no traps for the next person."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r5\\r5-m01.a019.solution.md",
+   "alive": true,
+   "eliminated_in": null,
+   "eliminated_by": null,
+   "byes": 0
+  },
+  "a020": {
+   "card": {
+    "reasoning": {
+     "id": "systems-thinking",
+     "name": "Systems thinking",
+     "how": "Map the moving parts, how they affect each other, and what happens second and third order. Optimise the whole system, not just the one part the task points at."
+    },
+    "workflow": {
+     "id": "test-first",
+     "name": "Test first",
+     "how": "Before writing the answer, write the checks it must pass: acceptance tests for code, pass or fail criteria for anything else. Then write the answer and run every check against it."
+    },
+    "strategy": {
+     "id": "explicit-trade-offs",
+     "name": "Explicit trade-offs",
+     "how": "Name the real trade-offs, choose for the user's most likely constraints, and say plainly what that choice gives up."
+    }
+   },
+   "solution": "C:\\Users\\speed\\OneDrive\\\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\\u041f\u0440\u043e\u0435\u043a\u0442 \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e\\hkoop-site\\.arena\\run-20261010-201401-s174151\\r2\\r2-m04.a020.solution.md",
+   "alive": false,
+   "eliminated_in": 2,
+   "eliminated_by": "a019",
+   "byes": 0
+  }
+ },
+ "rounds": [
+  {
+   "n": 1,
+   "alive": [
+    "a001",
+    "a002",
+    "a003",
+    "a004",
+    "a005",
+    "a006",
+    "a007",
+    "a008",
+    "a009",
+    "a010",
+    "a011",
+    "a012",
+    "a013",
+    "a014",
+    "a015",
+    "a016",
+    "a017",
+    "a018",
+    "a019",
+    "a020"
+   ],
+   "matches": [
+    {
+     "id": "r1-m01",
+     "a": "a015",
+     "b": "a016",
+     "winner": "a016",
+     "loser": "a015",
+     "reason": "a016 found the verified plaintext DB passwords in versioned db/README.md and the excessive DB privileges that a015 missed entirely.",
+     "survived": [
+      "map-widget finding added",
+      "iframe sandbox finding added",
+      "mysql-rights finding added",
+      "form probes added",
+      "headers fix reordered to meta-first",
+      "img-src mechanics corrected with NPA",
+      "vague Roskomnadzor phrase removed and honor finding added"
+     ],
+     "scores": {
+      "a015": 77.0,
+      "a016": 79.0
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r1-m02",
+     "a": "a013",
+     "b": "a008",
+     "winner": "a013",
+     "loser": "a008",
+     "reason": "a013 ranks leaked DB credentials as CRITICAL, covers data-localization (152-FZ art. 18(5)) and calibrates headers/soft-404 correctly, while a008 misses localization, inflates soft-404 and framing to MEDIUM/HIGH and stretches NPA articles.",
+     "survived": [
+      "plaintext DB passwords in db/README.md",
+      "missing DB-grant/phpMyAdmin checks",
+      "raw p.logo img-src",
+      "https-iframe PDF preview phishing",
+      "form strange-input probes",
+      "PD-localization/GH-Pages RF-hosting gap",
+      "LOW padding and static-export headers fix"
+     ],
+     "scores": {
+      "a013": 87.5,
+      "a008": 63.5
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r1-m03",
+     "a": "a004",
+     "b": "a012",
+     "winner": "a012",
+     "loser": "a004",
+     "reason": "a012 gives full probe commands with raw outputs and better severity calibration where a004 condenses probes and over-severitizes.",
+     "survived": [
+      "img javascript PoC corrected",
+      "headers hosting-level fix",
+      "localization added",
+      "least-privilege finding added",
+      "probes given with commands",
+      "iframe top-nav corrected",
+      "INFO renamed to LOW"
+     ],
+     "scores": {
+      "a004": 85.5,
+      "a012": 89.5
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r1-m04",
+     "a": "a002",
+     "b": "a003",
+     "winner": "a002",
+     "loser": "a003",
+     "reason": "a002 ranks the committed DB passwords CRITICAL and Next.js HIGH with honest non-exploitability analysis, while a003 inverts this with Next.js as CRITICAL despite no middleware and static export.",
+     "survived": [
+      "meta frame-ancestors fix corrected",
+      "alt-text misdiagnosis removed",
+      "SHOW GRANTS overclaim made honest",
+      "CVE memory claim given local commands and audit caveat",
+      "localization and operator contacts added",
+      "copyright moved to LOW finding",
+      "art-9 misapplied to non-processing form fixed"
+     ],
+     "scores": {
+      "a002": 86.0,
+      "a003": 80.5
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r1-m05",
+     "a": "a017",
+     "b": "a007",
+     "winner": "a017",
+     "loser": "a007",
+     "reason": "a017 covers localization and iframe-sandbox and avoids false RF-static claim, while a007 misses both required items",
+     "survived": [
+      "headers-via-headers() fixed to meta",
+      "localization finding added",
+      "grants honestly scoped",
+      "CVE applicability analyzed",
+      "honor-book softened to org-check",
+      "strange-input probes added",
+      "stored texts verdict added"
+     ],
+     "scores": {
+      "a017": 87.0,
+      "a007": 68.0
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r1-m06",
+     "a": "a019",
+     "b": "a005",
+     "winner": "a019",
+     "loser": "a005",
+     "reason": "a019 \u043a\u0430\u043b\u0438\u0431\u0440\u0443\u0435\u0442 severity \u0442\u043e\u0447\u043d\u0435\u0435 \u0438 \u0434\u0430\u0435\u0442 \u0438\u0441\u043f\u043e\u043b\u043d\u0438\u043c\u044b\u0439 \u0432\u0435\u0440\u0434\u0438\u043a\u0442, \u0430 a005 \u0431\u043b\u043e\u043a\u0438\u0440\u0443\u0435\u0442 \u043f\u043e\u043a\u0430\u0437 \u043d\u0430 \u043d\u0435\u0437\u0430\u043a\u0440\u044b\u0432\u0430\u0435\u043c\u044b\u0445 \u043d\u0430 Pages \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430\u0445 \u0438 \u0440\u0430\u0437\u0434\u0443\u0432\u0430\u0435\u0442 \u0432\u0435\u0440\u0441\u0438\u044e phpMyAdmin \u0434\u043e MEDIUM",
+     "survived": [
+      "misquote CONTEXT.md fixed",
+      "false 10.1 norm fixed",
+      "traversal probes added",
+      "copyright block added",
+      "API/grants/localization added",
+      "CVE commands added",
+      "headers meta fix rewritten"
+     ],
+     "scores": {
+      "a019": 83.5,
+      "a005": 81.0
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r1-m07",
+     "a": "a001",
+     "b": "a018",
+     "winner": "a018",
+     "loser": "a001",
+     "reason": "a018 covers all task requirements explicitly including localization and least-privilege with concrete probes and fixes, while a001 asserts localization without proof and punts on grants.",
+     "survived": [
+      "secrets marked closed with tracked passwords",
+      "headers fix unworkable on static export",
+      "skipped mysql privilege check",
+      "152-FZ on plain hyperlinks",
+      "overstated img XSS plus missing DB texts",
+      "skipped localization check",
+      "vague domain allowlist fix"
+     ],
+     "scores": {
+      "a001": 76.5,
+      "a018": 86.0
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r1-m08",
+     "a": "a014",
+     "b": "a011",
+     "winner": "a011",
+     "loser": "a014",
+     "reason": "a011 covers decisive extra findings a014 misses (Yandex-map consent, broad safeHref phishing domain, alt/OGRNa/YM-validation) with repeatable probes.",
+     "survived": [
+      "M1 safeHref tracking fix narrowed to /images allowlist",
+      "M6 static-export headers fix made honest",
+      "phpMyAdmin live login check added",
+      "strange/long inputs probes added",
+      "banner /docs 18.1 claim corrected",
+      "live curl commands with outputs added",
+      "noopener non-finding removed"
+     ],
+     "scores": {
+      "a014": 81.5,
+      "a011": 92.0
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r1-m09",
+     "a": "a020",
+     "b": "a009",
+     "winner": "a020",
+     "loser": "a009",
+     "reason": "a020 \u0442\u043e\u0447\u043d\u0435\u0435 \u043a\u0430\u043b\u0438\u0431\u0440\u0443\u0435\u0442 severity \u0438 \u041d\u041f\u0410 (\u043a\u0430\u0440\u0442\u0430 \u043a\u0430\u043a LOW-\u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435, \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438 MEDIUM \u0447\u0435\u0440\u0435\u0437 \u0445\u043e\u0441\u0442\u0438\u043d\u0433) \u0431\u0435\u0437 \u0437\u0430\u0432\u044b\u0448\u0435\u043d\u0438\u044f CVE/\u044d\u043a\u0441\u043f\u043b\u043e\u0439\u0442\u043e\u0432, \u0442\u043e\u0433\u0434\u0430 \u043a\u0430\u043a a009 \u0437\u0430\u0432\u044b\u0448\u0430\u0435\u0442 \u043a\u0430\u0440\u0442\u0443 \u0438 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438 \u0434\u043e HIGH.",
+     "survived": [
+      "phpMyAdmin-\u043f\u0440\u043e\u0431\u0430 \u0438 GRANTS \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u044b",
+      "\u0444\u0438\u043b\u044c\u0442\u0440\u044b XSS \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u043d\u044b",
+      "\u043f\u0443\u043d\u043a\u0442-9 \u0440\u0430\u0437\u0431\u0438\u0442 \u043d\u0430 \u043e\u0442\u0434\u0435\u043b\u044c\u043d\u044b\u0435 \u043d\u0430\u0445\u043e\u0434\u043a\u0438",
+      "\u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438: \u043c\u0435\u0441\u0442\u043e \u0438 \u0444\u0438\u043a\u0441 \u043f\u043e\u0434 \u0441\u0442\u0430\u0442\u0438\u043a\u0443",
+      "YM_ID \u0441\u043d\u044f\u0442 \u0432 hardening",
+      "noreferrer \u0441\u043d\u044f\u0442 \u0432 \u0433\u0438\u0433\u0438\u0435\u043d\u0443",
+      "\u043a\u0430\u0440\u0442\u0430 \u043f\u043e\u043d\u0438\u0436\u0435\u043d\u0430 \u0434\u043e LOW \u0431\u0435\u0437 \u043d\u0435\u0432\u0435\u0440\u043d\u043e\u0439 \u041d\u041f\u0410"
+     ],
+     "scores": {
+      "a020": 87.5,
+      "a009": 80.5
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r1-m10",
+     "a": "a006",
+     "b": "a010",
+     "winner": "a006",
+     "loser": "a010",
+     "reason": "a006 covers more required vectors (soft-404, PDF sandbox, prototype footer, duplicate passwords) with an explicit requirement checklist while both fixed all attacks.",
+     "survived": [
+      "headers fix unworkable on GH Pages",
+      "CRITICAL with wrong runtime reasoning",
+      "phpMyAdmin and mysql rights unchecked",
+      "conditional Metrica HIGH without probe",
+      "wrong NPA articles",
+      "img-src MEDIUM without PoC",
+      "noreferrer and public Metrica ID noise"
+     ],
+     "scores": {
+      "a006": 90.5,
+      "a010": 78.5
+     },
+     "source": "judge"
+    }
+   ],
+   "bye": null,
+   "closed": true
+  },
+  {
+   "n": 2,
+   "alive": [
+    "a002",
+    "a006",
+    "a011",
+    "a012",
+    "a013",
+    "a016",
+    "a017",
+    "a018",
+    "a019",
+    "a020"
+   ],
+   "matches": [
+    {
+     "id": "r2-m01",
+     "a": "a011",
+     "b": "a016",
+     "winner": "a016",
+     "loser": "a011",
+     "reason": "a016 covers the honor-book personal-data consent finding that a011 misses while fixing both fatal header and biometry errors.",
+     "survived": [
+      "meta-CSP frame-ancestors fix",
+      "biometry art.11 removed",
+      "art.18.1 moved off banner",
+      "safeHref kept as held fix",
+      "art.10 149-FZ removed from form",
+      "path-traversal probes added",
+      "grants made conditional LOW"
+     ],
+     "scores": {
+      "a011": 80.0,
+      "a016": 89.5
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r2-m02",
+     "a": "a012",
+     "b": "a018",
+     "winner": "a012",
+     "loser": "a018",
+     "reason": "a012 proved live grants and git history and gave a hosting-consistent header fix, while a018 left grants unproven and kept Metrika allowed by default CSP.",
+     "survived": [
+      "localization rewritten as unproven",
+      "header fix made hosting-aware",
+      "live SHOW GRANTS proof",
+      "git history proof d619937",
+      "Metrika downgraded to latent MEDIUM",
+      "non-findings removed from ranked list",
+      "VI probe added with honest toggle caveat"
+     ],
+     "scores": {
+      "a012": 92.0,
+      "a018": 84.0
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r2-m03",
+     "a": "a002",
+     "b": "a013",
+     "winner": "a002",
+     "loser": "a013",
+     "reason": "a002 \u043a\u0430\u043b\u0438\u0431\u0440\u0443\u0435\u0442 \u0442\u044f\u0436\u0435\u0441\u0442\u0438 \u043f\u043e \u0444\u0430\u043a\u0442\u0430\u043c (\u0443\u0441\u043b\u043e\u0432\u043d\u044b\u0439 LOW \u0434\u043b\u044f \u0433\u0440\u0430\u043d\u0442\u043e\u0432, MEDIUM \u0434\u043b\u044f \u043b\u0430\u0442\u0435\u043d\u0442\u043d\u043e\u0439 \u041c\u0435\u0442\u0440\u0438\u043a\u0438 \u0438 \u0433\u0438\u0433\u0438\u0435\u043d\u044b Next \u0431\u0435\u0437 \u0432\u044b\u0434\u0443\u043c\u0430\u043d\u043d\u044b\u0445 CVE), \u0430 a013 \u043e\u0441\u0442\u0430\u0432\u043b\u044f\u0435\u0442 HIGH \u0431\u0435\u0437 \u0436\u0438\u0432\u043e\u0433\u043e \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u044f \u0433\u0440\u0430\u043d\u0442\u043e\u0432 \u0438 \u0437\u0430 \u043d\u0435\u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0443\u044e \u0441\u0435\u0439\u0447\u0430\u0441 \u0443\u0442\u0435\u0447\u043a\u0443.",
+     "survived": [
+      "CSP-meta \u043b\u043e\u043c\u0430\u0435\u0442 \u0438\u043d\u043b\u0430\u0439\u043d-\u0441\u043a\u0440\u0438\u043f\u0442\u044b",
+      "\u0433\u0440\u0430\u043d\u0442\u044b \u0431\u0435\u0437 SHOW GRANTS",
+      "\u043a\u043e\u043f\u0438\u0440\u0430\u0439\u0442 \u0431\u0435\u0437 \u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445",
+      "\u041c\u0435\u0442\u0440\u0438\u043a\u0430 HIGH \u0431\u0435\u0437 \u0443\u0442\u0435\u0447\u043a\u0438",
+      "\u0441\u043e\u0433\u043b\u0430\u0441\u0438\u044f \u043a\u043d\u0438\u0433\u0438 \u043f\u043e\u0447\u0451\u0442\u0430 \u0438\u0437 git",
+      "politika.pdf \u043d\u0435 \u0447\u0438\u0442\u0430\u043b\u0441\u044f",
+      "CVE \u0431\u0435\u0437 npm audit"
+     ],
+     "scores": {
+      "a002": 84.5,
+      "a013": 63.0
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r2-m04",
+     "a": "a019",
+     "b": "a020",
+     "winner": "a019",
+     "loser": "a020",
+     "reason": "a019 executed SHOW GRANTS and npm audit with quoted outputs while a020 still leaves grants unverified and Next CVEs on bulletins alone.",
+     "survived": [
+      "mysql grants verified via SHOW GRANTS",
+      "npm audit outputs quoted",
+      "soft-200 downgraded to LOW with notFound fix",
+      "consent split into fact plus gated-by-code with concrete flag format",
+      "trim and length-limit correction",
+      "robots marked hygiene and VI marked partial"
+     ],
+     "scores": {
+      "a019": 87.5,
+      "a020": 69.0
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r2-m05",
+     "a": "a017",
+     "b": "a006",
+     "winner": "a006",
+     "loser": "a017",
+     "reason": "a006 covers the map-before-consent load, VI/imprint/alt/mysql details and an explicit requirement checklist that a017 omits or leaves as hygiene.",
+     "survived": [
+      "soft-404 dev-vs-export reformulated",
+      "IDN-breakage claim removed",
+      "P1 given LOW severity",
+      "headers HIGH bridged to GH Pages with two-track fix",
+      "L6 split into two findings",
+      "M3 NPA corrected to 149-FZ plus minimization"
+     ],
+     "scores": {
+      "a017": 78.5,
+      "a006": 89.0
+     },
+     "source": "judge"
+    }
+   ],
+   "bye": null,
+   "closed": true
+  },
+  {
+   "n": 3,
+   "alive": [
+    "a002",
+    "a006",
+    "a012",
+    "a016",
+    "a019"
+   ],
+   "matches": [
+    {
+     "id": "r3-m01",
+     "a": "a019",
+     "b": "a016",
+     "winner": "a019",
+     "loser": "a016",
+     "reason": "a019 \u0434\u043e\u043a\u0430\u0437\u0430\u043b \u043f\u0440\u0430\u0432\u0430 MySQL \u0447\u0435\u0440\u0435\u0437 SHOW GRANTS \u0438 CVE \u0447\u0435\u0440\u0435\u0437 npm audit \u0441 \u0432\u044b\u0432\u043e\u0434\u043e\u043c, \u0430 a016 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0443 \u0433\u0440\u0430\u043d\u0442\u043e\u0432 \u0441\u043d\u044f\u043b \u0438 \u0430\u0443\u0434\u0438\u0442 \u043d\u0435 \u0432\u044b\u043f\u043e\u043b\u043d\u0438\u043b.",
+     "survived": [
+      "meta-\u0444\u0438\u043a\u0441 \u0447\u0435\u0440\u0435\u0437 http-equiv",
+      "\u043f\u043e\u0434\u0441\u0447\u0451\u0442 2 vulnerabilities \u0432 npm audit",
+      "\u043f\u0440\u043e\u043f\u0443\u0441\u043a iframe-\u043f\u0440\u0435\u0432\u044c\u044e PDF",
+      "SHOW GRANTS \u0431\u0435\u0437 \u043a\u043e\u043c\u0430\u043d\u0434\u044b",
+      "\u0441\u043f\u044f\u0449\u0430\u044f \u041c\u0435\u0442\u0440\u0438\u043a\u0430 \u043a\u0430\u043a \u0436\u0438\u0432\u043e\u0435 \u043d\u0430\u0440\u0443\u0448\u0435\u043d\u0438\u0435",
+      "\u0440\u0435\u043a\u043b\u0430\u043c\u0430 38-\u0424\u0417 \u0432 LOW \u043f\u0440\u043e robots",
+      "\u0430\u0432\u0442\u043e\u0440\u0441\u043a\u0438\u0435 \u043f\u0440\u0430\u0432\u0430 \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438"
+     ],
+     "scores": {
+      "a019": 89.0,
+      "a016": 71.5
+     },
+     "source": "judge"
+    },
+    {
+     "id": "r3-m02",
+     "a": "a012",
+     "b": "a006",
+     "winner": "a006",
+     "loser": "a012",
+     "reason": "a006 is legally precise and more complete: it finds the second password copy and footer prototype that a012 misses and avoids a012's overstated Art.9 violations.",
+     "survived": [
+      "false CVE removed",
+      "soft-404 downgraded to LOW",
+      "form Art.9 claim corrected",
+      "localization verdict withdrawn",
+      "map header fixed",
+      "env.example padding removed",
+      "alt fix corrected"
+     ],
+     "scores": {
+      "a012": 75.5,
+      "a006": 87.0
+     },
+     "source": "judge"
+    }
+   ],
+   "bye": "a002",
+   "closed": true
+  },
+  {
+   "n": 4,
+   "alive": [
+    "a002",
+    "a006",
+    "a019"
+   ],
+   "matches": [
+    {
+     "id": "r4-m01",
+     "a": "a002",
+     "b": "a019",
+     "winner": "a019",
+     "loser": "a002",
+     "reason": "a019 covers both password files and the YM-ID sink while a002 leaves a live password in docs and misses that sink entirely.",
+     "survived": [
+      "second dangerouslySetInnerHTML env sink (M6)",
+      "second password copy in docs (H1)",
+      "politika scan without text layer (M7)",
+      "strange-input and long-string probes (L4)",
+      "CVE/GHSA counting and postcss transitivity (H2)",
+      "grep proof of no hardcoded passwords",
+      "static-export vs headers() prod marking (M1)"
+     ],
+     "scores": {
+      "a002": 57.5,
+      "a019": 86.0
+     },
+     "source": "judge"
+    }
+   ],
+   "bye": "a006",
+   "closed": true
+  },
+  {
+   "n": 5,
+   "alive": [
+    "a006",
+    "a019"
+   ],
+   "matches": [
+    {
+     "id": "r5-m01",
+     "a": "a019",
+     "b": "a006",
+     "winner": "a019",
+     "loser": "a006",
+     "reason": "a019 fixed all seven attacks with live DB/header/audit probes and correct HIGH/MEDIUM/LOW split, while a006 still proves the scan-PDF only by a single /Font grep and inflates headers to HIGH.",
+     "survived": [
+      "map HIGH requalified plus sleeping Metrika demoted to LOW",
+      "live DB counts and suspicious-row scans added",
+      "YM env sink demoted to LOW hygiene",
+      "PDF method replaced with multi-signal plus caveats",
+      "SHOW GRANTS command plus masked row output added",
+      "full npm audit GHSA list plus applicability split",
+      "robots/sitemap removed from ranked list"
+     ],
+     "scores": {
+      "a019": 85.0,
+      "a006": 73.5
+     },
+     "source": "judge"
+    }
+   ],
+   "bye": null,
+   "closed": true
+  }
+ ],
+ "champion": "a019",
+ "final": null
+}

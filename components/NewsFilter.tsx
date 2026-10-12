@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { safeImgSrc } from "../lib/url";
 
 type N = { id: string; title: string; date: string; category: string; tags: string[]; excerpt: string; image?: string | null };
 
@@ -36,6 +37,8 @@ export default function NewsFilter({ items }: { items: N[] }) {
       <div className="toolbar">
         <input
           className="search"
+          name="q"
+          maxLength={200}
           placeholder="Поиск по новостям…"
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -57,7 +60,7 @@ export default function NewsFilter({ items }: { items: N[] }) {
         {shown.map((n) => (
           <article key={n.id} className="card news-card">
             <div className="thumb">
-              <img src={n.image || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" width={400} height={250} />
+              <img src={safeImgSrc(n.image) || catFallback[n.category] || "/images/i-1.webp"} alt="" loading="lazy" width={400} height={250} />
               <span className="date-badge">{n.date}</span>
             </div>
             <div className="card-body">
