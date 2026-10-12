@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { q, parseTags } from "../../../lib/db";
+import Crumbs from "../../../components/Crumbs";
 import { safeImgSrc } from "../../../lib/url";
 
 const catLabels: Record<string, string> = {
@@ -32,7 +33,7 @@ export default async function NewsDetail({ params }: { params: Promise<{ id: str
   const img = safeImgSrc(n.image);
   return (
     <>
-      <p style={{ margin: "22px 0 0" }}><a href="/news">← Все новости</a></p>
+      <Crumbs items={[{ href: "/news", label: "Новости" }, { label: n.title }]} />
       <h1 style={{ margin: "10px 0 6px", lineHeight: 1.25 }}>{n.title}</h1>
       <p><small>{n.date} · {catLabels[n.category] || n.category} · {tags.join(" · ")}</small></p>
       <div className="card"><div className="card-body">

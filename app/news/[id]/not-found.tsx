@@ -1,7 +1,9 @@
+import Crumbs from "../../../components/Crumbs";
+
 export default function NewsNotFound() {
   return (
     <>
-      <p style={{ marginTop: 22 }}><a href="/news">← Все новости</a></p>
+      <Crumbs items={[{ href: "/news", label: "Новости" }, { label: "Не найдено" }]} />
       <h1>Не найдено</h1>
       <p>Такой новости нет. Возможно, ссылка устарела.</p>
     </>

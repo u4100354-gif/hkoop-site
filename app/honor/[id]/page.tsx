@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { q } from "../../../lib/db";
+import Crumbs from "../../../components/Crumbs";
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const rows: any[] = await q("SELECT fio FROM honor WHERE id=?", [params.id]);
@@ -15,10 +16,10 @@ export async function generateStaticParams() {
 export default async function HonorDetail({ params }: { params: { id: string } }) {
   const rows: any[] = await q("SELECT * FROM honor WHERE id=?", [params.id]);
   const h = rows[0];
-  if (!h) return <><p style={{ marginTop: 22 }}><a href="/honor">← Книга Почёта</a></p><h1>Не найдено</h1></>;
+  if (!h) return <><Crumbs items={[{ href: "/honor", label: "Книга Почёта" }, { label: "Не найдено" }]} /><h1>Не найдено</h1></>;
   return (
     <>
-      <p style={{ margin: "22px 0 0" }}><a href="/honor">← Книга Почёта</a></p>
+      <Crumbs items={[{ href: "/honor", label: "Книга Почёта" }, { label: h.fio }]} />
       <section className="honor-profile">
         <div className="honor-photo">
           {h.photo ? <img src={h.photo} alt={h.fio} width={300} height={400} /> : <div className="honor-stub">★</div>}

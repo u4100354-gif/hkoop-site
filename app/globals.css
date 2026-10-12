@@ -65,6 +65,15 @@ a { color: #1a3a6b; }
 .hsearch-drop a span { font-weight: 600; font-size: 14px; }
 .hsearch-drop a:hover { background: var(--light); }
 .hsearch-all { width: 100%; border: 0; background: var(--navy); color: #fff; padding: 10px; font-weight: 700; cursor: pointer; }
+/* Хлебные крошки */
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 4px; margin: 22px 0 0; font-size: 14px; font-weight: 600; }
+.crumb-item { display: inline-flex; align-items: center; gap: 4px; min-width: 0; }
+.crumbs a { display: inline-flex; align-items: center; gap: 6px; color: var(--navy); text-decoration: none; background: var(--light); border: 1.5px solid #d5dce8; padding: 6px 12px; border-radius: 999px; white-space: nowrap; transition: border-color .2s, background .2s, transform .15s; }
+.crumbs a:hover { border-color: var(--navy); background: #e9eff8; transform: translateY(-1px); }
+.crumbs a:active { transform: scale(.96); }
+.crumb-sep { color: #9aa5b5; font-weight: 400; padding: 0 2px; }
+.crumbs .cur { color: var(--muted); max-width: min(52vw, 420px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+body.vi-mode .crumbs a { background: transparent !important; border-color: currentColor !important; }
 .hsearch-drop a.hactive { background: var(--light); }
 .hsearch-empty { padding: 12px 14px; color: var(--muted); font-size: 14px; }
 .hsearch-empty a { color: var(--navy); }
