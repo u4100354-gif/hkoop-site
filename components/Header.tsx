@@ -30,7 +30,7 @@ export default function Header() {
     <>
       <div className="topbar-dark">
         <div className="container brand-row">
-          <img src="/images/logo.png" alt="Логотип ХКООП" width={124} height={124} className="round-logo" />
+          <Link href="/" aria-label="ХКООП — на главную"><img src="/images/logo.png" alt="Логотип ХКООП" width={124} height={124} className="round-logo" /></Link>
           <div className="brand-big">Союз «Хабаровское краевое объединение организаций профсоюзов»</div>
         </div>
       </div>
