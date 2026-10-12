@@ -9,3 +9,5 @@ out/
 graphify-out/cache/
 ".claude/worktrees/"
 scripts/parse-report.json
+tsconfig.tsbuildinfo
+dev.log
