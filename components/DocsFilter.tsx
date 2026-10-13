@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { safeHref } from "../lib/url";
 
 // Превью — только локальные PDF из /docs: чужой origin в iframe не пускаем.
@@ -25,8 +25,18 @@ export default function DocsFilter({ items }: { items: D[] }) {
   const [q, setQ] = useState("");
   const [type, setType] = useState("all");
   const types = useMemo(() => ["all", ...Array.from(new Set(items.map((i) => i.type)))], [items]);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<{ src: string; title: string } | null>(null);
   const [limit, setLimit] = useState(24);
+
+  // Модалка: ESC и блокировка прокрутки фона
+  useEffect(() => {
+    if (!preview) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setPreview(null); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [preview]);
 
   const filtered = items.filter((d) => {
     const ok = type === "all" || d.type === type;
@@ -59,7 +69,7 @@ export default function DocsFilter({ items }: { items: D[] }) {
               <div className="doc-foot">
                 <small>{typeLabels[d.type] || d.type} · {d.year}</small>
                 <div className="btn-row">
-                  {safePreview(d.file_local) && <button className="btn btn-ghost" onClick={() => setPreview(safePreview(d.file_local)!)}>Смотреть</button>}
+                  {safePreview(d.file_local) && <button className="btn btn-ghost" onClick={() => setPreview({ src: safePreview(d.file_local)!, title: d.title })}>Смотреть</button>}
                   {safeHref(d.file_old) && <a className="btn btn-ghost" href={safeHref(d.file_old)!} target="_blank" rel="noreferrer">PDF</a>}
                   {!safePreview(d.file_local) && !safeHref(d.file_old) && <span className="doc-missing">файл уточняется</span>}
                 </div>
@@ -84,12 +94,18 @@ export default function DocsFilter({ items }: { items: D[] }) {
         </div>
       )}
       {preview && (
-        <div className="preview-box">
-          <div className="preview-head">
-            <strong>Просмотр PDF</strong>
-            <button onClick={() => setPreview(null)}>Закрыть ✕</button>
+        <div className="pdf-modal" role="dialog" aria-modal="true" aria-label={`Просмотр: ${preview.title}`} onClick={(e) => { if (e.target === e.currentTarget) setPreview(null); }}>
+          <div className="pdf-panel">
+            <div className="pdf-modal-head">
+              <strong className="pdf-modal-title">{preview.title}</strong>
+              <div className="pdf-modal-actions">
+                <a className="btn btn-ghost btn-sm" href={preview.src} target="_blank" rel="noreferrer">Открыть в новой вкладке</a>
+                <button className="pdf-close" onClick={() => setPreview(null)} aria-label="Закрыть просмотр">✕</button>
+              </div>
+            </div>
+            <iframe className="pdf-frame" src={preview.src} title={`PDF: ${preview.title}`} sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerPolicy="no-referrer" />
+            <p className="pdf-note">Если PDF не открывается — <a href={preview.src} target="_blank" rel="noreferrer">откройте файл в новой вкладке</a>.</p>
           </div>
-          <iframe src={preview} width="100%" height="600" title="PDF" sandbox="" referrerPolicy="no-referrer" />
         </div>
       )}
     </>
