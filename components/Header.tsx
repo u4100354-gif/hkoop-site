@@ -37,6 +37,7 @@ export default function Header() {
       <nav className="mainnav">
         <div className="container mainnav-inner">
           <Link href="/" className="mob-logo"><img src="/images/logo.png" alt="ХКООП" width={34} height={34} /></Link>
+          <div className="mob-search"><HeaderSearch onGo={() => setOpen(false)} /></div>
           <button className="burger" onClick={() => setOpen(true)} aria-label="Открыть меню" aria-expanded={open} aria-controls="mainnav-links"><span aria-hidden="true">☰</span><span className="burger-label">ХКООП</span></button>
           <div className={`links ${open ? "open" : ""}`} id="mainnav-links">
             <div className="drawer-head">

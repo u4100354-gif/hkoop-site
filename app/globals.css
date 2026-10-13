@@ -39,6 +39,7 @@ a { color: #1a3a6b; }
 .burger:hover { background: rgba(255,255,255,.1); }
 .burger-label { font-size: 20px; letter-spacing: .02em; }
 .bar-search { display: flex; align-items: center; }
+.mob-search { display: none; }
 /* Десктоп: обычный ряд ссылок */
 .links { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; flex: 1 1 auto; align-items: center; }
 .links a { position: relative; color: #fff; text-decoration: none; font-weight: 700; padding: 14px 14px 12px; border-radius: 12px; transition: background .2s, transform .15s; }
@@ -625,7 +626,7 @@ body.vi-mode.vi-scheme-yb .aeyebrow { color: #ffe100 !important; }
 /* Планшет и мобила (до 1024): бургер + выезжающее меню слева */
 @media (max-width: 1024px) {
   .burger { display: inline-flex; }
-  .links { position: fixed; top: 0; left: 0; height: 100vh; width: min(86vw, 340px); background: var(--navy); flex-direction: column; align-items: stretch; padding: 14px; gap: 4px; margin: 0; overflow-y: auto; transform: translateX(-105%); transition: transform .32s cubic-bezier(.22,.61,.36,1), visibility .32s; visibility: hidden; box-shadow: 16px 0 40px rgba(0,0,0,.4); z-index: 60; justify-content: flex-start; flex: none; }
+  .links { position: fixed; top: 0; right: 0; height: 100vh; width: min(86vw, 340px); background: var(--navy); flex-direction: column; align-items: stretch; padding: 14px; gap: 4px; margin: 0; overflow-y: auto; transform: translateX(105%); transition: transform .32s cubic-bezier(.22,.61,.36,1), visibility .32s; visibility: hidden; box-shadow: -16px 0 40px rgba(0,0,0,.4); z-index: 60; justify-content: flex-start; flex: none; }
   .links.open { display: flex; transform: translateX(0); visibility: visible; }
   .links a { padding: 15px 12px; border-radius: 10px; font-size: 17px; border: 0; }
   .links a::after { display: none; }
@@ -646,9 +647,13 @@ body.vi-mode.vi-scheme-yb .aeyebrow { color: #ffe100 !important; }
   .round-logo { width: 82px; height: 82px; }
   .brand-big { font-size: 18px; }
 
-  .mainnav-inner { justify-content: space-between; gap: 10px; }
+  .mainnav-inner { justify-content: space-between; gap: 6px; }
   .mob-logo { display: flex; align-items: center; }
   .mob-logo img { border-radius: 50%; background: #fff; padding: 2px; }
+  .mob-search { display: flex; align-items: center; margin: 4px auto; flex: 1 1 auto; min-width: 0; max-width: 320px; padding: 0 2px; }
+  .mob-search .hsearch { width: 100%; }
+  .mob-search .hsearch-input { width: 100%; min-height: 40px; font-size: 15px; padding: 8px 12px; border-radius: 8px; }
+  .mob-search .hsearch-drop { width: max(100%, 280px); right: auto; left: 50%; transform: translateX(-50%); }
   .burger { display: flex; margin: 5px 0; border: 1px solid rgba(255,255,255,.6); font-size: 22px; min-height: 44px; }
   .burger-label { display: none; }
   .bar-search { display: none; }
@@ -656,14 +661,14 @@ body.vi-mode.vi-scheme-yb .aeyebrow { color: #ffe100 !important; }
   .mainnav { position: sticky; top: 0; z-index: 40; }
   .mainnav-inner { position: relative; min-height: 54px; }
 
-  /* Выезжающее меню */
+  /* Выезжающее меню (справа) */
   .links {
-    position: fixed; top: 0; left: 0; height: 100vh; width: min(86vw, 340px);
+    position: fixed; top: 0; right: 0; height: 100vh; width: min(86vw, 340px);
     background: var(--navy); flex-direction: column; align-items: stretch;
     padding: 14px; gap: 4px; margin: 0; overflow-y: auto;
-    transform: translateX(-105%); transition: transform .32s cubic-bezier(.22,.61,.36,1), visibility .32s;
+    transform: translateX(105%); transition: transform .32s cubic-bezier(.22,.61,.36,1), visibility .32s;
     visibility: hidden;
-    box-shadow: 16px 0 40px rgba(0,0,0,.4); z-index: 60; justify-content: flex-start;
+    box-shadow: -16px 0 40px rgba(0,0,0,.4); z-index: 60; justify-content: flex-start;
   }
   .links.open { display: flex; transform: translateX(0); visibility: visible; }
   .drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 6px 6px 12px; color: #fff; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,.2); margin-bottom: 8px; }
@@ -720,4 +725,12 @@ body.vi-mode.vi-scheme-yb .aeyebrow { color: #ffe100 !important; }
 @media (max-width: 420px) {
   .brand-big { font-size: 16px; }
   .stats { grid-template-columns: 1fr; }
+}
+
+/* Планшет: поиск в шапке пошире (обычные планшеты и телефонная ландшафтная ориентация) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .mob-search { display: flex; align-items: center; margin: 4px auto; flex: 1 1 auto; min-width: 0; max-width: 640px; padding: 0 12px; }
+  .mob-search .hsearch { width: 100% !important; }
+  .mob-search .hsearch-input { width: 100% !important; min-height: 44px; font-size: 16px; padding: 10px 14px; border-radius: 8px; }
+  .mob-search .hsearch-drop { width: max(100%, 320px) !important; right: auto; left: 50%; transform: translateX(-50%); }
 }

@@ -1,28 +1,59 @@
 "use client";
 import { useState } from "react";
 
+// Реальная отправка: FormSubmit AJAX → письмо на почту пресс-службы.
+// Первый запуск требует одноразовой активации адреса (письмо-подтверждение).
 const TO = "u4100354@gmail.com";
+const ENDPOINT = `https://formsubmit.co/ajax/${TO}`;
+
+type SubmitState = "idle" | "loading" | "ok" | "error";
 
 export default function ConsultForm() {
-  const [state, setState] = useState<"idle" | "loading" | "ok" | "error">("idle");
+  const [state, setState] = useState<SubmitState>("idle");
+  const [errMsg, setErrMsg] = useState("");
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [msg, setMsg] = useState("");
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    // honeypot: скрытое поле, роботы его заполняют
+    const honey = (form.elements.namedItem("_honey") as HTMLInputElement | null)?.value ?? "";
     if (!name.trim() || !contact.trim() || msg.trim().length < 5) {
+      setErrMsg("Заполните имя, контакт и вопрос (не короче 5 символов).");
       setState("error");
       return;
     }
     setState("loading");
-    const body = `Имя: ${name}\nКонтакт: ${contact}\n\nВопрос:\n${msg}`;
-    const url = `mailto:${TO}?subject=${encodeURIComponent("Заявка с сайта ХКООП")}&body=${encodeURIComponent(body)}`;
-    // Открываем почтовый клиент и показываем успех
-    window.setTimeout(() => {
-      window.location.href = url;
+    setErrMsg("");
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `Заявка с сайта ХКООП — ${name}`.slice(0, 100),
+          _template: "table",
+          _captcha: "false",
+          _honey: honey,
+          Имя: name,
+          Контакт: contact,
+          Вопрос: msg,
+          Страница: typeof window !== "undefined" ? window.location.href : "",
+        }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json().catch(() => null);
+      if (data && String(data.success) === "false") throw new Error(data.message || "Сервис отклонил заявку");
       setState("ok");
-    }, 400);
+    } catch (err) {
+      setErrMsg(
+        err instanceof Error && err.message
+          ? `Не удалось отправить: ${err.message}. Позвоните: 8 (4212) 32-87-18 или напишите на ${TO}.`
+          : `Не удалось отправить. Позвоните: 8 (4212) 32-87-18 или напишите на ${TO}.`
+      );
+      setState("error");
+    }
   };
 
   const reset = () => {
@@ -30,14 +61,15 @@ export default function ConsultForm() {
     setContact("");
     setMsg("");
     setState("idle");
+    setErrMsg("");
   };
 
   if (state === "ok") {
     return (
       <div className="form-state form-ok" role="status">
         <span className="fs-icon">✓</span>
-        <strong>Заявка сформирована</strong>
-        <p>Открылся почтовый клиент — отправьте письмо на <b>{TO}</b>. Мы ответим в рабочее время: Пн–Чт 9:00–18:00, Пт 9:00–16:20.</p>
+        <strong>Заявка отправлена</strong>
+        <p>Письмо ушло в аппарат Союза на <b>{TO}</b>. Ответим в рабочее время: Пн–Чт 9:00–18:00, Пт 9:00–16:20.</p>
         <button className="btn btn-ghost" onClick={reset}>Отправить ещё одну</button>
       </div>
     );
@@ -57,12 +89,14 @@ export default function ConsultForm() {
         <span className="field-label">Вопрос *</span>
         <textarea name="question" maxLength={2000} value={msg} onChange={(e) => { setMsg(e.target.value); setState("idle"); }} rows={4} placeholder="Опишите ситуацию — по трудовому праву, охране труда, членству" aria-label="Вопрос" required />
       </label>
+      {/* honeypot — скрыт от людей */}
+      <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ display: "none" }} />
       <label className="checkbox">
         <input type="checkbox" required /> Даю согласие на обработку персональных данных
       </label>
       <p className="consent-note">Для ответа на обращение (оператор — Союз «ХКООП», <a href="/policy">политика</a>).</p>
       {state === "error" && (
-        <p className="form-error" role="alert">Заполните имя, контакт и вопрос (не короче 5 символов).</p>
+        <p className="form-error" role="alert">{errMsg}</p>
       )}
       <button className="btn btn-primary" type="submit" disabled={state === "loading"}>
         {state === "loading" ? "Отправляем…" : "Отправить"}
