@@ -3,7 +3,7 @@
 import { lsGet, lsSet, lsDel } from "./storage";
 
 export const CONSENT_KEY = "hkoop-consent";
-export const POLICY_VERSION = "2026-10-10-v1";
+export const POLICY_VERSION = "2026-10-13-v1";
 const TTL_MS = 12 * 30 * 24 * 3600 * 1000; // ~12 мес.
 
 export type ConsentValue = "granted" | "denied";

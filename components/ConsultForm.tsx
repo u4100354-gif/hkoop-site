@@ -92,9 +92,12 @@ export default function ConsultForm() {
       {/* honeypot — скрыт от людей */}
       <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ display: "none" }} />
       <label className="checkbox">
-        <input type="checkbox" required /> Даю согласие на обработку персональных данных
+        <input type="checkbox" required aria-describedby="consent-desc" />
+        <span id="consent-desc">
+          Даю согласие Союзу «ХКООП» на обработку моих персональных данных (имя, телефон или e-mail, текст вопроса) —для рассмотрения обращения и подготовки ответа, срок: <b>до 1 года</b> или до отзыва. Заявка передаётся через сервис отправки почты, <a href="/policy">политика</a>.
+        </span>
       </label>
-      <p className="consent-note">Для ответа на обращение (оператор — Союз «ХКООП», <a href="/policy">политика</a>).</p>
+      <p className="consent-note">Оператор — Союз «ХКООП», отозвать согласие/удалить данные: ksps-priem@mail.ru.</p>
       {state === "error" && (
         <p className="form-error" role="alert">{errMsg}</p>
       )}
