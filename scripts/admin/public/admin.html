@@ -3,213 +3,703 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Админка ХКООП — новости</title>
+<title>Админка ХКООП</title>
 <style>
-  :root { --navy: #252e4f; --green: #3aa655; --light: #f2f4f7; --muted: #667085; }
+  /* ===== Токены (синтез 10 дизайн-агентов) ===== */
+  :root {
+    --navy: #252e4f; --navy-900: #1a2038; --navy-800: #20284a; --navy-600: #333d6b;
+    --navy-100: #e4e7f4; --navy-50: #f0f2f9;
+    --green: #3aa655; --green-700: #2d8a45; --green-100: #e3f3e8;
+    --bg: #f2f4f7; --surface: #fff; --line: #e4e7ec;
+    --ink: #101828; --ink2: #475467; --muted: #667085;
+    --danger: #d92d20; --warn: #b54708;
+    --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
+    --s-1: 4px; --s-2: 8px; --s-3: 16px; --s-4: 24px; --s-6: 48px;
+    --sh-1: 0 1px 2px rgba(16,24,40,.05);
+    --sh-3: 0 24px 64px -24px rgba(26,32,56,.35);
+    --ring: 0 0 0 3px rgba(58,166,85,.28);
+    --ease: cubic-bezier(.2,.8,.3,1);
+  }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: Manrope, system-ui, Arial, sans-serif; background: var(--light); color: #222; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 16px; }
-  header { background: var(--navy); color: #fff; padding: 14px 0; }
-  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  header b { font-size: 18px; }
-  button { cursor: pointer; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 8px 16px; border-radius: 8px; border: 2px solid var(--navy); font-weight: 700; font-size: 14px; }
-  .btn-p { background: var(--navy); color: #fff; }
-  .btn-g { background: var(--green); border-color: var(--green); color: #fff; }
-  .btn-w { background: #fff; color: var(--navy); }
-  .btn-d { background: #fff; color: #c0392b; border-color: #c0392b; }
-  .toolbar { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
-  .toolbar input { flex: 1; min-width: 200px; padding: 10px 12px; border: 1.5px solid #c3ccd9; border-radius: 8px; font-size: 15px; }
-  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e6ebf2; font-size: 14px; }
-  th { background: var(--navy); color: #fff; }
-  tr:hover td { background: #f6f9fd; }
-  .rowbtns { display: flex; gap: 6px; }
-  .rowbtns button { padding: 6px 10px; min-height: 34px; font-size: 13px; border-radius: 7px; border: 1.5px solid #c3ccd9; background: #fff; font-weight: 700; }
-  .login { max-width: 380px; margin: 80px auto; background: #fff; padding: 24px; border-radius: 12px; }
-  .login input { width: 100%; padding: 12px; font-size: 16px; border: 1.5px solid #c3ccd9; border-radius: 8px; margin: 8px 0 12px; }
-  .err { color: #c0392b; font-size: 14px; min-height: 20px; }
-  dialog { border: 0; border-radius: 12px; padding: 0; width: min(760px, 96vw); max-height: 92vh; }
-  dialog::backdrop { background: rgba(10,14,30,.55); }
-  .dlg { padding: 20px; display: grid; gap: 10px; max-height: 92vh; overflow-y: auto; }
-  .dlg h3 { margin: 0; }
-  .dlg label { font-size: 13px; font-weight: 700; color: var(--navy); }
-  .dlg input[type=text], .dlg input[type=date], .dlg select, .dlg textarea { width: 100%; padding: 10px 12px; border: 1.5px solid #c3ccd9; border-radius: 8px; font-size: 15px; font-family: inherit; }
+  body { margin: 0; font-family: Manrope, "PT Sans", system-ui, sans-serif; background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.5; }
+  h1 { font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; margin: 0; }
+  h2 { font-size: 16px; font-weight: 600; margin: 0; }
+  a { color: var(--navy); }
+  button { cursor: pointer; font-family: inherit; }
+  :focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r-sm); }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ===== Вход ===== */
+  .login-shell { min-height: 100vh; display: grid; place-items: center; background: var(--navy-900); }
+  .login { width: min(380px, calc(100vw - 32px)); background: var(--surface); padding: 32px; border-radius: var(--r-lg); box-shadow: var(--sh-3); }
+  .login h1 { font-size: 18px; margin-bottom: 4px; }
+  .login .sub { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+  .login input { width: 100%; padding: 11px 12px; font-size: 15px; border: 1px solid var(--line); border-radius: var(--r-sm); margin: 0 0 12px; }
+  .login input:hover { border-color: var(--ink2); }
+  .login input:focus { border-color: var(--green); box-shadow: var(--ring); }
+  .err { color: var(--danger); font-size: 13px; min-height: 18px; }
+  .caps { color: var(--warn); font-size: 12px; min-height: 16px; }
+
+  /* ===== Каркас ===== */
+  .shell { display: grid; grid-template-columns: 232px 1fr; min-height: 100vh; }
+  .sidebar { background: var(--navy); color: #fff; padding: var(--s-4) 12px; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 2px; }
+  .brand { display: flex; align-items: center; gap: 10px; padding: 4px 10px 20px; font-weight: 700; font-size: 15px; }
+  .brand .logo { width: 34px; height: 34px; border-radius: 50%; background: #fff; padding: 2px; flex: none; }
+  .navlink { position: relative; display: flex; align-items: center; gap: 10px; padding: 10px 12px 10px 18px; border-radius: var(--r-sm); color: var(--navy-100); text-decoration: none; font-weight: 600; font-size: 14px; transition: background-color .12s var(--ease), color .12s var(--ease); }
+  .navlink:hover { background: var(--navy-600); color: #fff; }
+  .navlink.active { background: var(--navy-600); color: #fff; }
+  .navlink.active::before { content: ""; position: absolute; left: 0; top: 50%; translate: 0 -50%; width: 3px; height: 20px; border-radius: 2px; background: #fff; }
+  .navlink .dot-i { color: var(--navy-100); display: inline-flex; }
+  .navlink.active .dot-i { color: var(--green); }
+  .navlink svg { flex: none; }
+  .side-foot { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--navy-600); }
+  .kbtn { display: flex; width: 100%; align-items: center; gap: 10px; background: none; border: 0; color: var(--navy-100); font: inherit; font-weight: 600; padding: 10px 12px 10px 18px; border-radius: var(--r-sm); }
+  .kbtn:hover { background: var(--navy-600); color: #fff; }
+
+  .content { padding: var(--s-4) var(--s-6) var(--s-6); max-width: 1160px; width: 100%; }
+  .page-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: var(--s-4); flex-wrap: wrap; }
+  .page-head .meta { color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+  /* ===== Стат-полоска (не карточки) ===== */
+  .statline { display: flex; gap: var(--s-6); flex-wrap: wrap; margin-bottom: var(--s-4); padding: 14px 0; border-block: 1px solid var(--line); }
+  .stat { display: flex; align-items: baseline; gap: 10px; }
+  .stat b { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
+  .stat span { color: var(--muted); font-size: 13px; }
+
+  /* ===== Кнопки ===== */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: var(--r-md); border: 1px solid transparent; font-weight: 600; font-size: 13px; transition: background-color .12s var(--ease), border-color .12s var(--ease), color .12s var(--ease); }
+  .btn:active { transform: scale(.98); }
+  .btn-p { background: var(--green); color: #fff; }
+  .btn-p:hover { background: var(--green-700); }
+  .btn-w { background: #fff; color: var(--navy); border-color: var(--line); }
+  .btn-w:hover { border-color: var(--ink2); }
+  .btn-d { background: #fff; color: var(--danger); border-color: var(--line); }
+  .btn-d:hover { border-color: var(--danger); }
+  .btn:disabled { opacity: .55; cursor: default; }
+  .ibtn { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: var(--r-sm); border: 0; background: none; color: var(--ink2); }
+  .ibtn:hover { background: var(--navy-100); color: var(--ink); }
+  .ibtn.del:hover { background: #fdecea; color: var(--danger); }
+
+  /* ===== Тулбар / таблица ===== */
+  .toolbar { display: flex; gap: var(--s-2); margin: var(--s-3) 0; flex-wrap: wrap; align-items: center; }
+  .toolbar input, .toolbar select { padding: 9px 12px; border: 1px solid var(--line); border-radius: var(--r-sm); font-size: 14px; background: #fff; }
+  .toolbar input:hover { border-color: var(--ink2); }
+  .toolbar input:focus, .toolbar select:focus { border-color: var(--green); box-shadow: var(--ring); outline: none; }
+  .toolbar input { flex: 1; min-width: 200px; }
+  .count { color: var(--muted); font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: var(--r-md); box-shadow: var(--sh-1); overflow: hidden; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); font-size: 14px; }
+  th { background: var(--navy-50); color: var(--ink2); font-size: 13px; font-weight: 600; }
+  tbody tr { transition: background-color .1s var(--ease); }
+  tbody tr:hover { background: var(--navy-50); }
+  td .tactions { opacity: .25; display: flex; gap: 4px; justify-content: flex-end; transition: opacity .12s var(--ease); }
+  tr:hover td .tactions { opacity: 1; }
+  .ttitle { max-width: 520px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; color: var(--ink); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--navy-100); color: var(--navy); }
+  .chip.ok { background: var(--green-100); color: var(--green-700); }
+  .chip.miss { background: #fdecea; color: var(--danger); }
+  .sort { display: inline-flex; align-items: center; gap: 4px; background: none; border: 0; font: inherit; font-weight: 600; color: var(--ink2); padding: 0; }
+  .sort:hover { color: var(--ink); }
+
+  /* ===== Состояния ===== */
+  .skeleton { background: linear-gradient(90deg, #eceff4 25%, #f6f8fb 50%, #eceff4 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: var(--r-sm); height: 14px; margin: 12px 14px; }
+  @keyframes shimmer { to { background-position: -200% 0; } }
+  .empty, .eblock { background: var(--surface); border-radius: var(--r-md); box-shadow: var(--sh-1); padding: 48px 24px; text-align: center; }
+  .empty svg, .eblock svg { color: var(--muted); margin-bottom: 8px; }
+  .empty b { display: block; margin-bottom: 4px; font-size: 15px; }
+  .empty p { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+  .eblock { text-align: left; margin: 12px 0; border-inline-start: 3px solid var(--danger); }
+  .eblock b { color: var(--danger); font-size: 13px; }
+  .eblock p { margin: 2px 0 10px; font-size: 13px; color: var(--muted); }
+
+  /* ===== Модалки ===== */
+  dialog { border: 0; border-radius: var(--r-lg); padding: 0; width: min(820px, 96vw); max-height: 92vh; box-shadow: var(--sh-3); }
+  dialog::backdrop { background: rgba(26,32,56,.45); }
+  .dlg { padding: var(--s-4); display: grid; gap: 12px; max-height: 92vh; overflow-y: auto; }
+  .dlg-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .dlg label { font-size: 13px; font-weight: 600; color: var(--ink2); display: grid; gap: 4px; }
+  .dlg input[type=text], .dlg input[type=date], .dlg input[type=url], .dlg select, .dlg textarea, .dlg input[type=number] { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--r-sm); font-size: 14px; font-family: inherit; background: #fff; }
+  .dlg input:hover, .dlg select:hover, .dlg textarea:hover { border-color: var(--ink2); }
+  .dlg input:focus, .dlg select:focus, .dlg textarea:focus { border-color: var(--green); box-shadow: var(--ring); outline: none; }
   .dlg textarea { min-height: 90px; resize: vertical; }
-  .dlg textarea.body { min-height: 220px; font-size: 14px; }
-  .fmt { display: flex; gap: 6px; flex-wrap: wrap; }
-  .fmt button { border: 1.5px solid #c3ccd9; background: #fff; border-radius: 7px; min-width: 38px; min-height: 34px; font-weight: 700; }
-  .dlg .foot { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 4px; }
+  .dlg textarea.body { min-height: 240px; font-size: 14px; line-height: 1.55; max-width: 68ch; }
+  .dlg .foot { display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px; }
   .hint { font-size: 13px; color: var(--muted); }
-  .prev img { max-width: 220px; border-radius: 8px; display: block; margin-top: 6px; }
+  .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .drop { border: 1.5px dashed var(--line); border-radius: var(--r-md); padding: 16px; text-align: center; color: var(--muted); font-size: 13px; cursor: pointer; transition: border-color .12s var(--ease), background-color .12s var(--ease); }
+  .drop:hover { border-color: var(--green); background: #fafcfa; }
+  .drop.on { border-color: var(--green); background: var(--green-100); }
+  .prev img { max-width: 260px; max-height: 160px; object-fit: contain; border-radius: var(--r-sm); display: block; margin-top: 8px; }
+  .prev img.docprev { width: 100%; max-height: 340px; background: var(--navy-50); object-fit: cover; }
+  .fmt { display: flex; gap: 4px; flex-wrap: wrap; }
+  .fmt button { border: 1px solid var(--line); background: #fff; border-radius: var(--r-sm); min-width: 38px; min-height: 34px; font-weight: 700; transition: border-color .12s var(--ease), background-color .12s var(--ease); }
+  .fmt button:hover { border-color: var(--ink2); background: var(--navy-50); }
+  .tabs-mini { display: flex; gap: 2px; background: var(--navy-50); padding: 2px; border-radius: var(--r-sm); width: max-content; }
+  .tabs-mini button { border: 0; background: none; padding: 7px 14px; border-radius: 5px; font: inherit; font-size: 13px; font-weight: 600; color: var(--ink2); }
+  .tabs-mini button.on { background: #fff; color: var(--ink); box-shadow: var(--sh-1); }
+
+  /* ===== Toast ===== */
+  #toast { position: fixed; bottom: 20px; left: 50%; translate: -50% 12px; background: var(--navy); color: #fff; padding: 10px 18px; border-radius: var(--r-md); font-size: 13px; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .2s var(--ease), translate .2s var(--ease); z-index: 100; display: flex; gap: 8px; align-items: center; }
+  #toast.show { opacity: 1; translate: -50% 0; }
+  #toast svg { color: var(--green); }
+  #toast.bad svg { color: #ff8f7a; }
+
+  /* ===== Палитра ⌘K ===== */
+  #palette { border: 0; padding: 0; width: min(480px, 92vw); border-radius: var(--r-lg); box-shadow: var(--sh-3); }
+  #palette::backdrop { background: rgba(26,32,56,.35); }
+  .pal { padding: 8px; }
+  .pal input { width: 100%; padding: 12px; border: 0; font-size: 15px; border-bottom: 1px solid var(--line); outline: none; background: var(--surface); border-radius: var(--r-lg) var(--r-lg) 0 0; }
+  .pal ul { list-style: none; margin: 8px 0 0; padding: 0; }
+  .pal li button { width: 100%; text-align: left; display: flex; gap: 10px; align-items: center; padding: 10px 12px; border: 0; background: none; border-radius: var(--r-sm); font: inherit; font-size: 14px;
+  }
+  .pal li button:hover, .pal li button.hi { background: var(--navy-50); }
+  .pal li small { color: var(--muted); margin-left: auto; }
+
+  /* ===== Адаптив ===== */
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar { position: fixed; inset: 0 auto 0 0; width: 232px; z-index: 50; translate: -100% 0; transition: translate .2s var(--ease); padding-top: 16px; }
+    .sidebar.open { translate: none; box-shadow: var(--sh-3); }
+    .content { padding: var(--s-3) var(--s-4) var(--s-6); }
+    .frow { grid-template-columns: 1fr; }
+    .ttitle { max-width: 220px; }
+    .statline { gap: var(--s-4); }
+  }
+  .burger-m { display: none; position: fixed; z-index: 60; left: 14px; top: 14px; width: 42px; height: 42px; border-radius: var(--r-sm); border: 0; background: var(--navy); color: #fff; align-items: center; justify-content: center; }
+  @media (max-width: 900px) { .burger-m { display: inline-flex; } }
+  .side-overlay { display: none; }
+  @media (max-width: 900px) { .side-overlay { display: block; position: fixed; inset: 0; background: rgba(26,32,56,.4); z-index: 40; opacity: 0; pointer-events: none; transition: opacity .2s; } .side-overlay.on { opacity: 1; pointer-events: auto; } }
 </style>
 </head>
 <body>
-<header><div class="wrap"><b>ХКООП · Админка (новости)</b><span id="topbar"></span></div></header>
-<div class="wrap" id="app"></div>
 
-<dialog id="ed"><form method="dialog" class="dlg" id="edform">
-  <h3 id="edtitle">Новая новость</h3>
-  <input type="hidden" id="f_id"><input type="hidden" id="f_isnew" value="1">
-  <label>Заголовок<input type="text" id="f_title" required maxlength="500"></label>
-  <label>Дата<input type="date" id="f_date" required></label>
-  <label>Рубрика<select id="f_cat">
-    <option value="novosti">Новости</option><option value="molodezh">Молодёжь</option>
-    <option value="ohrana-truda">Охрана труда</option><option value="mezhdunarodnoe">Международное</option>
-    <option value="podderzhka">Поддержка</option>
-  </select></label>
-  <label>Теги (через запятую)<input type="text" id="f_tags" placeholder="план, конференция"></label>
-  <label>Картинка<select id="f_img"></select></label>
-  <div class="prev" id="imgprev"></div>
-  <label>Загрузить новую картинку (до 5 МБ)<input type="file" id="f_file" accept="image/*"></label>
-  <label>Краткое описание<textarea id="f_excerpt" maxlength="2000"></textarea></label>
-  <label>Полный текст</label>
-  <div class="fmt" id="fmt">
-    <button type="button" data-t="b" title="Жирный"><b>Ж</b></button>
-    <button type="button" data-t="i" title="Курсив"><i>К</i></button>
-    <button type="button" data-t="h" title="Подзаголовок">H</button>
-    <button type="button" data-t="ul" title="Список">•≡</button>
-    <button type="button" data-t="a" title="Ссылка">🔗</button>
+<button class="burger-m" id="burgerM" aria-label="Меню разделов" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<div class="side-overlay" id="sideOv"></div>
+
+<div id="app"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<dialog id="palette">
+  <div class="pal">
+    <input id="palq" placeholder="Команда: раздел, новость, действие…" aria-label="Палитра команд">
+    <ul id="pallist"></ul>
   </div>
-  <textarea id="f_body" class="body" placeholder="Текст новости. Можно вставлять из Word — оформление сохранится простое."></textarea>
-  <label>Ссылка на старую новость (если перенос)<input type="text" id="f_old" placeholder="/index.php/news/..."></label>
-  <div class="foot">
-    <button type="button" class="btn btn-w" id="edcancel">Отмена</button>
-    <button type="button" class="btn btn-g" id="edsave">Сохранить</button>
-  </div>
-  <div class="err" id="ederr"></div>
-</form></dialog>
+</dialog>
+
+<dialog id="ed"><form method="dialog" class="dlg" id="edform"></form></dialog>
 
 <script>
+"use strict";
 const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+const I = {
+  news: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>`,
+  docs: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>`,
+  cal: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>`,
+  part: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  dash: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>`,
+  sett: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+  edit: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg>`,
+  del: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>`,
+  ok: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>`,
+  warn: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>`,
+};
+
 const api = async (path, opt = {}) => {
   const r = await fetch(path, { headers: { "Content-Type": "application/json" }, ...opt });
   const d = await r.json().catch(() => ({}));
-  if (r.status === 401) { location.reload(); throw 0; }
-  if (!r.ok) throw new Error(d.error || ("ошибка " + r.status));
+  if (!r.ok) {
+    if (r.status === 401) throw new Error("Сессия истекла — обновите страницу (Cmd+R)");
+    throw new Error(d.error || ("ошибка " + r.status));
+  }
   return d;
 };
 
-async function boot() {
-  const app = $("app");
-  app.innerHTML = `<div class="login"><h3>Вход для сотрудников</h3>
-    <input type="password" id="pw" placeholder="Пароль" autocomplete="current-password">
-    <div class="err" id="loginerr"></div>
-    <button class="btn btn-p" id="go" style="width:100%">Войти</button></div>`;
-  $("go").onclick = async () => {
-    try {
-      await api("/api/login", { method: "POST", body: JSON.stringify({ password: $("pw").value }) });
-      list();
-    } catch (e) { $("loginerr").textContent = e.message || "неверный пароль"; }
-  };
-  $("pw").onkeydown = (e) => { if (e.key === "Enter") $("go").click(); };
-  $("pw").focus();
+let toastT = null;
+function toast(msg, bad = false) {
+  const t = $("toast");
+  t.className = bad ? "bad" : "";
+  t.innerHTML = (bad ? I.warn : I.ok) + `<span>${esc(msg)}</span>`;
+  t.classList.add("show");
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove("show"), 3500);
 }
 
-async function list() {
-  const app = $("app");
-  $("topbar").innerHTML = `<button class="btn btn-w" id="out" style="min-height:34px;font-size:13px">Выйти</button>`;
-  $("out").onclick = async () => { await api("/api/logout", { method: "POST" }); boot(); $("topbar").innerHTML = ""; };
-  app.innerHTML = `<div class="toolbar">
-      <input id="q" placeholder="Найти новость…">
-      <button class="btn btn-g" id="add">+ Новая новость</button></div>
-    <div id="tbl"></div>
-    <p class="hint">После правок сайт обновится сам через минуту-две (localhost). На общий сайт изменения попадут по команде «обнови сайт».</p>`;
-  $("add").onclick = () => edit(null);
-  $("q").oninput = () => load();
-  await load();
+/* Навигация */
+const SECTIONS = [
+  { id: "dash", label: "Обзор", icon: I.dash },
+  { id: "news", label: "Новости", icon: I.news },
+  { id: "docs", label: "Документы", icon: I.docs },
+  { id: "events", label: "Мероприятия", icon: I.cal },
+  { id: "partners", label: "Партнёры", icon: I.part },
+  { id: "settings", label: "Настройки", icon: I.sett },
+];
+function go(id) { location.hash = "#/" + id; }
+function current() {
+  const h = (location.hash || "#/dash").replace(/^#\//, "").split("/")[0];
+  return SECTIONS.some(s => s.id === h) ? h : "dash";
 }
+window.addEventListener("hashchange", () => { closeSide(); render(); });
 
-async function load() {
-  const { rows } = await api("/api/news?q=" + encodeURIComponent($("q").value));
-  $("tbl").innerHTML = `<table><tr><th>Дата</th><th>Заголовок</th><th></th></tr>` +
-    rows.map((r) => `<tr><td style="white-space:nowrap">${r.date || ""}</td><td>${escapeHtml(r.title)}</td>
-      <td><div class="rowbtns"><button data-e="${r.id}">Править</button><button data-d="${r.id}" style="color:#c0392b">Удалить</button></div></td></tr>`).join("") +
-    `</table>`;
-  $("tbl").querySelectorAll("[data-e]").forEach((b) => b.onclick = () => edit(b.dataset.e));
-  $("tbl").querySelectorAll("[data-d]").forEach((b) => b.onclick = () => del(b.dataset.d));
+function sidebar() {
+  const cur = current();
+  return `<nav class="sidebar" id="side" aria-label="Разделы">
+    <div class="brand"><img class="logo" src="/site-logo" alt="Логотип ХКООП">Панель пресс-службы</div>
+    ${SECTIONS.map(s => `<a class="navlink ${s.id === cur ? "active" : ""}" href="#/${s.id}"><span class="dot-i">${s.icon}</span>${s.label}</a>`).join("")}
+    <div class="side-foot"><button class="kbtn" id="out">Выйти</button></div>
+  </nav>`;
 }
-
-function escapeHtml(s) { return String(s || "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
-
-async function edit(id) {
-  $("ederr").textContent = "";
-  const { files } = await api("/api/images");
-  $("f_img").innerHTML = `<option value="">— без картинки —</option>` + files.map((f) => `<option value="${f}">${f}</option>`).join("");
-  if (id) {
-    const { row } = await api("/api/news/one?id=" + encodeURIComponent(id));
-    if (!row) return alert("Не найдено");
-    $("edtitle").textContent = "Править новость";
-    $("f_id").value = row.id; $("f_isnew").value = "";
-    $("f_title").value = row.title || ""; $("f_date").value = row.date || "";
-    $("f_cat").value = row.category || "novosti";
-    try { $("f_tags").value = (JSON.parse(row.tags || "[]")).join(", "); } catch { $("f_tags").value = row.tags || ""; }
-    $("f_img").value = row.image || ""; $("f_excerpt").value = row.excerpt || "";
-    $("f_body").value = row.body || ""; $("f_old").value = row.old_url || "";
-  } else {
-    $("edtitle").textContent = "Новая новость";
-    $("edform").reset(); $("f_id").value = ""; $("f_isnew").value = "1";
-    $("f_date").value = new Date().toISOString().slice(0, 10);
-  }
-  updPrev();
-  $("ed").showModal();
+async function shell() {
+  $("app").innerHTML = `<div class="shell">` + sidebar() + `<main class="content" id="content"></main></div>`;
+  $("out").onclick = async () => { await api("/api/logout", { method: "POST" }); boot(); };
+  $("sideOv").onclick = closeSide;
+  $("burgerM").onclick = () => { $("side").classList.add("open"); $("sideOv").classList.add("on"); };
 }
+function closeSide() { $("side")?.classList.remove("open"); $("sideOv")?.classList.remove("on"); }
 
-function updPrev() {
-  $("imgprev").innerHTML = $("f_img").value ? `<img src="${$("f_img").value}" alt="">` : "";
+function pageHead(title, meta, action) {
+  return `<div class="page-head"><div><h1>${esc(title)}</h1><div class="meta">${meta}</div></div>${action || ""}</div>`;
 }
-$("f_img").onchange = updPrev;
+let seq = 0;
+function skel(n = 4) { return `<table><tbody>${Array.from({length:n}, (_,k) => `<tr><td><div class="skeleton" style="width:${70-8*k}%"></div></td></tr>`).join("")}</tbody></table>`; }
+function emptyBox(title, text, btn) { return `<div class="empty"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><b>${esc(title)}</b><p>${esc(text)}</p>${btn}</div>`; }
+function errBox(msg, retry) { return `<div class="eblock"><b>Не получилось загрузить</b><p>${esc(msg)}</p><button class="btn btn-w" id="retry">Повторить</button></div>`; }
+function ask(q) { return new Promise((ok) => { askCB = ok; $("edform").innerHTML = `<div class="dlg-header"><h3>${esc(q)}</h3></div><div class="foot"><button type="button" class="btn btn-w" id="a_no">Отмена</button><button type="button" class="btn btn-d" id="a_yes">Да, удалить</button></div>`; openModal(); $("a_yes").onclick = () => { closeModal(); askCB(true); }; $("a_no").onclick = () => { closeModal(); askCB(false); }; }); }
+let askCB = null;
 
-$("f_file").onchange = async () => {
-  const f = $("f_file").files[0];
-  if (!f) return;
-  const rd = new FileReader();
-  rd.onload = async () => {
-    try {
-      const d = await api("/api/upload", { method: "POST", body: JSON.stringify({ name: f.name, data: rd.result }) });
-      const o = document.createElement("option");
-      o.value = d.url; o.textContent = d.url;
-      $("f_img").appendChild(o); $("f_img").value = d.url; updPrev();
-      $("f_file").value = "";
-    } catch (e) { alert(e.message); }
-  };
-  rd.readAsDataURL(f);
-};
-
-$("fmt").onclick = (e) => {
-  const b = e.target.closest("button");
-  if (!b) return;
-  const ta = $("f_body"), s = ta.selectionStart, en = ta.selectionEnd, sel = ta.value.slice(s, en) || "текст";
-  let ins = sel;
-  if (b.dataset.t === "b") ins = `<b>${sel}</b>`;
-  if (b.dataset.t === "i") ins = `<i>${sel}</i>`;
-  if (b.dataset.t === "h") ins = `<h3>${sel}</h3>`;
-  if (b.dataset.t === "ul") ins = `<ul>\n<li>${sel}</li>\n</ul>`;
-  if (b.dataset.t === "a") { const u = prompt("Ссылка (https://…):", "https://"); if (u) ins = `<a href="${u}">${sel}</a>`; }
-  ta.setRangeText(ins, s, en, "end");
-  ta.focus();
-};
-
-$("edcancel").onclick = () => $("ed").close();
-$("edsave").onclick = async () => {
+/* ================= Разделы ================= */
+async function dash() {
+  const c = $("content");
+  c.innerHTML = pageHead("Обзор", "Сводка по материалам сайта") + `<div class="statline" id="stats">загрузка…</div><div id="recent"></div>`;
   try {
-    const d = await api("/api/news/save", { method: "POST", body: JSON.stringify({
-      id: $("f_id").value, isNew: $("f_isnew").value === "1",
-      title: $("f_title").value.trim(), date: $("f_date").value, category: $("f_cat").value,
-      tags: $("f_tags").value, image: $("f_img").value, excerpt: $("f_excerpt").value,
-      body: $("f_body").value, old_url: $("f_old").value.trim(),
-    }) });
-    $("ed").close();
-    load();
-  } catch (e) { $("ederr").textContent = e.message; }
-};
-
-async function del(id) {
-  if (!confirm("Удалить новость безвозвратно?")) return;
-  await api("/api/news/del", { method: "POST", body: JSON.stringify({ id }) });
-  load();
+    const s = await api("/api/stats");
+    $("stats").innerHTML = [
+      ["Новости", s.news, "/news"], ["Документы", s.docs, "/docs"], ["Мероприятия", s.events, "/events"], ["Партнёры", s.partners, "/partners"],
+    ].map(([k, v]) => `<div class="stat"><b class="num">${v ?? 0}</b><span>${k}</span></div>`).join("") + (s.lastEdit ? `<div class="stat"><span>последняя правка: ${esc(s.lastEdit)}</span></div>` : "");
+    $("recent").innerHTML = `<h2>Последние новости</h2><table style="margin-top:12px"><tbody>${(s.recent || []).map(r => `<tr><td class="num" style="white-space:nowrap;color:var(--muted)">${esc(r.date)}</td><td class="ttitle"><a href="http://localhost:3100/news/${esc(r.id)}" target="_blank" rel="noreferrer">${esc(r.title)}</a></td></tr>`).join("")}</tbody></table>
+      <p class="hint" style="margin-top:12px">Изменения автоматически попадут на localhost в течение 1–2 минут. На общий сайт — по команде «обнови сайт».</p>`;
+  } catch (e) { $("stats").innerHTML = errBox(e.message); bindRetry(dash); }
 }
 
+function bindRetry(fn) { const b = $("retry"); if (b) b.onclick = fn; }
+
+const CATS = [["novosti","Новости"],["molodezh","Молодёжь"],["ohrana-truda","Охрана труда"],["mezhdunarodnoe","Международное"],["podderzhka","Поддержка"]];
+const catLabel = (c) => (CATS.find(x => x[0] === c) || [null, c])[1];
+let newsState = { q: "", cat: "all", dir: "desc" };
+
+async function news() {
+  const c = $("content");
+  c.innerHTML = pageHead("Новости", "поиск, правка, публикация",
+      `<button class="btn btn-p" id="add"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Новая новость</button>`)
+    + `<div class="toolbar">
+        <input id="q" placeholder="Поиск по заголовку…" value="${esc(newsState.q)}" aria-label="Поиск">
+        <select id="cat" aria-label="Рубрика"><option value="all">Все рубрики</option>${CATS.map(c2 => `<option value="${c2[0]}" ${newsState.cat===c2[0]?"selected":""}>${c2[1]}</option>`).join("")}</select>
+        <span class="count" id="count"></span><span style="flex:1"></span>
+        <button class="sort" id="sort">Дата ${newsState.dir === "desc" ? "▼" : "▲"}</button>
+      </div><div id="tbl"></div>`;
+  $("add").onclick = () => editNews(null);
+  $("q").oninput = () => { newsState.q = $("q").value; loadNews(); };
+  $("cat").onchange = () => { newsState.cat = $("cat").value; loadNews(); };
+  $("sort").onclick = () => { newsState.dir = newsState.dir === "desc" ? "asc" : "desc"; news(); };
+  await loadNews();
+}
+async function loadNews() {
+  const t = $("tbl"); if (!t) return;
+  t.innerHTML = skel();
+  try {
+    const { rows } = await api("/api/news?q=" + encodeURIComponent(newsState.q));
+    let f = newsState.cat === "all" ? rows : rows.filter(r => r.category === newsState.cat);
+    f = f.sort((a, b) => newsState.dir === "desc" ? (b.date||"").localeCompare(a.date||"") : (a.date||"").localeCompare(b.date||""));
+    $("count").textContent = `Показано ${f.length}`;
+    if (!f.length) { t.innerHTML = emptyBox(newsState.q || newsState.cat !== "all" ? "Ничего не найдено" : "Новостей пока нет", "Измените запрос или создайте первую запись.", `<button class="btn btn-p" id="e1">Новая новость</button>`); $("e1").onclick = () => editNews(null); return; }
+    t.innerHTML = `<table><thead><tr><th>Дата</th><th>Заголовок</th><th>Рубрика</th><th style="width:96px"></th></tr></thead><tbody>` +
+      f.map(r => `<tr>
+        <td class="num" style="white-space:nowrap;color:var(--muted)">${esc(r.date||"")}</td>
+        <td class="ttitle" title="${esc(r.title)}">${esc(r.title)}</td>
+        <td><span class="chip">${esc(catLabel(r.category))}</span></td>
+        <td><div class="tactions"><button class="ibtn" data-e="${esc(r.id)}" title="Править" aria-label="Править">${I.edit}</button><button class="ibtn del" data-d="${esc(r.id)}" title="Удалить" aria-label="Удалить">${I.del}</button></div></td></tr>`).join("") +
+      `</tbody></table>`;
+    t.querySelectorAll("[data-e]").forEach(b => b.onclick = () => editNews(b.dataset.e));
+    t.querySelectorAll("[data-d]").forEach(b => b.onclick = () => delNews(b.dataset.d));
+  } catch (e) { t.innerHTML = errBox(e.message); bindRetry(loadNews); }
+}
+
+/* --- редактор новости --- */
+async function editNews(id) {
+  const form = $("edform");
+  if (!id) form.innerHTML = dialogLoading();
+  const { files } = await api("/api/images").catch(() => ({ files: [] }));
+  let row = { title:"", date:new Date().toISOString().slice(0,10), category:"novosti", tags:"[]", excerpt:"", image:"", body:"", old_url:"", id:"" };
+  if (id) { const d = await api("/api/news/one?id=" + encodeURIComponent(id)); if (!d.row) return toast("Новость не найдена", true); row = d.row; }
+  const tagsTxt = row.tags && row.tags.includes("[") ? (() => { try { return JSON.parse(row.tags).join(", "); } catch { return row.tags; } })() : (row.tags || "");
+  form.innerHTML = `
+    <div class="dlg-header"><h3>${id ? "Править новость" : "Новая новость"}</h3><button type="button" class="ibtn" id="c" aria-label="Закрыть">✕</button></div>
+    <label>Заголовок<input type="text" id="f_title" required maxlength="500" value="${esc(row.title)}"></label>
+    <div class="frow">
+      <label>Дата<input type="date" id="f_date" required value="${esc(row.date||"")}"></label>
+      <label>Рубрика<select id="f_cat">${CATS.map(x => `<option value="${x[0]}" ${row.category===x[0]?"selected":""}>${x[1]}</option>`).join("")}</select></label>
+    </div>
+    <label>Теги (через запятую)<input type="text" id="f_tags" maxlength="300" value="${esc(tagsTxt)}" placeholder="план, конференция"></label>
+    <div class="frow">
+      <div>
+        <label>Картинка<select id="f_img"><option value="">— без картинки —</option>${(files||[]).map(f => `<option value="${esc(f)}" ${row.image===f?"selected":""}>${esc(f)}</option>`).join("")}</select></label>
+        <div class="prev" id="imgprev"></div>
+      </div>
+      <div>
+        <label>Загрузить новое фото (до 5 МБ)</label>
+        <div class="drop" id="drop" tabindex="0" role="button">Перетащите файл или нажмите — jpg/png/webp</div>
+        <input type="file" id="f_file" accept="image/*" hidden>
+      </div>
+    </div>
+    <label>Краткое описание (превью до 160 знаков)<textarea id="f_excerpt" maxlength="2000">${esc(row.excerpt)}</textarea></label>
+    <div>
+      <div class="fmt" id="fmt">
+        <button type="button" data-t="b" title="Жирный" aria-label="Жирный"><b>Ж</b></button>
+        <button type="button" data-t="i" title="Курсив" aria-label="Курсив"><i>К</i></button>
+        <button type="button" data-t="h" title="Подзаголовок" aria-label="Подзаголовок">H</button>
+        <button type="button" data-t="ul" title="Список" aria-label="Список">≡</button>
+        <button type="button" data-t="a" title="Ссылка" aria-label="Ссылка"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></button>
+        <button type="button" data-t="pv" title="Предпросмотр">👁 Предпросмотр</button>
+      </div>
+      <textarea id="f_body" class="body" placeholder="Текст новости. Кнопки выше добавляют оформление — ничего знать не нужно.">${esc(row.body)}</textarea>
+      <div class="prev" id="pv" hidden></div>
+    </div>
+    <label>Ссылка на старую новость (при переносе)<input type="text" id="f_old" value="${esc(row.old_url)}" placeholder="/index.php/news/..."></label>
+    <div class="err" id="ederr" role="alert"></div>
+    <div class="foot">
+      <button type="button" class="btn btn-w" id="edcancel">Отмена</button>
+      <button type="button" class="btn btn-p" id="edsave">Сохранить</button>
+    </div>`;
+  $("c").onclick = () => closeModal();
+  $("edcancel").onclick = () => closeModal();
+  $("f_img").onchange = updPrevN;
+  updPrevN();
+  const dr = $("drop"), fi = $("f_file");
+  dr.onclick = () => fi.click();
+  dr.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") fi.click(); };
+  ["dragover","dragenter"].forEach(ev => dr.addEventListener(ev, (e) => { e.preventDefault(); dr.classList.add("on"); }));
+  ["dragleave","drop"].forEach(ev => dr.addEventListener(ev, (e) => { e.preventDefault(); dr.classList.remove("on"); }));
+  dr.addEventListener("drop", (e) => { if (e.dataTransfer.files[0]) { fi.files = e.dataTransfer.files; fi.onchange(); } });
+  fi.onchange = () => upload(f_ => { $("f_img").appendChild(new Option(f_.url, f_.url)); $("f_img").value = f_.url; updPrevN(); }, fi, false);
+  $("fmt").onclick = (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.t === "pv") { const pv = $("pv"); pv.hidden = !pv.hidden; pv.innerHTML = pv.hidden ? "" : `<strong style="font-size:13px;color:var(--muted)">Предпросмотр на сайте</strong><div class="card-body article-body" style="border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:8px">${$("f_body").value || "<i>пусто</i>"}</div>`; return; }
+    const ta = $("f_body"), s = ta.selectionStart, en = ta.selectionEnd, sel = ta.value.slice(s, en) || "текст";
+    let ins = sel;
+    if (b.dataset.t === "b") ins = `<b>${sel}</b>`;
+    if (b.dataset.t === "i") ins = `<i>${sel}</i>`;
+    if (b.dataset.t === "h") ins = `<h3>${sel}</h3>`;
+    if (b.dataset.t === "ul") ins = `<ul>\n<li>${sel}</li>\n</ul>`;
+    if (b.dataset.t === "a") { const u = prompt("Ссылка (https://…):", "https://"); if (u) ins = `<a href="${u}">${sel}</a>`; }
+    ta.setRangeText(ins, s, en, "end");
+    ta.focus();
+  };
+  $("edsave").onclick = async () => {
+    const btn = $("edsave"); btn.disabled = true; btn.textContent = "Сохраняем…"; $("ederr").textContent = "";
+    try {
+      const d = await api("/api/news/save", { method: "POST", body: JSON.stringify({
+        id: row.id, isNew: !id,
+        title: $("f_title").value.trim(), date: $("f_date").value, category: $("f_cat").value,
+        tags: $("f_tags").value, image: $("f_img").value, excerpt: $("f_excerpt").value,
+        body: $("f_body").value, old_url: $("f_old").value.trim(),
+      }) });
+      ;
+      toast(id ? "Новость сохранена" : "Новость создана · /news/" + d.id);
+      tdhash("news"); loadNews();
+    } catch (e) { $("ederr").textContent = e.message; btn.disabled = false; btn.textContent = "Сохранить"; }
+  };
+  openModal();
+  if (!id) form.classList.remove("loading");
+}
+function dialogLoading() { return `<h3>Открываем…</h3><div class="skeleton" style="width:70%"></div><div class="skeleton" style="width:50%"></div>`; }
+function updPrevN() { const v = $("f_img").value; $("imgprev").innerHTML = v ? `<img src="${esc(v)}" alt="Превью выбранной картинки">` : ""; }
+
+async function delNews(id) {
+  if (!await ask("Удалить новость безвозвратно?")) return;
+  await api("/api/news/del", { method: "POST", body: JSON.stringify({ id }) });
+  toast("Удалено"); loadNews();
+}
+/* --- документы --- */
+let docState = { q: "" };
+const docTypes = [["plan","План"],["soglashenie","Соглашение"],["program","Программа"],["policy","Политика"],["document","Документ"]];
+const docLabel = (t) => (docTypes.find(x => x[0] === t) || [null, t])[1];
+
+async function docs() {
+  const c = $("content");
+  c.innerHTML = pageHead("Документы", "Каталог PDF: тип, год, файл",
+      `<button class="btn btn-p" id="addDoc">+ Новый документ</button>`)
+    + `<div class="toolbar"><input id="dq" placeholder="Поиск…" value="${esc(docState.q)}" aria-label="Поиск"><span class="count" id="dcount"></span></div><div id="dtbl"></div>`;
+  $("addDoc").onclick = () => editDoc(null);
+  $("dq").oninput = () => { docState.q = $("dq").value; loadDocs(); };
+  await loadDocs();
+}
+async function loadDocs() {
+  const t = $("dtbl"); if (!t) return;
+  t.innerHTML = skel();
+  try {
+    const { rows } = await api("/api/docs");
+    const f = docState.q ? rows.filter(r => r.title.toLowerCase().includes(docState.q.toLowerCase())) : rows;
+    $("dcount").textContent = `Показано ${f.length}`;
+    if (!f.length) { t.innerHTML = emptyBox("Документов нет", "Добавьте первый документ.", `<button class="btn btn-p" id="d1">Новый документ</button>`); $("d1").onclick = () => editDoc(null); return; }
+    t.innerHTML = `<table><thead><tr><th>Год</th><th>Название</th><th>Тип</th><th>Файл</th><th style="width:96px"></th></tr></thead><tbody>` +
+      f.map(r => `<tr><td class="num" style="color:var(--muted)">${r.year}</td>
+        <td class="ttitle" title="${esc(r.title)}">${esc(r.title)}</td>
+        <td><span class="chip">${esc(docLabel(r.type))}</span></td>
+        <td>${r.file_local ? `<span class="chip ok">${I.ok} PDF</span>` : `<span class="chip miss">нет файла</span>`}</td>
+        <td><div class="tactions"><button class="ibtn" data-e="${esc(r.id)}" title="Править" aria-label="Править">${I.edit}</button><button class="ibtn del" data-d="${esc(r.id)}" title="Удалить" aria-label="Удалить">${I.del}</button></div></td></tr>`).join("") + `</tbody></table>`;
+    t.querySelectorAll("[data-e]").forEach(b => b.onclick = () => editDoc(b.dataset.e));
+    t.querySelectorAll("[data-d]").forEach(b => b.onclick = () => delDoc(b.dataset.d));
+  } catch (e) { t.innerHTML = errBox(e.message); bindRetry(loadDocs); }
+}
+async function editDoc(id) {
+  const form = $("edform");
+  let row = { title: "", type: "document", year: new Date().getFullYear(), file_old: "", file_local: "", old_url: "", id: "" };
+  if (id) { const d = await api("/api/docs/one?id=" + encodeURIComponent(id)); if (!d.row) return toast("Документ не найден", true); row = d.row; }
+  form.innerHTML = `
+    <div class="dlg-header"><h3>${id ? "Править документ" : "Новый документ"}</h3><button type="button" class="ibtn" id="c" aria-label="Закрыть">✕</button></div>
+    <label>Название<input type="text" id="dt" required maxlength="500" value="${esc(row.title)}"></label>
+    <div class="frow">
+      <label>Тип<select id="dtype">${docTypes.map(x => `<option value="${x[0]}" ${row.type===x[0]?"selected":""}>${x[1]}</option>`).join("")}</select></label>
+      <label>Год<input type="number" id="dyear" min="1990" max="2100" value="${row.year}"></label>
+    </div>
+    <div class="frow">
+      <div><label>Файл локально (PDF)<select id="dfile"><option value="">— не задан —</option>${await (async () => { try { const { files } = await api("/api/files?dir=docs"); return (files || []).map(f => `<option value="${esc(f)}" ${row.file_local===f?"selected":""}>${esc(f)}</option>`).join(""); } catch { return ""; } })()}</select></label>
+      <div class="prev"><img id="dociframe" class="docprev" src="${esc(row.file_local)}" alt="Первый лист PDF" style="${row.file_local?"":"display:none"}"></div></div>
+      <div>
+        <label>Загрузить PDF (до 15 МБ)</label>
+        <div class="drop" id="ddrop" tabindex="0" role="button">Перетащите PDF или нажмите</div>
+        <input type="file" id="dfileIn" accept="application/pdf" hidden>
+      </div>
+    </div>
+    <div class="err" id="derr" role="alert"></div>
+    <div class="foot"><button type="button" class="btn btn-w" id="dcancel">Отмена</button><button type="button" class="btn btn-p" id="dsave">Сохранить</button></div>`;
+  $("c").onclick = () => closeModal();
+  $("dcancel").onclick = () => closeModal();
+  const dr = $("ddrop"), fi = $("dfileIn");
+  dr.onclick = () => fi.click();
+  dr.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") fi.click(); };
+  ["dragover","dragenter"].forEach(ev => dr.addEventListener(ev, (e) => { e.preventDefault(); dr.classList.add("on"); }));
+  ["dragleave","drop"].forEach(ev => dr.addEventListener(ev, (e) => { e.preventDefault(); dr.classList.remove("on"); }));
+  dr.addEventListener("drop", (e) => { if (e.dataTransfer.files[0]) { fi.files = e.dataTransfer.files; fi.onchange(); } });
+  fi.onchange = () => upload(f_ => { $("dfile").appendChild(new Option(f_.url, f_.url)); $("dfile").value = f_.url; const im = $("dociframe"); im.src = f_.url; im.style.display = "block"; }, fi, true);
+  $("dsave").onclick = async () => {
+    const btn = $("dsave"); btn.disabled = true; btn.textContent = "Сохраняем…"; $("derr").textContent = "";
+    try {
+      await api("/api/docs/save", { method: "POST", body: JSON.stringify({
+        id: row.id, isNew: !id, title: $("dt").value.trim(), type: $("dtype").value,
+        year: Number($("dyear").value), file_local: $("dfile").value,
+      }) });
+      ; toast("Документ сохранён"); loadDocs();
+    } catch (e) { $("derr").textContent = e.message; btn.disabled = false; btn.textContent = "Сохранить"; }
+  };
+  openModal();
+}
+async function delDoc(id) { if (!await ask("Удалить документ из каталога? (файл на диске останется)")) return; await api("/api/docs/del", { method: "POST", body: JSON.stringify({ id }) }); toast("Удалено"); loadDocs(); }
+
+/* --- мероприятия --- */
+async function events() {
+  const c = $("content");
+  c.innerHTML = pageHead("Мероприятия", "Анонсы и события",
+      `<button class="btn btn-p" id="addEv">+ Новое событие</button><div id="evt" style="width:100%"></div>`);
+  $("addEv").onclick = () => editEvent(null);
+  await loadEvents();
+}
+async function loadEvents() {
+  const t = $("evt"); if (!t) return;
+  t.innerHTML = skel();
+  try {
+    const { rows } = await api("/api/events");
+    if (!rows.length) { t.innerHTML = emptyBox("Событий нет", "Добавьте первое мероприятие.", `<button class="btn btn-p" id="ev1">Новое событие</button>`); $("ev1").onclick = () => editEvent(null); return; }
+    const today = new Date().toISOString().slice(0,10);
+    t.innerHTML = `<table><thead><tr><th>Дата</th><th>Событие</th><th>Тип</th><th style="width:96px"></th></tr></thead><tbody>` +
+      rows.map(r => `<tr><td class="num" style="white-space:nowrap;color:var(--muted)">${esc(r.date)}</td>
+        <td class="ttitle" title="${esc(r.title)}">${esc(r.title)}</td>
+        <td><span class="chip ${r.date >= today ? "ok" : ""}">${r.date >= today ? "анонс" : "в архиве"}</span></td>
+        <td><div class="tactions"><button class="ibtn" data-e="${esc(r.id)}" title="Править" aria-label="Править">${I.edit}</button><button class="ibtn del" data-d="${esc(r.id)}" title="Удалить" aria-label="Удалить">${I.del}</button></div></td></tr>`).join("") + `</tbody></table>`;
+    t.querySelectorAll("[data-e]").forEach(b => b.onclick = () => editEvent(b.dataset.e));
+    t.querySelectorAll("[data-d]").forEach(b => b.onclick = () => delEvent(b.dataset.d));
+  } catch (e) { t.innerHTML = errBox(e.message); bindRetry(loadEvents); }
+}
+async function editEvent(id) {
+  const form = $("edform");
+  let row = { title: "", date: new Date().toISOString().slice(0, 10), type: "document", old_url: "", id: "" };
+  if (id) { const d = await api("/api/events/one?id=" + encodeURIComponent(id)).catch(() => ({ row: null })); if (d.row) row = d.row; }
+  form.innerHTML = `
+    <div class="dlg-header"><h3>${id ? "Править событие" : "Новое событие"}</h3><button type="button" class="ibtn" id="c" aria-label="Закрыть">✕</button></div>
+    <label>Название<input type="text" id="evt_t" required maxlength="500" value="${esc(row.title)}"></label>
+    <div class="frow">
+      <label>Дата<input type="date" id="evt_d" required value="${esc(row.date||"")}"></label>
+      <label>Ссылка на старый анонс<input type="text" id="evt_o" value="${esc(row.old_url)}"></label>
+    </div>
+    <div class="err" id="eve" role="alert"></div>
+    <div class="foot"><button type="button" class="btn btn-w" id="evc">Отмена</button><button type="button" class="btn btn-p" id="evs">Сохранить</button></div>`;
+  $("c").onclick = () => closeModal();
+  $("evc").onclick = () => closeModal();
+  $("evs").onclick = async () => {
+    const btn = $("evs"); btn.disabled = true; btn.textContent = "Сохраняем…";
+    try {
+      await api("/api/events/save", { method: "POST", body: JSON.stringify({ id: row.id, isNew: !id, title: $("evt_t").value.trim(), date: $("evt_d").value, old_url: $("evt_o").value.trim() }) });
+      ; toast("Событие сохранено"); loadEvents();
+    } catch (e) { $("eve").textContent = e.message; btn.disabled = false; btn.textContent = "Сохранить"; }
+  };
+  openModal();
+}
+async function delEvent(id) { if (!await ask("Удалить событие?")) return; await api("/api/events/del", { method: "POST", body: JSON.stringify({ id }) }); toast("Удалено"); loadEvents(); }
+
+/* --- партнёры --- */
+async function partners() {
+  const c = $("content");
+  c.innerHTML = pageHead("Партнёры", "Список организаций-партнёров") + `<div id="ptbl"></div>`;
+  await loadPartners();
+}
+async function loadPartners() {
+  const t = $("ptbl"); if (!t) return;
+  t.innerHTML = skel();
+  try {
+    const { rows } = await api("/api/partners");
+    if (!rows.length) { t.innerHTML = emptyBox("Партнёров нет", "Данные появятся после переноса."); return; }
+    t.innerHTML = `<table><thead><tr><th>Лого</th><th>Название</th><th>Ссылка</th><th style="width:64px"></th></tr></thead><tbody>` +
+      rows.map(r => `<tr><td>${r.logo ? `<img src="${esc(r.logo)}" alt="" style="width:44px;height:44px;object-fit:contain">` : `<span class="chip miss">нет лого</span>`}</td>
+        <td class="ttitle">${esc(r.name)}</td>
+        <td><a href="${esc(r.url)}" target="_blank" rel="noreferrer" style="font-size:13px">${esc(r.url).replace(/^https?:\/\//,"")}</a></td>
+        <td><div class="tactions"><button class="ibtn" data-e="${esc(r.id)}" title="Править" aria-label="Править">${I.edit}</button></div></td></tr>`).join("") + `</tbody></table>`;
+    t.querySelectorAll("[data-e]").forEach(b => b.onclick = () => editPartner(b.dataset.e));
+  } catch (e) { t.innerHTML = errBox(e.message); bindRetry(loadPartners); }
+}
+async function editPartner(id) {
+  const d = await api("/api/partners");
+  const r = d.rows.find(x => x.id === id);
+  if (!r) return toast("Партнёр не найден", true);
+  $("edform").innerHTML = `
+    <div class="dlg-header"><h3>Править партнёра</h3><button type="button" class="ibtn" id="c" aria-label="Закрыть">✕</button></div>
+    <label>Логотип <span class="hint">(ссылка на файл/официальный адрес)</span><input type="url" id="p_l" value="${esc(r.logo)}"></label>
+    <label>Название<input type="text" id="p_n" value="${esc(r.name)}"></label>
+    <label>Ссылка<input type="url" id="p_u" value="${esc(r.url)}"></label>
+    <div class="err" id="per"></div>
+    <div class="foot"><button type="button" class="btn btn-w" id="pc">Отмена</button><button type="button" class="btn btn-p" id="ps">Сохранить</button></div>`;
+  $("c").onclick = () => closeModal();
+  $("pc").onclick = () => closeModal();
+  $("ps").onclick = async () => {
+    try { await api("/api/partners/save", { method: "POST", body: JSON.stringify({ id: r.id, name: $("p_n").value.trim(), url: $("p_u").value.trim(), logo: $("p_l").value.trim() }) }); ; toast("Сохранено"); loadPartners(); }
+    catch (e) { $("per").textContent = e.message; }
+  };
+  openModal();
+}
+
+/* --- настройки --- */
+async function settings() {
+  const c = $("content");
+  c.innerHTML = pageHead("Настройки", "Контакты и реквизиты блока «в цифрах» из БД") + `<div id="stbl"></div>`;
+  const t = $("stbl");
+  t.innerHTML = skel();
+  try {
+    const { rows } = await api("/api/settings");
+    t.innerHTML = `<table><thead><tr><th style="width:220px">Ключ</th><th>Значение</th></tr></thead><tbody>` +
+      rows.map(r => `<tr><td><span class="chip">${esc(r.key)}</span></td><td><input data-s="${esc(r.key)}" value="${esc(r.value)}" style="width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font:inherit" aria-label="${esc(r.key)}"></td></tr>`).join("") + `</tbody></table>
+      <div class="foot" style="display:flex;justify-content:flex-end;margin-top:12px"><button class="btn btn-p" id="ssave">Сохранить настройки</button></div>`;
+    $("ssave").onclick = async () => {
+      const btn = $("ssave"); btn.disabled = true; btn.textContent = "Сохраняем…";
+      const data = Object.fromEntries(Array.from(t.querySelectorAll("[data-s]")).map(i => [i.dataset.s, i.value]));
+      try { const d = await api("/api/settings/save", { method: "POST", body: JSON.stringify(data) }); btn.disabled = false; btn.textContent = "Сохранить настройки"; toast(`Сохранено полей: ${d.updated}`); }
+      catch (e) { btn.disabled = false; btn.textContent = "Сохранить настройки"; $("ederr"); toast(e.message, true); }
+    };
+  } catch (e) { t.innerHTML = errBox(e.message); bindRetry(settings); }
+}
+
+/* --- загрузка файлов --- */
+async function upload(after, input, isDoc) {
+  if (!input.files || !input.files[0]) return;
+  const f = input.files[0];
+  const limit = isDoc ? 15 : 5;
+  try {
+    if (f.size > limit * 1024 * 1024) throw new Error(`файл ${(f.size/1048576).toFixed(1)} МБ — больше ${limit} МБ`);
+    const b64 = await new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = no; r.readAsDataURL(f); });
+    toast(`Загружаем ${esc(f.name.slice(0,20))}…`);
+    const d = await api("/api/upload", { method: "POST", body: JSON.stringify({ name: f.name, data: b64, kind: isDoc ? "doc" : "image" }) });
+    after(d);
+    toast(isDoc ? "PDF загружен" : "Фото загружено");
+  } catch (e) { toast(e.message, true); }
+}
+
+/* --- палитра ⌘K --- */
+const PAL = [
+  { label: "Новая новость", act: () => { go("news"); setTimeout(() => editNews(null), 250); }, k: "N" },
+  { label: "Новый документ", act: () => { go("docs"); setTimeout(() => editDoc(null), 250); }, k: "" },
+  { label: "Новое событие", act: () => { go("events"); setTimeout(() => editEvent(null), 250); }, k: "" },
+  ...SECTIONS.map(s => ({ label: "Открыть: " + s.label, act: () => go(s.id), k: "" })),
+  { label: "Выход", act: async () => { await api("/api/logout", { method: "POST" }); boot(); }, k: "" },
+];
+function openPal() {
+  const d = $("palette"); $("palq").value = ""; renderPal("");
+  d.showModal(); setTimeout(() => $("palq").focus(), 50);
+}
+function renderPal(q) {
+  const list = PAL.filter(p => p.label.toLowerCase().includes(q.toLowerCase()));
+  $("pallist").innerHTML = list.map((p, k) => `<li><button data-k="${k}" ${k===0?'class="hi"':""}>${esc(p.label)}${p.k?`<small>${p.k}</small>`:""}</button></li>`).join("") || `<li><button disabled>Ничего нет</button></li>`;
+  $("pallist").querySelectorAll("button[data-k]").forEach(b => b.onclick = () => { $("palette").close(); list[+b.dataset.k].act(); });
+}
+$("palette").addEventListener("input", () => renderPal($("palq").value));
+
+/* --- hotkeys --- */
+document.addEventListener("keydown", (e) => {
+  const inField = /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); openPal(); return; }
+  if (e.key === "/" && !inField) { e.preventDefault(); $("q")?.focus(); return; }
+  if (e.key.toLowerCase() === "n" && !inField && !e.metaKey && !e.ctrlKey) { e.preventDefault(); go("news"); setTimeout(() => editNews(null), 250); return; }
+});
+
+function tdhash(id) { if (location.hash !== "#/" + id) location.hash = "#/" + id; }
+
+/* --- главная точка входа --- */
+async function render() {
+  await shell();
+  const cur = current();
+  const fn = { dash, news, docs, events, partners, settings }[cur] || dash;
+  await fn();
+}
+async function boot() {
+  // Живая сессия? Сразу в панель без формы.
+  try {
+    const rr = await fetch("/api/stats", { headers: { "Content-Type": "application/json" } });
+    if (rr.ok) { render(); return; }
+  } catch {}
+  $("app").innerHTML = `<div class="login-shell"><div class="login">
+    <h1>Панель пресс-службы</h1><div class="sub">Сайт ХКООП · только для сотрудников</div>
+    <label style="font-size:13px;font-weight:600;color:var(--ink2)" for="pw">Пароль</label>
+    <input type="password" id="pw" placeholder="Пароль" autocomplete="current-password">
+    <div class="caps" id="caps" hidden>Включён Caps Lock</div>
+    <div class="err" id="loginerr" role="alert"></div>
+    <button class="btn btn-p" id="go" style="width:100%">Войти</button>
+  </div></div>`;
+  const pw = $("pw");
+  $("go").onclick = async () => {
+    const b = $("go"); b.disabled = true; b.textContent = "Входим…"; $("loginerr").textContent = "";
+    try { await api("/api/login", { method: "POST", body: JSON.stringify({ password: pw.value }) }); render(); }
+    catch (e) { $("loginerr").textContent = e.message; b.disabled = false; b.textContent = "Войти"; pw.focus(); }
+  };
+  pw.onkeydown = (e) => { if (e.key === "Enter") $("go").click(); };
+  pw.addEventListener("keyup", (e) => { $("caps").hidden = !e.getModifierState || !e.getModifierState("CapsLock"); });
+  pw.focus();
+}
+// Отладка: любая ошибка JS — видимым баннером вместо «мертвого» экрана
+window.onerror = (msg, src, line) => {
+  let d = document.getElementById("jswarn");
+  if (!d) { d = document.createElement("div"); d.id = "jswarn"; d.style.cssText = "position:fixed;inset:auto 12px 12px 12px;z-index:999;background:#d92d20;color:#fff;padding:12px 16px;border-radius:10px;font:600 13px/1.5 system-ui"; document.body.appendChild(d); }
+  d.textContent = "Ошибка интерфейса: " + msg + " (" + (line || "?") + ") — обновите страницу (Cmd+Shift+R).";
+};
+// Fallback для старых Safari без <dialog>
+function openModal() {
+  const d = $("ed");
+  if (d.showModal) return d.showModal();
+  d.setAttribute("open", ""); d.style.cssText = "position:fixed;z-index:90;inset:0;margin:auto;height:fit-content";
+  $("sideOv")?.classList.add("on");
+}
+function closeModal() {
+  const d = $("ed");
+  if (d.close) return d.close();
+  d.removeAttribute("open"); d.style.cssText = "";
+}
 boot();
 </script>
 </body>

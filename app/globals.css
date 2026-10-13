@@ -2,7 +2,7 @@
   --font-main: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --navy: #252e4f;
   --navy-dark: #1a2138;
-  --navgray: #6e7484;
+  --navgray: rgba(110, 116, 132, 0.78);
   --green: #3aa655;
   --light: #f2f4f7;
   --text: #222;
@@ -33,7 +33,7 @@ a { color: #1a3a6b; }
 .brand-big { font-size: clamp(22px, 3.6vw, 40px); line-height: 1.2; margin: 0; color: #fff; font-weight: 800; text-align: center; }
 
 /* Gray nav */
-.mainnav { background: var(--navgray); position: sticky; top: 0; z-index: 20; }
+.mainnav { background: var(--navgray); position: sticky; top: 0; z-index: 20; backdrop-filter: blur(8px) saturate(1.15); -webkit-backdrop-filter: blur(8px) saturate(1.15); }
 .mainnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .burger { display: none; background: none; border: 0; color: #fff; border-radius: 8px; font-size: 26px; padding: 0 4px; min-width: 44px; min-height: 52px; align-items: center; justify-content: center; gap: 10px; margin: 4px 0; cursor: pointer; font-weight: 800; }
 .burger:hover { background: rgba(255,255,255,.1); }
@@ -727,8 +727,20 @@ body.vi-mode.vi-scheme-yb .aeyebrow { color: #ffe100 !important; }
   .stats { grid-template-columns: 1fr; }
 }
 
-/* Планшет с бургером: поиск в шапке пошире (только ≤860, чтобы не дублировать десктопный) */
-@media (min-width: 641px) and (max-width: 860px) {
+/* Планшет 861–1024: тот же компактный хедер, что и ≤860 (один вариант на всём ≤1024) */
+@media (min-width: 861px) and (max-width: 1024px) {
+  .bar-search { display: none; }
+  .mob-logo { display: flex; align-items: center; }
+  .mob-logo img { border-radius: 50%; background: #fff; padding: 2px; }
+  .burger { display: flex; margin: 5px 0; border: 1px solid rgba(255,255,255,.6); font-size: 22px; min-height: 44px; }
+  .burger-label { display: none; }
+  .mainnav { position: sticky; top: 0; z-index: 40; }
+  .mainnav-inner { position: relative; min-height: 54px; justify-content: space-between; gap: 6px; }
+  .links .hsearch { display: flex; }
+}
+
+/* Планшет с бургером: поиск в шапке пошире (весь 641–1024) */
+@media (min-width: 641px) and (max-width: 1024px) {
   .mob-search { display: flex; align-items: center; margin: 4px auto; flex: 1 1 auto; min-width: 0; max-width: 640px; padding: 0 12px; }
   .mob-search .hsearch { width: 100% !important; }
   .mob-search .hsearch-input { width: 100% !important; min-height: 44px; font-size: 16px; padding: 10px 14px; border-radius: 8px; }
@@ -784,4 +796,9 @@ body.vi-mode .news-side .side-all { color: inherit; }
 @media (max-width: 640px) {
   .pdf-fallback { padding: 20px 18px; gap: 12px; }
   .pdf-fallback strong { font-size: 16px; }
+}
+
+/* Шапка: размытие фона (безпрефиксная версия отдельно — чтобы не вычистил минификатор) */
+@supports (backdrop-filter: blur(0)) {
+  .mainnav { backdrop-filter: blur(8px) saturate(1.15); }
 }
