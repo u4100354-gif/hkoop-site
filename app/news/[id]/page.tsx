@@ -29,6 +29,18 @@ export default async function NewsDetail({ params }: { params: Promise<{ id: str
   const rows: any[] = await q("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category,tags,excerpt,old_url,image,body FROM news WHERE id=?", [id]);
   const n = rows[0];
   if (!n) notFound();
+  // Похожие: сначала та же рубрика, остальное — свежие новости
+  let related: any[] = await q(
+    "SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category FROM news WHERE id<>? AND category=? ORDER BY date DESC LIMIT 6",
+    [id, n.category]
+  );
+  if (related.length < 6) {
+    const extra: any[] = await q(
+      "SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,category FROM news WHERE id<>? AND category<>? ORDER BY date DESC LIMIT ?",
+      [id, n.category, 6 - related.length]
+    );
+    related = [...related, ...extra].slice(0, 6);
+  }
   const tags = parseTags(n.tags);
   const img = safeImgSrc(n.image);
   return (
@@ -36,17 +48,32 @@ export default async function NewsDetail({ params }: { params: Promise<{ id: str
       <Crumbs items={[{ href: "/news", label: "Новости" }, { label: n.title }]} />
       <h1 style={{ margin: "10px 0 6px", lineHeight: 1.25 }}>{n.title}</h1>
       <p className="article-meta"><time dateTime={n.date}>{n.date}</time> · {catLabels[n.category] || n.category}{tags.length ? <> · {tags.join(" · ")}</> : null}</p>
-      <div className="card"><div className="card-body">
-        {img && <img src={img} alt="" className="article-img" width={1200} height={675} />}
-        {n.body ? (
-          <div className="article-body" dangerouslySetInnerHTML={{ __html: String(n.body) }} />
-        ) : (
-          <>
-            <p>{n.excerpt}</p>
-            <p><small>Полный текст перенести со старого сайта: habprof.ru{n.old_url}</small></p>
-          </>
-        )}
-      </div></div>
+      <div className="news-detail-grid">
+        <div className="card"><div className="card-body article-page-body">
+          {img && <img src={img} alt="" className="article-img" width={1200} height={675} />}
+          {n.body ? (
+            <div className="article-body" dangerouslySetInnerHTML={{ __html: String(n.body) }} />
+          ) : (
+            <>
+              <p>{n.excerpt}</p>
+              <p><small>Полный текст перенести со старого сайта: habprof.ru{n.old_url}</small></p>
+            </>
+          )}
+        </div></div>
+        <aside className="news-side" aria-label="Другие новости рубрики">
+          <h2 className="side-title">Другие новости</h2>
+          <ul className="side-list">
+            {related.map((r) => (
+              <li key={r.id}>
+                <Link href={`/news/${r.id}`}><small>{r.date}</small>{r.title}</Link>
+              </li>
+            ))}
+          </ul>
+          <Link href="/news" className="side-all">Все новости →</Link>
+        </aside>
+      </div>
     </>
   );
 }
+
+import Link from "next/link";

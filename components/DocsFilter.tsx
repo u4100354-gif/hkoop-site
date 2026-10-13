@@ -22,6 +22,10 @@ const typeLabels: Record<string, string> = {
 };
 
 export default function DocsFilter({ items }: { items: D[] }) {
+  // Safari (macOS/iOS) не рендерит PDF внутри iframe → показываем заглушку с открытием во вкладке
+  const isSafari = typeof window === "object"
+    ? /^((?!chrome|chromium|crios|fxios|edg|android|opr).)*safari/i.test(navigator.userAgent) || /iPad|iPhone|iPod/.test(navigator.userAgent)
+    : false;
   const [q, setQ] = useState("");
   const [type, setType] = useState("all");
   const types = useMemo(() => ["all", ...Array.from(new Set(items.map((i) => i.type)))], [items]);
@@ -103,8 +107,22 @@ export default function DocsFilter({ items }: { items: D[] }) {
                 <button className="pdf-close" onClick={() => setPreview(null)} aria-label="Закрыть просмотр">✕</button>
               </div>
             </div>
-            <iframe className="pdf-frame" src={preview.src} title={`PDF: ${preview.title}`} sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerPolicy="no-referrer" />
-            <p className="pdf-note">Если PDF не открывается — <a href={preview.src} target="_blank" rel="noreferrer">откройте файл в новой вкладке</a>.</p>
+            {isSafari ? (
+              // Safari не рендерит PDF внутри iframe — честная заглушка вместо белого экрана
+              <div className="pdf-fallback">
+                <span className="pdf-fb-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+                <strong>Встроенный просмотр недоступен в Safari</strong>
+                <p>Браузер Apple не умеет показывать PDF в окне — документ откроется в отдельной вкладке.</p>
+                <a className="btn btn-primary" href={preview.src} target="_blank" rel="noreferrer">Открыть PDF</a>
+              </div>
+            ) : (
+              <>
+                <iframe className="pdf-frame" src={preview.src} title={`PDF: ${preview.title}`} sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerPolicy="no-referrer" />
+                <p className="pdf-note">
+                  Если PDF не виден — <a href={preview.src} target="_blank" rel="noreferrer">откройте файл в новой вкладке</a>.
+                </p>
+              </>
+            )}
           </div>
         </div>
       )}
