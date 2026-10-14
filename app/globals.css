@@ -200,7 +200,7 @@ body.vi-mode .act-num-item { background: #fff !important; border-color: #000 !im
 body.vi-mode .act-num-item b, body.vi-mode .act-num-item span { color: #000 !important; }
 .act-map { max-width: 920px; margin: 10px auto 0; }
 .act-map .map-box { margin-top: 0; }
-.act-form-card { max-width: 560px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 22px 20px; box-shadow: 0 20px 50px rgba(10,14,32,.4); }
+.act-form-card { max-width: 560px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 22px 20px; box-shadow: 0 20px 50px rgba(10,14,32,.4); text-align: left; }
 body.vi-mode .act-form-card { background: #fff !important; border: 2px solid #000 !important; }
 /* Мобильная вёрстка сцен */
 @media (max-width: 760px) {
@@ -751,7 +751,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--navy); box-shado
 .preview-box { margin-top: 16px; border: 2px solid var(--navy); border-radius: 12px; overflow: hidden; }
 .preview-head { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--light); min-height: 52px; }
 .preview-head button { min-height: 40px; padding: 6px 12px; border-radius: 8px; border: 1.5px solid #c3ccd9; background: #fff; cursor: pointer; font-weight: 700; }
-.consult-form { display: grid; gap: 10px; max-width: 520px; width: 100%; margin: 0 auto; }
+.consult-form { display: grid; gap: 10px; max-width: 520px; width: 100%; margin: 0 auto; text-align: left; }
 .consult-form input[type="text"], .consult-form input:not([type]), .consult-form input:not([type="checkbox"]), .consult-form textarea { padding: 13px 14px; border: 1.5px solid #c3ccd9; border-radius: 12px; font-size: 15px; width: 100%; background: #fff; transition: border-color .2s, box-shadow .2s, transform .15s, background .2s; }
 .consult-form textarea { min-height: 110px; resize: vertical; }
 .consult-form input:hover, .consult-form textarea:hover { border-color: var(--navy); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,46,79,.16); background: #f7faff; }
