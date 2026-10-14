@@ -9,6 +9,7 @@ function Results() {
   const [index, setIndex] = useState<SearchItem[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [typed, setTyped] = useState("");
+  const [limit, setLimit] = useState(24);
   const query = typed || sp.get("q") || "";
   const words = useMemo(() => queryWords(query), [query]);
 
@@ -23,11 +24,19 @@ function Results() {
     if (words.length === 0) return null;
     return searchAll(index, query, 60);
   }, [query, index, words]);
+  const shown = res ? res.slice(0, limit) : res;
+  const limitClick = res && res.length > limit ? (
+    <div className="load-more">
+      <button type="button" className="btn btn-primary" onClick={() => setLimit((l) => l + 24)}>
+        Показать ещё ({res.length - limit})
+      </button>
+    </div>
+  ) : null;
 
   return (
     <>
       <div className="toolbar">
-        <input className="search" placeholder="Введите запрос… (мин. 2 символа)" defaultValue={sp.get("q") || ""} onChange={(e) => setTyped(e.target.value)} aria-label="Поиск по сайту" autoFocus />
+        <input className="search" placeholder="Введите запрос… (мин. 2 символа)" defaultValue={sp.get("q") || ""} onChange={(e) => setTyped(e.target.value)} aria-label="Поиск по сайту" />
       </div>
       {!loaded && <p className="result-count">Загружаем базу поиска…</p>}
       {res && loaded && (
@@ -41,13 +50,14 @@ function Results() {
           <>
             <p className="result-count" aria-live="polite">Найдено: {res.length}</p>
             <div className="grid">
-              {res.map((r, k) => (
+              {(shown ?? []).map((r, k) => (
                 <div key={k} className="card"><div className="card-body">
                   <small className="cat">{r.item.tag}</small>
                   <h3><a href={r.item.url}><SearchHighlight text={r.item.title} words={words} /></a></h3>
                 </div></div>
               ))}
             </div>
+            {res.length > limit && limitClick}
           </>
         )
       )}
