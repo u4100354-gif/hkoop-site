@@ -61,7 +61,7 @@ a { color: #1a3a6b; }
 .act-scene.act-dark { background: linear-gradient(165deg, var(--navy) 0%, #2b3560 70%, #2f3a66 100%); color: #fff; }
 
 
-.act-inner { max-width: 780px; text-align: center; margin: 0 auto; display: flex; flex-direction: column; }
+.act-inner { max-width: 780px; text-align: center; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
 /* кнопки — всегда в самом низу блока сцены */
 .act-inner > .act-ctas { order: 9; margin-top: 26px; }
 .act-num { font-size: clamp(13px, 1.4vw, 16px); font-weight: 800; letter-spacing: .35em; opacity: .55; margin: 0 0 6px; font-variant-numeric: tabular-nums; }
