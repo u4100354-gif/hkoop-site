@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useState } from "react";
 import { readConsent } from "../lib/consent";
 
@@ -25,5 +25,5 @@ export default function MapGate() {
         </a>
       </div>
     );
-  return <iframe src={MAP_SRC} width="100%" height="300" frameBorder="0" title="Карта: ХКООП, Хабаровск, ул. Муравьёва-Амурского, 4" />;
+  return <iframe src={MAP_SRC} width="100%" height={540} style={{ display: "block", width: "100%" }} frameBorder="0" title="Карта: ХКООП, Хабаровск, ул. Муравьёва-Амурского, 4" />;
 }
