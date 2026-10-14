@@ -304,6 +304,13 @@ body.vi-mode .act-fact-link { background: #fff !important; border-color: #000 !i
 .act-scene.v-org .act-partners .partner-card { background: #fff; }
 
 
+/* Список-закладки со стеклом (как чипы сцен) */
+.act-flist { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 20px; }
+.act-flist .act-fact { white-space: normal; max-width: 620px; padding: 13px 26px; line-height: 1.45; border-radius: 999px; }
+.act-flist .act-fact b { margin-right: 6px; }
+body.vi-mode .act-flist { gap: 10px; }
+
+
 /* CTA: стрелка в собственном кружке (button-in-button) */
 .act-arrow { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.14); margin-left: 10px; margin-right: -8px; transition: transform .35s cubic-bezier(0.34,1.56,0.64,1), background .25s; }
 .act-btn-white .act-arrow, .act-scene.act-light .act-arrow, .act-scene.v-org .act-arrow { background: rgba(37,46,79,.08); }

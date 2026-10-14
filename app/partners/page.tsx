@@ -6,12 +6,6 @@ export default async function Partners() {
   const partners: any[] = await q("SELECT * FROM partners ORDER BY name");
   return (
     <div className="act-page">
-      <div className="act-pagehead">
-        <div className="container">
-          <h1>Партнёры</h1>
-          <p>Организации, с которыми ХКООП работает в постоянном партнёрстве.</p>
-        </div>
-      </div>
 
       <section id="intro" className="act-scene act-dark v-pravo">
         <div className="container act-inner">

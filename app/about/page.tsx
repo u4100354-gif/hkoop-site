@@ -73,11 +73,11 @@ export default function About() {
               <span className="act-arrow" aria-hidden="true">→</span>
             </Link>
           </div>
-          <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
-            <p><b>Конференция</b> — высший орган; определяет направления работы на 2025–2030 годы.</p>
-            <p><b>Совет</b> — руководит работой между конференциями.</p>
-            <p><b>Президиум</b> — оперативные решения между заседаниями Совета.</p>
-            <p><b>Контрольно-ревизионная комиссия</b> — контроль финансов и уставной деятельности.</p>
+          <div className="act-flist act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <span className="act-fact"><b>Конференция</b> — высший орган; направления 2025–2030</span>
+            <span className="act-fact"><b>Совет</b> — руководит между конференциями</span>
+            <span className="act-fact"><b>Президиум</b> — оперативные решения</span>
+            <span className="act-fact"><b>КРК</b> — контроль финансов и устава</span>
           </div>
         </div>
       </section>
