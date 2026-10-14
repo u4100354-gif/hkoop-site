@@ -1,33 +1,114 @@
-import PageHero from "../../components/PageHero";
+import Link from "next/link";
 
 export default function About() {
   return (
-    <>
-      <PageHero eyebrow="ХКООП · с 1948 года" title="О нас" sub="Союз «Хабаровское краевое объединение организаций профсоюзов» — 77 лет на страже прав трудящихся." />
-      <section className="section">
-        <h2>История</h2>
-        <div className="card"><div className="card-body">
-          <p>Хабаровское краевое объединение организаций профсоюзов ведёт историю с <b>11 декабря 1948 года</b>. Сегодня это союз членских организаций, координационных советов и первичек по всему краю.</p>
-          <p><small>Точные цифры членских организаций и членов профсоюза на 01.01.2026 — запросить у руководства.</small></p>
-        </div></div>
-      </section>
-      <section className="section">
-        <h2>Органы и конференция</h2>
-        <div className="grid">
-          <div className="card"><div className="card-body"><strong>Конференция</strong><div><small>Высший орган, направления 2025–2030</small></div></div></div>
-          <div className="card"><div className="card-body"><strong>Совет</strong><div><small>Руководство между конференциями</small></div></div></div>
-          <div className="card"><div className="card-body"><strong>Президиум</strong><div><small>Оперативные решения</small></div></div></div>
-          <div className="card"><div className="card-body"><strong>Контрольно-ревизионная комиссия</strong><div><small>Контроль финансов и устава</small></div></div></div>
+    <div className="act-page">
+      <div className="act-pagehead">
+        <div className="container">
+          <h1>О нас</h1>
+          <p>Союз «Хабаровское краевое объединение организаций профсоюзов» — с 11 декабря 1948 года.</p>
+        </div>
+      </div>
+
+      <section id="intro" className="act-scene act-dark v-about">
+        <div className="container act-inner">
+          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>01</p>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Профобъединение</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>77 лет на страже прав трудящихся</h2>
+          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <Link href="/activity" className="act-btn-white">
+              Наши направления
+              <span className="act-arrow" aria-hidden="true">→</span>
+            </Link>
+            <Link href="/docs" className="act-link">
+              Устав и документы
+              <span className="act-arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
+          <div className="act-photo act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
+            <img src="/images/about-banner.png" alt="Хабаровское Профобъединение" width={960} height={540} loading="lazy" />
+          </div>
+          <div className="act-text act-r reveal" style={{ "--i": 5 } as React.CSSProperties}>
+            <p>
+              Союз «ХКООП» — добровольное объединение организаций общероссийских и
+              межрегиональных профсоюзов, действующих на территории Хабаровского края.
+              Независимы от органов власти, работодателей и политических партий;
+              представляем интересы работников и их семей.
+            </p>
+            <p>
+              Председатель Профобъединения — Галина Анатольевна Кононенко.
+              Профобъединение — членская организация Федерации независимых профсоюзов
+              России (ФНПР) и представляет её в Хабаровском крае.
+            </p>
+          </div>
+          <div className="act-facts">
+            <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>С 11.12.1948</span>
+            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Член ФНПР</span>
+            <span className="act-fact reveal" style={{ "--i": 2 } as React.CSSProperties}>Хабаровск, ул. Муравьёва-Амурского, 4</span>
+          </div>
         </div>
       </section>
-      <section className="section">
-        <h2>Основные направления 2025–2030</h2>
-        <div className="card"><div className="card-body">
-          <p>Правозащита, охрана труда, соцпартнёрство, молодёжная политика, международное сотрудничество, оргработа.</p>
-          <a className="btn btn-ghost" href="/docs">Читать документы →</a>
-        </div></div>
+
+      <section id="cifry" className="act-scene act-dark v-socpart">
+        <div className="container act-inner">
+          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>02</p>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>ХКООП в цифрах</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>Сила — в единстве</h2>
+          <div className="act-nums act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <div className="act-num-item"><b>77</b><span>лет истории</span></div>
+            <div className="act-num-item"><b>20</b><span>членских организаций</span></div>
+            <div className="act-num-item"><b>677</b><span>первичных профсоюзных организаций</span></div>
+            <div className="act-num-item"><b>102 576</b><span>членов профсоюза</span></div>
+            <div className="act-num-item"><b>7</b><span>координационных советов в муниципалитетах</span></div>
+          </div>
+          <div className="act-text act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
+            <p>Данные на 1 января 2026 года: 14 краевых, 4 территориальные, 1 бассейновая и 1 первичная организация в составе Союза, а также 9 городских и районных организаций профсоюзов.</p>
+          </div>
+        </div>
       </section>
-    </>
+
+      <section id="organy" className="act-scene act-dark v-molodezh">
+        <div className="container act-inner">
+          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>03</p>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Структура</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>Органы Профобъединения</h2>
+          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <Link href="/docs" className="act-btn-white">
+              Документы органов
+              <span className="act-arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
+          <div className="act-text act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
+            <p><b>Конференция</b> — высший орган; определяет направления работы на 2025–2030 годы.</p>
+            <p><b>Совет</b> — руководит работой между конференциями.</p>
+            <p><b>Президиум</b> — оперативные решения между заседаниями Совета.</p>
+            <p><b>Контрольно-ревизионная комиссия</b> — контроль финансов и уставной деятельности.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="napravleniya" className="act-scene act-light v-org">
+        <div className="container act-inner">
+          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>04</p>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>2025–2030</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>Основные направления</h2>
+          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <Link href="/activity" className="act-link">
+              Все направления подробно
+              <span className="act-arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
+          <div className="act-facts">
+            <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>Правозащита</span>
+            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Охрана труда</span>
+            <span className="act-fact reveal" style={{ "--i": 2 } as React.CSSProperties}>Социальное партнёрство</span>
+            <span className="act-fact reveal" style={{ "--i": 3 } as React.CSSProperties}>Молодёжная политика</span>
+            <span className="act-fact reveal" style={{ "--i": 4 } as React.CSSProperties}>Международное сотрудничество</span>
+            <span className="act-fact reveal" style={{ "--i": 5 } as React.CSSProperties}>Организационная работа</span>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
@@ -35,5 +116,5 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "О нас — ХКООП",
-  description: "История и структура Хабаровского краевого объединения организаций профсоюзов.",
+  description: "История, структура и цифры Хабаровского краевого объединения организаций профсоюзов с 1948 года.",
 };

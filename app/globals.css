@@ -177,6 +177,46 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 
 .act-scene + .act-scene { border-top: 1px solid rgba(255,255,255,.09); }
 
+/* О нас/Контакты: navy + бренд-зелёный акцент */
+.act-scene.v-about { background: linear-gradient(170deg, #2b3465 0%, #232c52 48%, #1a2138 100%); --act-accent: var(--green); }
+.act-photo { margin: 6px auto 24px; max-width: 720px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.14); box-shadow: 0 18px 44px rgba(10,14,32,.45); }
+.act-photo img { display: block; width: 100%; height: auto; }
+body.vi-mode .act-photo { border-color: #000 !important; }
+.act-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; max-width: 900px; margin: 0 auto 26px; }
+.act-num-item { border: 1.5px solid rgba(240,194,100,.45); background: rgba(240,194,100,.10); border-radius: 14px; padding: 18px 12px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.act-num-item b { font-size: clamp(26px, 3vw, 40px); font-weight: 800; color: #ffe9bd; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.act-num-item span { font-size: 13.5px; color: rgba(255,255,255,.9); line-height: 1.35; text-align: center; }
+body.vi-mode .act-num-item { background: #fff !important; border-color: #000 !important; }
+body.vi-mode .act-num-item b, body.vi-mode .act-num-item span { color: #000 !important; }
+.act-map { max-width: 920px; margin: 10px auto 0; }
+.act-map .map-box { margin-top: 0; }
+.act-form-card { max-width: 560px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 22px 20px; box-shadow: 0 20px 50px rgba(10,14,32,.4); }
+body.vi-mode .act-form-card { background: #fff !important; border: 2px solid #000 !important; }
+/* Мобильная вёрстка сцен */
+@media (max-width: 760px) {
+  .act-scene { min-height: auto; padding: 46px 0 52px; }
+  .act-scene.v-pravo, .act-scene.v-ohrana, .act-scene.v-socpart, .act-scene.v-molodezh, .act-scene.v-mezhdunar, .act-scene.v-about { min-height: auto; }
+  .act-inner, .act-inner-wide { text-align: left; }
+  .act-title { font-size: clamp(27px, 7.4vw, 34px); }
+  .act-text p { font-size: 16px; }
+  .act-num { letter-spacing: .28em; }
+  .act-eyebrow { letter-spacing: .16em; font-size: 12px; }
+  .act-eyebrow::after { margin-left: 0; }
+  .act-facts { justify-content: flex-start; gap: 8px; }
+  .act-fact { font-size: 13px; padding: 8px 13px; }
+  .act-ctas { justify-content: flex-start; flex-direction: column; align-items: stretch; }
+  .act-ctas .act-btn-white, .act-ctas .act-link { justify-content: center; display: flex; align-items: center; }
+  .act-nums { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .act-num-item { padding: 14px 10px; }
+  .act-photo { margin: 4px 0 20px; }
+  .act-pagehead { padding: 20px 0 18px; }
+  .act-pagehead h1 { font-size: 26px; }
+  .act-pagehead p { font-size: 14px; }
+  .act-form-card { padding: 16px 14px; }
+  .act-map .map-box iframe { min-height: 260px; }
+}
+
+
 /* ---- act-scroll: сцена собирается при прокрутке ---- */
 html.js .act-scene .act-r { transform: translateY(30px); transition: transform .75s cubic-bezier(.22,.61,.36,1); transition-delay: calc(var(--i, 0) * .13s); }
 html.js .act-scene .act-r.in { opacity: 1; transform: none; }
