@@ -320,7 +320,7 @@ input, textarea, select, button, small { font: inherit; }
 .hsearch-lupa { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: rgba(255,255,255,.85); pointer-events: none; }
 .hsearch-lupa svg { display: block; width: 100%; height: 100%; }
 body.vi-mode .hsearch-lupa { color: #000 !important; }
-.hsearch-input { background: rgba(255,255,255,.13); border: 1.5px solid rgba(255,255,255,.42); color: #fff; border-radius: 999px; padding: 9px 14px 9px 38px; font-size: 14px; width: 240px; min-height: 40px; transition: background .25s cubic-bezier(0.32,0.72,0,1), border-color .25s, box-shadow .25s; }
+.hsearch-input { background: rgba(255,255,255,.13); border: 1.5px solid rgba(255,255,255,.42); color: #fff; border-radius: 12px; padding: 9px 14px 9px 38px; font-size: 14px; width: 240px; min-height: 40px; transition: background .25s cubic-bezier(0.32,0.72,0,1), border-color .25s, box-shadow .25s; }
 .hsearch-input::placeholder { color: rgba(255,255,255,.75); }
 .hsearch-input:hover { background: rgba(255,255,255,.22); border-color: #fff; }
 .hsearch-input:focus { background: rgba(255,255,255,.16); border-color: var(--green); outline: none; box-shadow: 0 0 0 3px rgba(58,166,85,.30); }
