@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ActSceneNav from "../../components/ActSceneNav";
 
 const scenes = [
   {
@@ -96,23 +97,24 @@ const scenes = [
 export default function Activity() {
   return (
     <div className="act-page">
+      <ActSceneNav scenes={scenes.map((x) => ({ id: x.id, label: x.eyebrow }))} />
       {scenes.map((s, i) => (
         <section key={s.id} id={s.id} className={`act-scene ${s.theme === "dark" ? "act-dark" : "act-light"} ${s.v}`}>
           <div className="container act-inner">
-            <p className="act-num">{s.num}</p>
-            <p className="act-eyebrow">{s.eyebrow}</p>
-            <h2 className="act-title">{s.title}</h2>
-            <div className="act-text">
+            <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>{s.num}</p>
+            <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>{s.eyebrow}</p>
+            <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>{s.title}</h2>
+            <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
               {s.text.map((p, j) => (
                 <p key={j}>{p}</p>
               ))}
             </div>
             <div className="act-facts">
-              {s.facts.map((f) => (
-                <span key={f} className="act-fact">{f}</span>
+              {s.facts.map((f, k) => (
+                <span key={f} className="act-fact reveal" style={{ "--i": k } as React.CSSProperties}>{f}</span>
               ))}
             </div>
-            <div className="act-ctas">
+            <div className="act-ctas act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
               {s.ctas.map((c) => (
                 <Link key={c.href + c.label} href={c.href} className={s.v === "v-pravo" && i === 0 && c.label.startsWith("Новости") ? "act-btn-white" : "act-link"}>
                   {c.label}

@@ -112,7 +112,7 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-pravo .act-eyebrow::after { background: linear-gradient(90deg, #ffffff 0 33.4%, #2f5ea8 33.4% 66.7%, #d63a3a 66.7% 100%); opacity: 1; }
 
 /* 02 Охрана труда — светлый стальной, синий акцент */
-.act-scene.v-ohrana { background: linear-gradient(165deg, #232f3d 0%, #3d5266 100%); --act-accent: #9fc6e0; }
+.act-scene.v-ohrana { background: linear-gradient(165deg, #3a1420 0%, #6b2230 100%); --act-accent: #ff9d9d; }
 
 /* 03 Соцпартнёрство — глубокий индиго + золотой (соглашения, печати) */
 .act-scene.v-socpart { background: linear-gradient(160deg, #232c55 0%, #40406e 100%); --act-accent: #f0c264; }
@@ -122,7 +122,7 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-molodezh { background: linear-gradient(160deg, #17422d 0%, #2e7a4f 100%); --act-accent: #9ae6b4; }
 
 /* 05 Международное — тёмный стальной север, голубой */
-.act-scene.v-mezhdunar { background: radial-gradient(110% 80% at 15% 0%, rgba(195,168,255,.18) 0%, rgba(195,168,255,0) 55%), linear-gradient(160deg, #2a2a4d 0%, #4a3a7a 100%); --act-accent: #c3a8ff; }
+.act-scene.v-mezhdunar { background: radial-gradient(110% 80% at 15% 0%, rgba(127,224,200,.16) 0%, rgba(127,224,200,0) 55%), linear-gradient(160deg, #0e3b3a 0%, #1c5f57 100%); --act-accent: #7fe0c8; }
 .act-scene.v-mezhdunar .act-fact { border-color: rgba(127,180,232,.55); }
 
 /* 06 Организационная — тёплый песочный, янтарный */
@@ -146,10 +146,10 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-pravo .act-link:hover { border-color: #fff; background: rgba(255,255,255,.12); box-shadow: none; }
 
 /* 02 Охрана труда (light, steel) */
-.act-scene.v-ohrana .act-fact { background: rgba(159,198,224,.12); border-color: rgba(159,198,224,.45); color: #e7f0f8; }
-.act-scene.v-ohrana .act-fact:hover { background: rgba(159,198,224,.2); box-shadow: 0 6px 16px rgba(159,198,224,.2); border-color: #9fc6e0; }
-.act-scene.v-ohrana .act-link { color: #e7f0f8; border-color: rgba(159,198,224,.55); background: transparent; }
-.act-scene.v-ohrana .act-link:hover { border-color: #9fc6e0; background: rgba(159,198,224,.15); box-shadow: none; }
+.act-scene.v-ohrana .act-fact { background: rgba(255,157,157,.13); border-color: rgba(255,157,157,.5); color: #ffe3e3; }
+.act-scene.v-ohrana .act-fact:hover { background: rgba(255,157,157,.22); box-shadow: 0 6px 16px rgba(255,157,157,.22); border-color: #ff9d9d; }
+.act-scene.v-ohrana .act-link { color: #ffe3e3; border-color: rgba(255,157,157,.55); background: transparent; }
+.act-scene.v-ohrana .act-link:hover { border-color: #ff9d9d; background: rgba(255,157,157,.15); box-shadow: none; }
 
 /* 03 Соцпартнёрство (dark, gold) */
 .act-scene.v-socpart .act-fact { background: rgba(240,194,100,.13); border-color: rgba(240,194,100,.5); color: #ffe9bd; }
@@ -164,10 +164,10 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-molodezh .act-link:hover { border-color: #9ae6b4; background: rgba(154,230,180,.15); box-shadow: none; }
 
 /* 05 Международное (dark, sky) */
-.act-scene.v-mezhdunar .act-fact { background: rgba(195,168,255,.13); border-color: rgba(195,168,255,.5); color: #efe9ff; }
-.act-scene.v-mezhdunar .act-fact:hover { background: rgba(195,168,255,.22); box-shadow: 0 6px 16px rgba(195,168,255,.22); }
-.act-scene.v-mezhdunar .act-link { color: #efe9ff; border-color: rgba(195,168,255,.55); }
-.act-scene.v-mezhdunar .act-link:hover { border-color: #c3a8ff; background: rgba(195,168,255,.15); box-shadow: none; }
+.act-scene.v-mezhdunar .act-fact { background: rgba(127,224,200,.13); border-color: rgba(127,224,200,.5); color: #ddfff2; }
+.act-scene.v-mezhdunar .act-fact:hover { background: rgba(127,224,200,.22); box-shadow: 0 6px 16px rgba(127,224,200,.22); }
+.act-scene.v-mezhdunar .act-link { color: #ddfff2; border-color: rgba(127,224,200,.55); }
+.act-scene.v-mezhdunar .act-link:hover { border-color: #7fe0c8; background: rgba(127,224,200,.15); box-shadow: none; }
 
 /* 06 Организационная (light, amber) */
 .act-scene.v-org .act-fact { background: #fff; border-color: #e3d3a6; color: #7a5c14; }
@@ -175,6 +175,26 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-org .act-link { color: #7a5c14; border-color: #e3d3a6; background: #fff; }
 .act-scene.v-org .act-link:hover { border-color: #b8860b; background: #faf5e6; box-shadow: none; }
 .act-chip-themes {}
+
+/* ---- act-scroll: сцена собирается при прокрутке ---- */
+html.js .act-scene .act-r { opacity: 0; transform: translateY(30px); transition: opacity .75s ease, transform .75s cubic-bezier(.22,.61,.36,1); transition-delay: calc(var(--i, 0) * .13s); will-change: opacity, transform; }
+html.js .act-scene .act-r.in { opacity: 1; transform: none; }
+html.js .act-scene .act-fact { opacity: 0; transform: translateY(14px) scale(.92); transition: opacity .55s ease, transform .55s cubic-bezier(.22,.61,.36,1); transition-delay: calc(var(--i, 0) * .09s + .55s); }
+html.js .act-scene .act-fact.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.js .act-scene .act-r, html.js .act-scene .act-fact { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+/* боковой навигатор по сценам */
+.act-nav { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 30; }
+.act-nav a { display: flex; align-items: center; gap: 8px; text-decoration: none; opacity: .85; }
+.act-nav .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.45); border: 1px solid rgba(255,255,255,.6); transition: transform .25s, background .25s, box-shadow .25s; }
+.act-nav .lbl { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .04em; opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; white-space: nowrap; text-shadow: 0 1px 6px rgba(10,14,32,.5); }
+.act-nav a:hover .lbl, .act-nav a.on .lbl { opacity: 1; transform: none; }
+.act-nav a.on .dot { background: #fff; transform: scale(1.5); box-shadow: 0 0 0 4px rgba(255,255,255,.18); }
+.act-nav.on-light .lbl { color: var(--navy); text-shadow: none; }
+.act-nav.on-light .dot { background: rgba(37,46,79,.35); border-color: rgba(37,46,79,.5); }
+.act-nav.on-light a.on .dot { background: var(--navy); box-shadow: 0 0 0 4px rgba(37,46,79,.12); }
+@media (max-width: 1200px) { .act-nav { display: none; } }
 
 /* Header search dropdown */
 .hsearch { position: relative; display: flex; align-items: center; padding: 8px 6px; }
