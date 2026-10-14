@@ -179,9 +179,11 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 
 /* О нас/Контакты: navy + бренд-зелёный акцент */
 .act-scene.v-about { background: linear-gradient(170deg, #2b3465 0%, #232c52 48%, #1a2138 100%); --act-accent: var(--green); }
-.act-photo { margin: 6px auto 24px; max-width: 720px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.14); box-shadow: 0 18px 44px rgba(10,14,32,.45); }
-.act-photo img { display: block; width: 100%; height: auto; }
-body.vi-mode .act-photo { border-color: #000 !important; }
+.act-heroimg { position: absolute; inset: 0; background: url("/images/about-banner.png") center/cover no-repeat; pointer-events: none; }
+.act-heroimg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(170deg, rgba(26,33,56,.60) 0%, rgba(26,33,56,.86) 55%, rgba(26,33,56,.94) 100%); }
+.act-inner { position: relative; z-index: 1; }
+
+body.vi-mode .act-heroimg { display: none !important; }
 .act-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; max-width: 900px; margin: 0 auto 26px; }
 .act-num-item { border: 1.5px solid rgba(240,194,100,.45); background: rgba(240,194,100,.10); border-radius: 14px; padding: 18px 12px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
 .act-num-item b { font-size: clamp(26px, 3vw, 40px); font-weight: 800; color: #ffe9bd; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
@@ -204,7 +206,8 @@ body.vi-mode .act-form-card { background: #fff !important; border: 2px solid #00
   .act-eyebrow::after { margin-left: 0; }
   .act-facts { justify-content: flex-start; gap: 8px; }
   .act-fact { font-size: 13px; padding: 8px 13px; }
-  .act-ctas { justify-content: flex-start; flex-direction: column; align-items: stretch; margin-bottom: 4px; }
+  .act-ctas { justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin-bottom: 4px; }
+  .act-ctas .act-btn-white, .act-ctas .act-link { width: auto; }
   .act-ctas .act-btn-white, .act-ctas .act-link { justify-content: center; display: flex; align-items: center; }
   .act-nums { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .act-num-item { padding: 14px 10px; }

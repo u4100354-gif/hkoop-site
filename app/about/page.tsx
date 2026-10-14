@@ -11,6 +11,7 @@ export default function About() {
       </div>
 
       <section id="intro" className="act-scene act-dark v-about">
+          <div className="act-heroimg" aria-hidden="true" />
         <div className="container act-inner">
           <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Профобъединение</p>
           <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>77 лет на страже прав трудящихся</h2>
@@ -23,9 +24,6 @@ export default function About() {
               Устав и документы
               <span className="act-arrow" aria-hidden="true">→</span>
             </Link>
-          </div>
-          <div className="act-photo act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
-            <img src="/images/about-banner.png" alt="Хабаровское Профобъединение" width={960} height={540} loading="lazy" />
           </div>
           <div className="act-text act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
             <p>
