@@ -142,16 +142,20 @@ export default async function Home() {
       </section>
 
       <section id="konsult" className="act-scene act-dark v-socpart">
-        <div className="container act-inner">
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Бесплатно для членов профсоюза</p>
-          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Консультация юриста</h2>
-          <div className="act-ctas act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
-            <a href="tel:+784212328718" className="act-btn-white">8 (4212) 32-87-18</a>
+        <div className="container act-split">
+          <div className="act-split-info reveal in">
+            <p className="act-eyebrow">Бесплатно для членов профсоюза</p>
+            <h2 className="act-title">Консультация юриста</h2>
+            <div className="act-text">
+              <p>Горячая линия по вопросам трудового законодательства для членов профсоюза. Ответим в рабочее время.</p>
+              <p><b>8 (4212) 32-87-18</b> · ksps-priem@mail.ru</p>
+              <p>Пн-Чт 9:00–18:00, Пт 9:00–16:20</p>
+            </div>
+            <div className="act-ctas">
+              <a href="tel:+784212328718" className="act-btn-white">Позвонить на линию<span className="act-arrow" aria-hidden="true">→</span></a>
+            </div>
           </div>
-          <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
-            <p>Горячая линия по вопросам трудового законодательства. Пн-Чт 9:00–18:00, Пт 9:00–16:20 · ksps-priem@mail.ru</p>
-          </div>
-          <div className="act-form-card act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
+          <div className="act-form-card reveal in">
             <ConsultForm />
           </div>
         </div>
