@@ -12,10 +12,9 @@ export default function About() {
 
       <section id="intro" className="act-scene act-dark v-about">
         <div className="container act-inner">
-          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>01</p>
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Профобъединение</p>
-          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>77 лет на страже прав трудящихся</h2>
-          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Профобъединение</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>77 лет на страже прав трудящихся</h2>
+          <div className="act-ctas act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
             <Link href="/activity" className="act-btn-white">
               Наши направления
               <span className="act-arrow" aria-hidden="true">→</span>
@@ -25,10 +24,10 @@ export default function About() {
               <span className="act-arrow" aria-hidden="true">→</span>
             </Link>
           </div>
-          <div className="act-photo act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
+          <div className="act-photo act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
             <img src="/images/about-banner.png" alt="Хабаровское Профобъединение" width={960} height={540} loading="lazy" />
           </div>
-          <div className="act-text act-r reveal" style={{ "--i": 5 } as React.CSSProperties}>
+          <div className="act-text act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
             <p>
               Союз «ХКООП» — добровольное объединение организаций общероссийских и
               межрегиональных профсоюзов, действующих на территории Хабаровского края.
@@ -43,25 +42,24 @@ export default function About() {
           </div>
           <div className="act-facts">
             <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>С 11.12.1948</span>
-            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Член ФНПР</span>
-            <span className="act-fact reveal" style={{ "--i": 2 } as React.CSSProperties}>Хабаровск, ул. Муравьёва-Амурского, 4</span>
+            <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>Член ФНПР</span>
+            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Хабаровск, ул. Муравьёва-Амурского, 4</span>
           </div>
         </div>
       </section>
 
       <section id="cifry" className="act-scene act-dark v-socpart">
         <div className="container act-inner">
-          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>02</p>
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>ХКООП в цифрах</p>
-          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>Сила — в единстве</h2>
-          <div className="act-nums act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>ХКООП в цифрах</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Сила — в единстве</h2>
+          <div className="act-nums act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
             <div className="act-num-item"><b>77</b><span>лет истории</span></div>
             <div className="act-num-item"><b>20</b><span>членских организаций</span></div>
             <div className="act-num-item"><b>677</b><span>первичных профсоюзных организаций</span></div>
             <div className="act-num-item"><b>102 576</b><span>членов профсоюза</span></div>
             <div className="act-num-item"><b>7</b><span>координационных советов в муниципалитетах</span></div>
           </div>
-          <div className="act-text act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
+          <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
             <p>Данные на 1 января 2026 года: 14 краевых, 4 территориальные, 1 бассейновая и 1 первичная организация в составе Союза, а также 9 городских и районных организаций профсоюзов.</p>
           </div>
         </div>
@@ -69,16 +67,15 @@ export default function About() {
 
       <section id="organy" className="act-scene act-dark v-molodezh">
         <div className="container act-inner">
-          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>03</p>
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Структура</p>
-          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>Органы Профобъединения</h2>
-          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Структура</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Органы Профобъединения</h2>
+          <div className="act-ctas act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
             <Link href="/docs" className="act-btn-white">
               Документы органов
               <span className="act-arrow" aria-hidden="true">→</span>
             </Link>
           </div>
-          <div className="act-text act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
+          <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
             <p><b>Конференция</b> — высший орган; определяет направления работы на 2025–2030 годы.</p>
             <p><b>Совет</b> — руководит работой между конференциями.</p>
             <p><b>Президиум</b> — оперативные решения между заседаниями Совета.</p>
@@ -89,10 +86,9 @@ export default function About() {
 
       <section id="napravleniya" className="act-scene act-light v-org">
         <div className="container act-inner">
-          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>04</p>
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>2025–2030</p>
-          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>Основные направления</h2>
-          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>2025–2030</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Основные направления</h2>
+          <div className="act-ctas act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
             <Link href="/activity" className="act-link">
               Все направления подробно
               <span className="act-arrow" aria-hidden="true">→</span>
@@ -100,11 +96,11 @@ export default function About() {
           </div>
           <div className="act-facts">
             <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>Правозащита</span>
-            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Охрана труда</span>
-            <span className="act-fact reveal" style={{ "--i": 2 } as React.CSSProperties}>Социальное партнёрство</span>
-            <span className="act-fact reveal" style={{ "--i": 3 } as React.CSSProperties}>Молодёжная политика</span>
-            <span className="act-fact reveal" style={{ "--i": 4 } as React.CSSProperties}>Международное сотрудничество</span>
-            <span className="act-fact reveal" style={{ "--i": 5 } as React.CSSProperties}>Организационная работа</span>
+            <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>Охрана труда</span>
+            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Социальное партнёрство</span>
+            <span className="act-fact reveal" style={{ "--i": 2 } as React.CSSProperties}>Молодёжная политика</span>
+            <span className="act-fact reveal" style={{ "--i": 3 } as React.CSSProperties}>Международное сотрудничество</span>
+            <span className="act-fact reveal" style={{ "--i": 4 } as React.CSSProperties}>Организационная работа</span>
           </div>
         </div>
       </section>

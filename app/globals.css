@@ -57,13 +57,13 @@ a { color: #1a3a6b; }
 .links a:active { transform: scale(.96); }
 /* ---- Страница «Деятельность»: полные сцены (Apple-style) ---- */
 .act-page { }
-.act-scene { position: relative; padding: clamp(64px, 9vh, 110px) 0; min-height: clamp(620px, 92svh, 860px); display: flex; align-items: center; scroll-margin-top: 64px; }
+.act-scene { position: relative; padding: clamp(40px, 7vh, 76px) 0; min-height: clamp(360px, 52svh, 600px); display: flex; align-items: center; scroll-margin-top: 64px; }
 .act-scene.act-dark { background: linear-gradient(165deg, var(--navy) 0%, #2b3560 70%, #2f3a66 100%); color: #fff; }
 
 
 .act-inner { max-width: 780px; text-align: center; margin: 0 auto; }
 .act-num { font-size: clamp(13px, 1.4vw, 16px); font-weight: 800; letter-spacing: .35em; opacity: .55; margin: 0 0 6px; font-variant-numeric: tabular-nums; }
-.act-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 13px; font-weight: 800; opacity: 1; margin: 0 0 14px; color: var(--green); }
+.act-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 13px; font-weight: 800; opacity: 1; margin: 0 0 12px; color: var(--green); }
 .act-eyebrow::after { content: ""; display: block; width: 46px; height: 2px; background: var(--green); margin: 10px auto 0; opacity: .9; }
 .act-title { font-size: clamp(30px, 4.2vw, 52px); line-height: 1.1; letter-spacing: -.02em; font-weight: 800; margin: 0 0 22px; }
 .act-scene.act-light .act-title { color: var(--navy); }
@@ -194,7 +194,7 @@ body.vi-mode .act-num-item b, body.vi-mode .act-num-item span { color: #000 !imp
 body.vi-mode .act-form-card { background: #fff !important; border: 2px solid #000 !important; }
 /* Мобильная вёрстка сцен */
 @media (max-width: 760px) {
-  .act-scene { min-height: auto; padding: 46px 0 52px; }
+  .act-scene { min-height: auto; padding: 30px 0 36px; }
   .act-scene.v-pravo, .act-scene.v-ohrana, .act-scene.v-socpart, .act-scene.v-molodezh, .act-scene.v-mezhdunar, .act-scene.v-about { min-height: auto; }
   .act-inner, .act-inner-wide { text-align: left; }
   .act-title { font-size: clamp(27px, 7.4vw, 34px); }
@@ -204,12 +204,12 @@ body.vi-mode .act-form-card { background: #fff !important; border: 2px solid #00
   .act-eyebrow::after { margin-left: 0; }
   .act-facts { justify-content: flex-start; gap: 8px; }
   .act-fact { font-size: 13px; padding: 8px 13px; }
-  .act-ctas { justify-content: flex-start; flex-direction: column; align-items: stretch; }
+  .act-ctas { justify-content: flex-start; flex-direction: column; align-items: stretch; margin-bottom: 4px; }
   .act-ctas .act-btn-white, .act-ctas .act-link { justify-content: center; display: flex; align-items: center; }
   .act-nums { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .act-num-item { padding: 14px 10px; }
   .act-photo { margin: 4px 0 20px; }
-  .act-pagehead { padding: 20px 0 18px; }
+  .act-pagehead { padding: 14px 0 12px; }
   .act-pagehead h1 { font-size: 26px; }
   .act-pagehead p { font-size: 14px; }
   .act-form-card { padding: 16px 14px; }

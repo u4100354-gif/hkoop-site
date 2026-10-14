@@ -15,16 +15,15 @@ export default async function Partners() {
 
       <section id="intro" className="act-scene act-dark v-pravo">
         <div className="container act-inner">
-          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>01</p>
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Партнёрство</p>
-          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>Один — на весь край</h2>
-          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Партнёрство</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Один — на весь край</h2>
+          <div className="act-ctas act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
             <Link href="/contacts" className="act-link">
               Связаться с нами
               <span className="act-arrow" aria-hidden="true">→</span>
             </Link>
           </div>
-          <div className="act-text act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
+          <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
             <p>
               ХКООП объединяет профсоюзные организации края и работает с Федерацией
               независимых профсоюзов России, правительством Хабаровского края, фондами,
@@ -34,18 +33,17 @@ export default async function Partners() {
           </div>
           <div className="act-facts">
             <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>ФНПР</span>
-            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Правительство края</span>
-            <span className="act-fact reveal" style={{ "--i": 2 } as React.CSSProperties}>Фонды и вузы</span>
+            <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>Правительство края</span>
+            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Фонды и вузы</span>
           </div>
         </div>
       </section>
 
       <section id="spisok" className="act-scene act-light v-org">
         <div className="container act-inner-wide">
-          <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>02</p>
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Список</p>
-          <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>Наши партнёры</h2>
-          <div className="act-partners act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Список</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Наши партнёры</h2>
+          <div className="act-partners act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
             <PartnersStrip items={partners} />
           </div>
         </div>
