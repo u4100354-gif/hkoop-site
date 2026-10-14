@@ -88,7 +88,7 @@ export default async function Home() {
       </section>
 
       <section id="cifry" className="act-scene act-dark v-socpart">
-        <div className="container act-inner">
+        <div className="container act-inner act-inner-nums">
           <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>ХКООП в цифрах</p>
           <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Сила — в единстве</h2>
           <div className="act-nums act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
@@ -101,7 +101,7 @@ export default async function Home() {
       </section>
 
       <section id="docs" className="act-scene act-dark v-molodezh">
-        <div className="container act-inner">
+        <div className="container act-inner act-inner-docs">
           <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>База документов</p>
           <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Планы и соглашения</h2>
           <div className="act-docgrid act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
@@ -110,7 +110,7 @@ export default async function Home() {
                 <div className="card-body">
                   <span className="doc-icon">PDF</span>
                   <strong>{d.title}</strong>
-                  <div><small>{typeLabels[d.type] || d.type} · {d.year}</small></div>
+                  <div className="doc-meta"><small>{typeLabels[d.type] || d.type} · {d.year}</small></div>
                   <div className="btn-row"><a className="btn btn-ghost" href={docHref(d)} target={d.file_local ? undefined : "_blank"} rel="noreferrer">Открыть →</a></div>
                 </div>
               </div>

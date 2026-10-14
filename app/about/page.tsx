@@ -53,7 +53,7 @@ export default function About() {
       </section>
 
       <section id="cifry" className="act-scene act-dark v-socpart">
-        <div className="container act-inner">
+        <div className="container act-inner act-inner-nums">
           <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>ХКООП в цифрах</p>
           <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Сила — в единстве</h2>
           <div className="act-nums act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>

@@ -193,8 +193,10 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-inner { position: relative; z-index: 1; }
 
 body.vi-mode .act-heroimg { display: none !important; }
-.act-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 14px; max-width: 960px; margin: 0 auto 26px; }
-@media (max-width: 960px) { .act-nums { grid-template-columns: repeat(2, 1fr); max-width: 560px; } .act-nums .act-num-item:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+/* числа: центриск для любого количества плиток (4, 5, 6) — плитки равные, ряд по центру */
+.act-inner.act-inner-nums { max-width: 1020px; }
+.act-nums { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; width: 100%; max-width: 980px; margin: 0 auto 26px; }
+.act-nums .act-num-item { flex: 1 1 135px; max-width: 216px; }
 .act-num-item { border: 1.5px solid rgba(240,194,100,.45); background: rgba(240,194,100,.10); border-radius: 14px; padding: 18px 12px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
 .act-num-item b { font-size: clamp(24px, 2.6vw, 36px); font-weight: 800; color: #ffe9bd; letter-spacing: -.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .act-num-item span { font-size: 13.5px; color: rgba(255,255,255,.9); line-height: 1.35; text-align: center; }
@@ -219,7 +221,8 @@ body.vi-mode .act-form-card { background: #fff !important; border: 2px solid #00
   .act-ctas { justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin-bottom: 4px; }
   .act-ctas .act-btn-white, .act-ctas .act-link { width: auto; }
   .act-ctas .act-btn-white, .act-ctas .act-link { justify-content: center; display: flex; align-items: center; }
-  .act-nums { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .act-nums { gap: 12px; }
+  .act-nums .act-num-item { flex: 1 1 40%; max-width: none; }
   .act-num-item { padding: 16px 12px; }
 
   .act-pagehead { padding: 14px 0 12px; }
@@ -342,6 +345,11 @@ body.vi-mode .act-branch-svg { display: none; }
 .act-docgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 4px; }
 @media (max-width: 1000px) { .act-docgrid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 760px) { .act-docgrid { grid-template-columns: 1fr; } }
+/* широкая сцена «Планы и соглашения» (шире базовой .act-inner) */
+.act-inner.act-inner-docs { max-width: 1120px; }
+/* строка «тип · год» прижата к низу карточки — на одной высоте во всех карточках */
+.act-docgrid .doc-meta { margin-top: auto; padding-top: 2px; }
+.act-docgrid .doc-card .btn-row { margin-top: 0; }
 
 
 /* Консультация: две колонки (инфо слева, форма справа) */
