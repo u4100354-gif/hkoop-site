@@ -74,10 +74,10 @@ export default function About() {
             </Link>
           </div>
           <div className="act-flist act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
-            <span className="act-fact"><b>Конференция</b> — высший орган; направления 2025–2030</span>
-            <span className="act-fact"><b>Совет</b> — руководит между конференциями</span>
-            <span className="act-fact"><b>Президиум</b> — оперативные решения</span>
-            <span className="act-fact"><b>КРК</b> — контроль финансов и устава</span>
+            <span className="act-fact">Конференция — высший орган</span>
+            <span className="act-fact">Совет — руководство</span>
+            <span className="act-fact">Президиум — решения</span>
+            <span className="act-fact">КРК — контроль</span>
           </div>
         </div>
       </section>

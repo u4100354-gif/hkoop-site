@@ -63,7 +63,7 @@ a { color: #1a3a6b; }
 
 .act-inner { max-width: 780px; text-align: center; margin: 0 auto; display: flex; flex-direction: column; }
 /* кнопки — всегда в самом низу блока сцены */
-.act-inner > .act-ctas { order: 9; margin-top: 22px; }
+.act-inner > .act-ctas { order: 9; margin-top: 26px; }
 .act-num { font-size: clamp(13px, 1.4vw, 16px); font-weight: 800; letter-spacing: .35em; opacity: .55; margin: 0 0 6px; font-variant-numeric: tabular-nums; }
 .act-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 13px; font-weight: 800; opacity: 1; margin: 0 0 12px; color: var(--green); }
 .act-eyebrow::after { content: ""; display: block; width: 46px; height: 2px; background: var(--green); margin: 10px auto 0; opacity: .9; }
@@ -305,7 +305,7 @@ body.vi-mode .act-fact-link { background: #fff !important; border-color: #000 !i
 
 
 /* Список-закладки со стеклом (как чипы сцен) */
-.act-flist { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 20px; }
+.act-flist { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
 .act-flist .act-fact { white-space: normal; max-width: 620px; padding: 13px 26px; line-height: 1.45; border-radius: 999px; }
 .act-flist .act-fact b { margin-right: 6px; }
 body.vi-mode .act-flist { gap: 10px; }
