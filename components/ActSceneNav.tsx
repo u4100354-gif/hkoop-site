@@ -31,13 +31,14 @@ export default function ActSceneNav({ scenes }: { scenes: Scene[] }) {
   }, [scenes]);
 
   return (
-    <nav className={`act-nav ${onLight ? "on-light" : ""}`} aria-label="Сцены страницы">
-      {scenes.map((s, i) => (
+    <nav className={`act-nav ${onLight ? "on-light" : ""}`} aria-label="Разделы страницы">
+      {scenes.map((s) => (
         <Link
           key={s.id}
           href={`#${s.id}`}
           className={active === s.id ? "on" : ""}
-          style={{ "--nva": s.accent, "--nvi": i } as React.CSSProperties}
+          aria-label={s.label}
+          style={{ "--nva": s.accent } as React.CSSProperties}
         >
           <span className="dot" aria-hidden="true" />
           <span className="lbl">{s.label}</span>
