@@ -5,6 +5,7 @@ const scenes = [
     id: "pravo",
     num: "01",
     theme: "dark",
+    v: "v-pravo",
     eyebrow: "Правозащита",
     title: "Право — на вашей стороне",
     text: [
@@ -21,6 +22,7 @@ const scenes = [
     id: "ohrana",
     num: "02",
     theme: "light",
+    v: "v-ohrana",
     eyebrow: "Охрана труда",
     title: "Безопасное рабочее место — не привилегия",
     text: [
@@ -34,6 +36,7 @@ const scenes = [
     id: "socpart",
     num: "03",
     theme: "dark",
+    v: "v-socpart",
     eyebrow: "Социальное партнёрство",
     title: "Договариваемся на равных",
     text: [
@@ -47,6 +50,7 @@ const scenes = [
     id: "molodezh",
     num: "04",
     theme: "light",
+    v: "v-molodezh",
     eyebrow: "Молодёжный совет",
     title: "Молодёжь решает",
     text: [
@@ -60,6 +64,7 @@ const scenes = [
     id: "mezhdunar",
     num: "05",
     theme: "dark",
+    v: "v-mezhdunar",
     eyebrow: "Международное сотрудничество",
     title: "Соседи по Амуру",
     text: [
@@ -73,6 +78,7 @@ const scenes = [
     id: "org",
     num: "06",
     theme: "light",
+    v: "v-org",
     eyebrow: "Организационная работа",
     title: "Профсоюз — это организация людей",
     text: [
@@ -91,7 +97,7 @@ export default function Activity() {
   return (
     <div className="act-page">
       {scenes.map((s, i) => (
-        <section key={s.id} id={s.id} className={`act-scene ${s.theme === "dark" ? "act-dark" : "act-light"}`}>
+        <section key={s.id} id={s.id} className={`act-scene ${s.theme === "dark" ? "act-dark" : "act-light"} ${s.v}`}>
           <div className="container act-inner">
             <p className="act-num">{s.num}</p>
             <p className="act-eyebrow">{s.eyebrow}</p>
@@ -108,7 +114,7 @@ export default function Activity() {
             </div>
             <div className="act-ctas">
               {s.ctas.map((c) => (
-                <Link key={c.href + c.label} href={c.href} className={i === 0 ? "btn btn-white" : "act-link"}>
+                <Link key={c.href + c.label} href={c.href} className={s.v === "v-pravo" && i === 0 && c.label.startsWith("Новости") ? "act-btn-white" : "act-link"}>
                   {c.label}
                 </Link>
               ))}
