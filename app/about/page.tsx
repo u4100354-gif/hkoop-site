@@ -1,8 +1,15 @@
 import Link from "next/link";
+import ActSceneNav from "../../components/ActSceneNav";
 
 export default function About() {
   return (
     <div className="act-page">
+      <ActSceneNav scenes={[
+        { id: "intro", label: "О Союзе", accent: "#3aa655" },
+        { id: "cifry", label: "В цифрах", accent: "#f0c264" },
+        { id: "organy", label: "Органы", accent: "#9ae6b4" },
+        { id: "napravleniya", label: "Направления", accent: "#8a6a12" },
+      ]} />
       <div className="act-pagehead">
         <div className="container">
           <h1>О нас</h1>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ActSceneNav from "../../components/ActSceneNav";
 import ConsultForm from "../../components/ConsultForm";
 import MapGate from "../../components/MapGate";
 import { safeHref } from "../../lib/url";
@@ -12,6 +13,11 @@ export default async function Contacts() {
   const mx = safeHref(s.social_max);
   return (
     <div className="act-page">
+      <ActSceneNav scenes={[
+        { id: "nayti", label: "На связи", accent: "#3aa655" },
+        { id: "kartа", label: "Карта", accent: "#8a6a12" },
+        { id: "konsult", label: "Консультация", accent: "#f0c264" },
+      ]} />
 
       <section id="nayti" className="act-scene act-dark v-about">
         <div className="container act-inner">
