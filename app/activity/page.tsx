@@ -77,7 +77,7 @@ const scenes = [
   {
     id: "org",
     num: "06",
-    theme: "dark",
+    theme: "light",
     v: "v-org",
     eyebrow: "Организационная работа",
     title: "Профсоюз — это организация людей",

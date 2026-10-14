@@ -67,7 +67,7 @@ a { color: #1a3a6b; }
 .act-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 13px; font-weight: 800; opacity: .75; margin: 0 0 14px; color: var(--green); }
 .act-eyebrow::after { content: ""; display: block; width: 46px; height: 2px; background: var(--green); margin: 10px auto 0; opacity: .9; }
 .act-title { font-size: clamp(30px, 4.2vw, 52px); line-height: 1.1; letter-spacing: -.02em; font-weight: 800; margin: 0 0 22px; }
-/* act-light больше не используется: все сцены тёмные */
+.act-scene.act-light .act-title { color: var(--navy); }
 .act-text { max-width: 640px; margin: 0 auto 26px; display: grid; gap: 14px; }
 .act-text p { margin: 0; font-size: clamp(16px, 1.6vw, 19px); line-height: 1.65; }
 .act-scene.act-dark .act-text p { color: rgba(255,255,255,.88); }
@@ -112,7 +112,7 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-pravo .act-eyebrow::after { background: linear-gradient(90deg, #ffffff 0 33.4%, #2f5ea8 33.4% 66.7%, #d63a3a 66.7% 100%); opacity: 1; }
 
 /* 02 Охрана труда — светлый стальной, синий акцент */
-.act-scene.v-ohrana { background: linear-gradient(165deg, #14384d 0%, #20618a 100%); --act-accent: #86d8ef; }
+.act-scene.v-ohrana { background: linear-gradient(165deg, #232f3d 0%, #3d5266 100%); --act-accent: #9fc6e0; }
 
 /* 03 Соцпартнёрство — глубокий индиго + золотой (соглашения, печати) */
 .act-scene.v-socpart { background: linear-gradient(160deg, #232c55 0%, #40406e 100%); --act-accent: #f0c264; }
@@ -122,11 +122,11 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-molodezh { background: linear-gradient(160deg, #17422d 0%, #2e7a4f 100%); --act-accent: #9ae6b4; }
 
 /* 05 Международное — тёмный стальной север, голубой */
-.act-scene.v-mezhdunar { background: radial-gradient(110% 80% at 15% 0%, rgba(127,180,232,.16) 0%, rgba(127,180,232,0) 55%), linear-gradient(160deg, #1c2a4d 0%, #2d4a77 100%); --act-accent: #7fb4e8; }
+.act-scene.v-mezhdunar { background: radial-gradient(110% 80% at 15% 0%, rgba(195,168,255,.18) 0%, rgba(195,168,255,0) 55%), linear-gradient(160deg, #2a2a4d 0%, #4a3a7a 100%); --act-accent: #c3a8ff; }
 .act-scene.v-mezhdunar .act-fact { border-color: rgba(127,180,232,.55); }
 
 /* 06 Организационная — тёплый песочный, янтарный */
-.act-scene.v-org { background: linear-gradient(165deg, #2e2820 0%, #4d4028 100%); --act-accent: #e8c376; }
+.act-scene.v-org { background: linear-gradient(165deg, #ffffff 0%, #faf7f0 100%); --act-accent: #b8860b; }
 .act-scene.v-org .act-fact { border-color: #dccfae; }
 
 /* белая кнопка на тёмной сцене */
@@ -146,10 +146,10 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-pravo .act-link:hover { border-color: #fff; background: rgba(255,255,255,.12); box-shadow: none; }
 
 /* 02 Охрана труда (light, steel) */
-.act-scene.v-ohrana .act-fact { background: rgba(134,216,239,.13); border-color: rgba(134,216,239,.5); color: #dff4fb; }
-.act-scene.v-ohrana .act-fact:hover { background: rgba(134,216,239,.22); box-shadow: 0 6px 16px rgba(134,216,239,.22); border-color: #86d8ef; }
-.act-scene.v-ohrana .act-link { color: #dff4fb; border-color: rgba(134,216,239,.55); background: transparent; }
-.act-scene.v-ohrana .act-link:hover { border-color: #86d8ef; background: rgba(134,216,239,.15); box-shadow: none; }
+.act-scene.v-ohrana .act-fact { background: rgba(159,198,224,.12); border-color: rgba(159,198,224,.45); color: #e7f0f8; }
+.act-scene.v-ohrana .act-fact:hover { background: rgba(159,198,224,.2); box-shadow: 0 6px 16px rgba(159,198,224,.2); border-color: #9fc6e0; }
+.act-scene.v-ohrana .act-link { color: #e7f0f8; border-color: rgba(159,198,224,.55); background: transparent; }
+.act-scene.v-ohrana .act-link:hover { border-color: #9fc6e0; background: rgba(159,198,224,.15); box-shadow: none; }
 
 /* 03 Соцпартнёрство (dark, gold) */
 .act-scene.v-socpart .act-fact { background: rgba(240,194,100,.13); border-color: rgba(240,194,100,.5); color: #ffe9bd; }
@@ -164,16 +164,16 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-molodezh .act-link:hover { border-color: #9ae6b4; background: rgba(154,230,180,.15); box-shadow: none; }
 
 /* 05 Международное (dark, sky) */
-.act-scene.v-mezhdunar .act-fact { background: rgba(127,180,232,.13); border-color: rgba(127,180,232,.5); color: #e2efff; }
-.act-scene.v-mezhdunar .act-fact:hover { background: rgba(127,180,232,.22); box-shadow: 0 6px 16px rgba(127,180,232,.22); }
-.act-scene.v-mezhdunar .act-link { color: #e2efff; border-color: rgba(127,180,232,.55); }
-.act-scene.v-mezhdunar .act-link:hover { border-color: #7fb4e8; background: rgba(127,180,232,.15); box-shadow: none; }
+.act-scene.v-mezhdunar .act-fact { background: rgba(195,168,255,.13); border-color: rgba(195,168,255,.5); color: #efe9ff; }
+.act-scene.v-mezhdunar .act-fact:hover { background: rgba(195,168,255,.22); box-shadow: 0 6px 16px rgba(195,168,255,.22); }
+.act-scene.v-mezhdunar .act-link { color: #efe9ff; border-color: rgba(195,168,255,.55); }
+.act-scene.v-mezhdunar .act-link:hover { border-color: #c3a8ff; background: rgba(195,168,255,.15); box-shadow: none; }
 
 /* 06 Организационная (light, amber) */
-.act-scene.v-org .act-fact { background: rgba(232,195,118,.13); border-color: rgba(232,195,118,.5); color: #f7e7c4; }
-.act-scene.v-org .act-fact:hover { background: rgba(232,195,118,.22); box-shadow: 0 6px 16px rgba(232,195,118,.2); border-color: #e8c376; }
-.act-scene.v-org .act-link { color: #f7e7c4; border-color: rgba(232,195,118,.55); background: transparent; }
-.act-scene.v-org .act-link:hover { border-color: #e8c376; background: rgba(232,195,118,.15); box-shadow: none; }
+.act-scene.v-org .act-fact { background: #fff; border-color: #e3d3a6; color: #7a5c14; }
+.act-scene.v-org .act-fact:hover { box-shadow: 0 6px 14px rgba(184,134,11,.18); border-color: #b8860b; }
+.act-scene.v-org .act-link { color: #7a5c14; border-color: #e3d3a6; background: #fff; }
+.act-scene.v-org .act-link:hover { border-color: #b8860b; background: #faf5e6; box-shadow: none; }
 .act-chip-themes {}
 
 /* Header search dropdown */
