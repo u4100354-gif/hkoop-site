@@ -21,7 +21,7 @@ const scenes = [
   {
     id: "ohrana",
     num: "02",
-    theme: "light",
+    theme: "dark",
     v: "v-ohrana",
     eyebrow: "Охрана труда",
     title: "Безопасное рабочее место — не привилегия",
@@ -49,7 +49,7 @@ const scenes = [
   {
     id: "molodezh",
     num: "04",
-    theme: "light",
+    theme: "dark",
     v: "v-molodezh",
     eyebrow: "Молодёжный совет",
     title: "Молодёжь решает",
@@ -77,7 +77,7 @@ const scenes = [
   {
     id: "org",
     num: "06",
-    theme: "light",
+    theme: "dark",
     v: "v-org",
     eyebrow: "Организационная работа",
     title: "Профсоюз — это организация людей",
