@@ -33,7 +33,7 @@ a { color: #1a3a6b; }
 .brand-big { font-size: clamp(21px, 3vw, 34px); line-height: 1.2; letter-spacing: -.015em; max-width: 900px; margin: 0 auto; color: #fff; font-weight: 800; text-align: center; }
 
 /* Gray nav */
-.mainnav { background: linear-gradient(90deg, rgba(37,46,79,.78) 0%, rgba(46,57,99,.78) 60%, rgba(37,46,79,.78) 100%); position: sticky; top: 0; z-index: 20; border-top: 1px solid rgba(255,255,255,.09); box-shadow: 0 8px 24px rgba(14,18,40,.30); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); }
+.mainnav { background: linear-gradient(90deg, rgba(37,46,79,.95) 0%, rgba(46,57,99,.95) 60%, rgba(37,46,79,.95) 100%); position: sticky; top: 0; z-index: 20; border-top: 1px solid rgba(255,255,255,.09); box-shadow: 0 8px 24px rgba(14,18,40,.30); backdrop-filter: blur(10px) saturate(1.2); -webkit-backdrop-filter: blur(10px) saturate(1.2); }
 .mainnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .burger { display: none; background: none; border: 0; color: #fff; border-radius: 8px; font-size: 26px; padding: 0 4px; min-width: 44px; min-height: 52px; align-items: center; justify-content: center; gap: 10px; margin: 4px 0; cursor: pointer; font-weight: 800; }
 .burger:hover { background: rgba(255,255,255,.1); }
@@ -57,13 +57,13 @@ a { color: #1a3a6b; }
 .links a:active { transform: scale(.96); }
 /* ---- Страница «Деятельность»: полные сцены (Apple-style) ---- */
 .act-page { }
-.act-scene { position: relative; padding: clamp(64px, 9vh, 110px) 0; }
+.act-scene { position: relative; padding: clamp(64px, 9vh, 110px) 0; min-height: clamp(620px, 92svh, 860px); display: flex; align-items: center; }
 .act-scene.act-dark { background: linear-gradient(165deg, var(--navy) 0%, #2b3560 70%, #2f3a66 100%); color: #fff; }
 
 
-.act-inner { max-width: 780px; text-align: center; }
+.act-inner { max-width: 780px; text-align: center; margin: 0 auto; }
 .act-num { font-size: clamp(13px, 1.4vw, 16px); font-weight: 800; letter-spacing: .35em; opacity: .55; margin: 0 0 6px; font-variant-numeric: tabular-nums; }
-.act-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 13px; font-weight: 800; opacity: .75; margin: 0 0 14px; color: var(--green); }
+.act-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 13px; font-weight: 800; opacity: 1; margin: 0 0 14px; color: var(--green); }
 .act-eyebrow::after { content: ""; display: block; width: 46px; height: 2px; background: var(--green); margin: 10px auto 0; opacity: .9; }
 .act-title { font-size: clamp(30px, 4.2vw, 52px); line-height: 1.1; letter-spacing: -.02em; font-weight: 800; margin: 0 0 22px; }
 .act-scene.act-light .act-title { color: var(--navy); }
@@ -72,7 +72,7 @@ a { color: #1a3a6b; }
 .act-scene.act-dark .act-text p { color: rgba(255,255,255,.88); }
 .act-scene.act-light .act-text p { color: #3c475e; }
 .act-facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 30px; }
-.act-fact { border: 1.5px solid rgba(255,255,255,.35); border-radius: 999px; padding: 8px 15px; font-size: 13.5px; font-weight: 700; white-space: nowrap; }
+.act-fact { border: 1.5px solid rgba(255,255,255,.35); border-radius: 999px; padding: 9px 16px; font-size: 14px; font-weight: 700; white-space: nowrap; }
 .act-scene.act-dark .act-fact { border-color: rgba(255,255,255,.35); }
 .act-scene.act-light .act-fact { border-color: #cfd8e6; color: var(--navy); background: #fff; }
 .act-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -111,7 +111,7 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-pravo .act-eyebrow::after { background: linear-gradient(90deg, #ffffff 0 33.4%, #2f5ea8 33.4% 66.7%, #d63a3a 66.7% 100%); opacity: 1; }
 
 /* 02 Охрана труда — светлый стальной, синий акцент */
-.act-scene.v-ohrana { background: linear-gradient(165deg, #3a1420 0%, #6b2230 100%); --act-accent: #ff9d9d; }
+.act-scene.v-ohrana { background: linear-gradient(165deg, #1e2742 0%, #4a1c26 100%); --act-accent: #ff9d9d; }
 
 /* 03 Соцпартнёрство — глубокий индиго + золотой (соглашения, печати) */
 .act-scene.v-socpart { background: linear-gradient(160deg, #232c55 0%, #40406e 100%); --act-accent: #f0c264; }
@@ -121,26 +121,24 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-molodezh { background: linear-gradient(160deg, #17422d 0%, #2e7a4f 100%); --act-accent: #9ae6b4; }
 
 /* 05 Международное — тёмный стальной север, голубой */
-.act-scene.v-mezhdunar { background: linear-gradient(160deg, #0e3b3a 0%, #1c5f57 100%); --act-accent: #7fe0c8; }
-.act-scene.v-mezhdunar .act-fact { border-color: rgba(127,180,232,.55); }
+.act-scene.v-mezhdunar { background: linear-gradient(160deg, #16233f 0%, #1f3a63 100%); --act-accent: #b8d4f0; }
 
 /* 06 Организационная — тёплый песочный, янтарный */
-.act-scene.v-org { background: linear-gradient(165deg, #ffffff 0%, #faf7f0 100%); --act-accent: #b8860b; }
-.act-scene.v-org .act-fact { border-color: #dccfae; }
+.act-scene.v-org { background: linear-gradient(165deg, #ffffff 0%, #faf7f0 100%); --act-accent: #8a6a12; }
 
 /* белая кнопка на тёмной сцене */
 .act-btn-white { display: inline-block; background: #fff; color: var(--navy); border: 2px solid #fff; border-radius: 12px; padding: 12px 22px; font-weight: 800; font-size: 15px; text-decoration: none; transition: transform .15s, box-shadow .2s, background .2s; }
 .act-btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(10,14,32,.35); }
 
 /* ---- act-chip-themes: заполненные фоны чипов и стилевые CTA по сценам ---- */
-.act-fact { transition: background .2s, transform .15s, box-shadow .2s; }
+.act-fact { transition: background .2s, transform .15s, box-shadow .2s; cursor: default; }
 .act-fact:hover { transform: translateY(-1px); }
 
 /* 01 Правозащита (dark, red) */
 .act-scene.v-pravo .act-fact { background: rgba(224,82,82,.13); border-color: rgba(224,82,82,.5); color: #ffe4e4; }
 .act-scene.v-pravo .act-fact:hover { background: rgba(224,82,82,.22); box-shadow: 0 6px 16px rgba(214,58,58,.25); }
-.act-scene.v-pravo .act-btn-white { background: #e05252; border-color: #e05252; color: #fff; }
-.act-scene.v-pravo .act-btn-white:hover { background: #c94444; border-color: #c94444; box-shadow: 0 8px 22px rgba(214,58,58,.4); }
+.act-scene.v-pravo .act-btn-white { background: #d63a3a; border-color: #d63a3a; color: #fff; }
+.act-scene.v-pravo .act-btn-white:hover { background: #b93333; border-color: #b93333; box-shadow: 0 8px 22px rgba(214,58,58,.4); }
 .act-scene.v-pravo .act-link { color: #fff; border-color: rgba(255,255,255,.45); }
 .act-scene.v-pravo .act-link:hover { border-color: #fff; background: rgba(255,255,255,.12); box-shadow: none; }
 
@@ -163,10 +161,10 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-molodezh .act-link:hover { border-color: #9ae6b4; background: rgba(154,230,180,.15); box-shadow: none; }
 
 /* 05 Международное (dark, sky) */
-.act-scene.v-mezhdunar .act-fact { background: rgba(127,224,200,.13); border-color: rgba(127,224,200,.5); color: #ddfff2; }
-.act-scene.v-mezhdunar .act-fact:hover { background: rgba(127,224,200,.22); box-shadow: 0 6px 16px rgba(127,224,200,.22); }
-.act-scene.v-mezhdunar .act-link { color: #ddfff2; border-color: rgba(127,224,200,.55); }
-.act-scene.v-mezhdunar .act-link:hover { border-color: #7fe0c8; background: rgba(127,224,200,.15); box-shadow: none; }
+.act-scene.v-mezhdunar .act-fact { background: rgba(184,212,240,.12); border-color: rgba(184,212,240,.5); color: #e6f0fb; }
+.act-scene.v-mezhdunar .act-fact:hover { background: rgba(184,212,240,.2); box-shadow: 0 6px 16px rgba(184,212,240,.2); }
+.act-scene.v-mezhdunar .act-link { color: #e6f0fb; border-color: rgba(184,212,240,.55); }
+.act-scene.v-mezhdunar .act-link:hover { border-color: #b8d4f0; background: rgba(184,212,240,.15); box-shadow: none; }
 
 /* 06 Организационная (light, amber) */
 .act-scene.v-org .act-fact { background: #fff; border-color: #e3d3a6; color: #7a5c14; }
@@ -176,18 +174,18 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-chip-themes {}
 
 /* ---- act-scroll: сцена собирается при прокрутке ---- */
-html.js .act-scene .act-r { opacity: 0; transform: translateY(30px); transition: opacity .75s ease, transform .75s cubic-bezier(.22,.61,.36,1); transition-delay: calc(var(--i, 0) * .13s); will-change: opacity, transform; }
+html.js .act-scene .act-r { transform: translateY(30px); transition: transform .75s cubic-bezier(.22,.61,.36,1); transition-delay: calc(var(--i, 0) * .13s); }
 html.js .act-scene .act-r.in { opacity: 1; transform: none; }
-html.js .act-scene .act-fact { opacity: 0; transform: translateY(14px) scale(.92); transition: opacity .55s ease, transform .55s cubic-bezier(.22,.61,.36,1); transition-delay: calc(var(--i, 0) * .09s + .55s); }
+html.js .act-scene .act-fact { transform: translateY(14px) scale(.92); transition: transform .55s cubic-bezier(.22,.61,.36,1); transition-delay: calc(var(--i, 0) * .09s + .55s); }
 html.js .act-scene .act-fact.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  html.js .act-scene .act-r, html.js .act-scene .act-fact { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html.js .act-scene .act-r, html.js .act-scene .act-fact { transform: none !important; transition: none !important; }
 }
 /* боковой навигатор по сценам — колонка точек, подписи поверх */
-.act-nav { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 14px; z-index: 30; width: 14px; }
-.act-nav a { position: relative; display: block; width: 14px; height: 14px; opacity: .9; transition: transform .28s cubic-bezier(.34,1.56,.64,1); }
-.act-nav .dot { position: absolute; inset: 2px; border-radius: 50%; background: rgba(255,255,255,.38); border: 1px solid rgba(255,255,255,.55); transition: transform .3s cubic-bezier(.34,1.56,.64,1), background .25s, box-shadow .3s, border-color .25s; }
-.act-nav .lbl { position: absolute; right: 26px; top: 50%; margin-top: -0.65em; color: #fff; font-size: 13px; font-weight: 800; letter-spacing: .03em; opacity: 0; transform: translateX(10px); transition: opacity .25s, transform .32s cubic-bezier(.34,1.56,.64,1); white-space: nowrap; text-shadow: 0 1px 3px rgba(10,14,32,.85), 0 0 14px rgba(10,14,32,.45); pointer-events: none; }
+.act-nav { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 12px; z-index: 30; width: 24px; }
+.act-nav a { position: relative; display: block; width: 24px; height: 24px; opacity: .9; transition: transform .28s cubic-bezier(.34,1.56,.64,1); }
+.act-nav .dot { position: absolute; inset: 7px; border-radius: 50%; background: rgba(255,255,255,.38); border: 1px solid rgba(255,255,255,.55); transition: transform .3s cubic-bezier(.34,1.56,.64,1), background .25s, box-shadow .3s, border-color .25s; }
+.act-nav .lbl { position: absolute; right: 32px; top: 50%; margin-top: -0.65em; color: #fff; font-size: 13px; font-weight: 800; letter-spacing: .03em; opacity: 0; transform: translateX(10px); transition: opacity .25s, transform .32s cubic-bezier(.34,1.56,.64,1); white-space: nowrap; text-shadow: 0 1px 3px rgba(10,14,32,.85), 0 0 14px rgba(10,14,32,.45); pointer-events: none; }
 .act-nav a:hover, .act-nav a.on { opacity: 1; }
 .act-nav a:hover { transform: translateX(-4px) scale(1.12); }
 .act-nav a:hover .lbl, .act-nav a.on .lbl { opacity: 1; transform: none; }
@@ -195,19 +193,21 @@ html.js .act-scene .act-fact.in { opacity: 1; transform: none; }
 .act-nav a.on { transform: scale(1.18); }
 .act-nav a.on .dot { background: var(--nva, #fff); border-color: var(--nva, #fff); box-shadow: 0 0 0 4px color-mix(in srgb, var(--nva, #fff) 30%, transparent); }
 .act-nav a:active { transform: scale(.9); }
+.act-nav a:focus-visible { outline: 2px solid var(--nva, #fff); outline-offset: 3px; border-radius: 50%; }
+.act-nav a:focus-visible .lbl, .act-nav a:focus-visible .dot { opacity: 1; transform: none; background: var(--nva, #fff); }
 .act-nav.on-light .lbl { color: var(--navy); text-shadow: 0 1px 2px rgba(255,255,255,.9), 0 0 10px rgba(255,255,255,.7); }
 .act-nav.on-light .dot { background: rgba(37,46,79,.3); border-color: rgba(37,46,79,.45); }
 .act-nav.on-light a.on .dot, .act-nav.on-light a:hover .dot { background: var(--nva, var(--navy)); border-color: var(--nva, var(--navy)); }
 @media (max-width: 1200px) { .act-nav { display: none; } }
 
 /* ---- act-bridge: плавные переходы между сценами ---- */
-.act-scene { position: relative; }
+.act-scene { position: relative; overflow: clip; scroll-margin-top: 64px; }
 .act-scene::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 170px; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--act-next) 100%); }
-.act-scene.v-pravo::after { --act-next: #3a1420; }
+.act-scene.v-pravo::after { --act-next: #1e2742; }
 .act-scene.v-ohrana::after { --act-next: #232c55; }
 .act-scene.v-socpart::after { --act-next: #17422d; }
-.act-scene.v-molodezh::after { --act-next: #0e3b3a; }
-.act-scene.v-mezhdunar::after { --act-next: #faf7f0; }
+.act-scene.v-molodezh::after { --act-next: #16233f; }
+.act-scene.v-mezhdunar::after { --act-next: #faf7f0; } /* мост в белую сцену 06 */
 .act-scene.v-org::after { --act-next: #1a2138; height: 0; }
 /* контент сцены поверх моста */
 .act-scene .act-inner { position: relative; z-index: 1; }
@@ -215,15 +215,84 @@ html.js .act-scene .act-fact.in { opacity: 1; transform: none; }
 /* ---- act-depth: водяные цифры и параллакс-отсветы ---- */
 .act-wm { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(190px, 26vw, 340px); font-weight: 800; letter-spacing: -.04em; color: #fff; opacity: .05; pointer-events: none; user-select: none; transform: translateY(calc((var(--py, 0) - .5) * -55px)); }
 .act-scene.act-light .act-wm { color: var(--navy); opacity: .06; }
-.act-glow { position: absolute; inset: -12% 0; pointer-events: none; transform: translateY(calc((var(--py, 0) - .5) * -80px)); }
+.act-glow { position: absolute; inset: -14% 0; pointer-events: none; transform: translateY(calc((var(--py, 0) - .5) * -80px)); opacity: .95; }
 .act-scene.v-pravo .act-glow { background: radial-gradient(52% 42% at 78% 20%, rgba(214,58,58,.22) 0%, rgba(214,58,58,0) 62%); }
-.act-scene.v-mezhdunar .act-glow { background: radial-gradient(48% 40% at 18% 28%, rgba(127,224,200,.18) 0%, rgba(127,224,200,0) 62%); }
+.act-scene.v-mezhdunar .act-glow { background: radial-gradient(48% 40% at 18% 28%, rgba(184,212,240,.16) 0%, rgba(184,212,240,0) 62%); }
 .act-scene.v-socpart .act-glow { background: radial-gradient(50% 40% at 82% 24%, rgba(240,194,100,.12) 0%, rgba(240,194,100,0) 60%); }
 .act-scene.v-molodezh .act-glow { background: radial-gradient(50% 40% at 22% 22%, rgba(154,230,180,.12) 0%, rgba(154,230,180,0) 60%); }
 @media (prefers-reduced-motion: reduce) {
   .act-wm, .act-glow { transform: none !important; }
 }
 
+/* VI: сцены арены — полный захват (мосты, цифры, отсветы, навигатор, кнопки) */
+
+body.vi-mode .act-scene, body.vi-mode .act-scene.act-dark, body.vi-mode .act-scene.act-light { background: #fff !important; color: #000 !important; }
+
+body.vi-mode .act-scene::after, body.vi-mode .act-glow { display: none !important; }
+
+body.vi-mode .act-wm { color: #000 !important; opacity: .07 !important; }
+
+body.vi-mode .act-eyebrow { color: #000 !important; }
+
+body.vi-mode .act-eyebrow::after { background: #000 !important; }
+
+body.vi-mode .act-fact { background: #fff !important; border-color: #000 !important; color: #000 !important; }
+
+body.vi-mode .act-link, body.vi-mode .act-btn-white { background: #fff !important; border-color: #000 !important; color: #000 !important; }
+
+body.vi-mode .act-nav a .dot { background: #000 !important; border-color: #000 !important; box-shadow: none !important; }
+
+body.vi-mode .act-nav .lbl { color: #000 !important; text-shadow: none !important; background: #fff !important; padding: 2px 6px; }
+
+body.vi-mode .act-nav { opacity: 1; }
+
+body.vi-mode.vi-scheme-wb .act-scene, body.vi-mode.vi-scheme-bw .act-scene, body.vi-mode.vi-scheme-yb .act-scene { background: #000 !important; }
+
+body.vi-mode.vi-scheme-wb .act-scene .act-text p, body.vi-mode.vi-scheme-wb .act-eyebrow, body.vi-mode.vi-scheme-wb .act-num { color: #fff !important; }
+
+body.vi-mode.vi-scheme-wb .act-fact, body.vi-mode.vi-scheme-wb .act-link, body.vi-mode.vi-scheme-wb .act-btn-white { background: #000 !important; border-color: #fff !important; color: #fff !important; }
+
+body.vi-mode.vi-scheme-wb .act-wm { color: #fff !important; }
+
+body.vi-mode.vi-scheme-wb .act-nav a .dot { background: #fff !important; border-color: #fff !important; }
+
+body.vi-mode.vi-scheme-wb .act-nav .lbl { background: #000 !important; color: #fff !important; }
+
+body.vi-mode.vi-scheme-yb .act-scene .act-text p, body.vi-mode.vi-scheme-yb .act-eyebrow, body.vi-mode.vi-scheme-yb .act-num { color: #ffe100 !important; }
+
+body.vi-mode.vi-scheme-yb .act-fact, body.vi-mode.vi-scheme-yb .act-link, body.vi-mode.vi-scheme-yb .act-btn-white { background: #000 !important; border-color: #ffe100 !important; color: #ffe100 !important; }
+
+body.vi-mode.vi-scheme-yb .act-wm { color: #ffe100 !important; }
+
+body.vi-mode.vi-scheme-yb .act-nav a .dot { background: #ffe100 !important; border-color: #ffe100 !important; }
+
+body.vi-mode.vi-scheme-yb .act-nav .lbl { background: #000 !important; color: #ffe100 !important; }
+
+
+
+/* Печать: сцены на бумаге — белый фон, весь контент виден */
+@media print {
+  .act-scene, .act-scene.act-dark, .act-scene.act-light { background: #fff !important; color: #000 !important; min-height: 0 !important; padding: 18px 0 !important; }
+  .act-scene::after, .act-glow, .act-wm, .act-nav, .mainnav, .topbar-dark { display: none !important; }
+  .act-scene .act-text p, .act-title, .act-eyebrow, .act-num { color: #000 !important; }
+  .act-fact, .act-link, .act-btn-white { background: #fff !important; border-color: #999 !important; color: #000 !important; }
+  .act-ctas .act-link { display: inline-block; }
+}
+
+
+/* Шапка страницы «Деятельность»: h1-полоса в navy, продолжает сцену 01 */
+.act-pagehead { background: linear-gradient(165deg, var(--navy) 0%, #2b3560 100%); color: #fff; padding: 26px 0 22px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.act-pagehead h1 { margin: 0 0 6px; font-size: clamp(26px, 3vw, 40px); letter-spacing: -.02em; font-weight: 800; text-align: center; }
+.act-pagehead p { margin: 0; text-align: center; color: rgba(255,255,255,.85); font-size: 15.5px; }
+body.vi-mode .act-pagehead { background: #fff !important; border-color: #000 !important; }
+body.vi-mode .act-pagehead h1, body.vi-mode .act-pagehead p { color: #000 !important; }
+body.vi-mode.vi-scheme-wb .act-pagehead, body.vi-mode.vi-scheme-yb .act-pagehead { background: #000 !important; }
+body.vi-mode.vi-scheme-wb .act-pagehead h1, body.vi-mode.vi-scheme-wb .act-pagehead p, body.vi-mode.vi-scheme-yb .act-pagehead h1, body.vi-mode.vi-scheme-yb .act-pagehead p { color: #fff !important; }
+body.vi-mode.vi-scheme-yb .act-pagehead h1, body.vi-mode.vi-scheme-yb .act-pagehead p { color: #ffe100 !important; }
+/* телефон-чип как ссылка */
+.act-fact-link { color: inherit; text-decoration: none; cursor: pointer; transition: background .2s, transform .15s, box-shadow .2s; }
+.act-fact-link:hover { transform: translateY(-1px); }
+body.vi-mode .act-fact-link { background: #fff !important; border-color: #000 !important; color: #000 !important; }
 /* Header search dropdown */
 .hsearch { position: relative; display: flex; align-items: center; padding: 8px 6px; }
 .hsearch-input { background: rgba(255,255,255,.10); border: 1.5px solid rgba(255,255,255,.35); color: #fff; border-radius: 10px; padding: 8px 12px; font-size: 14px; width: 210px; transition: background .2s, border-color .2s, box-shadow .2s; }

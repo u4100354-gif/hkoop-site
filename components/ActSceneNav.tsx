@@ -62,6 +62,7 @@ export default function ActSceneNav({ scenes }: { scenes: Scene[] }) {
           key={s.id}
           href={`#${s.id}`}
           className={active === s.id ? "on" : ""}
+          aria-current={active === s.id ? "true" : undefined}
           aria-label={s.label}
           style={{ "--nva": s.accent } as React.CSSProperties}
         >
