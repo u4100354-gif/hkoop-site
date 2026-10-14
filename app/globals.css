@@ -133,6 +133,49 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-btn-white { display: inline-block; background: #fff; color: var(--navy); border: 2px solid #fff; border-radius: 12px; padding: 12px 22px; font-weight: 800; font-size: 15px; text-decoration: none; transition: transform .15s, box-shadow .2s, background .2s; }
 .act-btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(10,14,32,.35); }
 
+/* ---- act-chip-themes: заполненные фоны чипов и стилевые CTA по сценам ---- */
+.act-fact { transition: background .2s, transform .15s, box-shadow .2s; }
+.act-fact:hover { transform: translateY(-1px); }
+
+/* 01 Правозащита (dark, red) */
+.act-scene.v-pravo .act-fact { background: rgba(224,82,82,.13); border-color: rgba(224,82,82,.5); color: #ffe4e4; }
+.act-scene.v-pravo .act-fact:hover { background: rgba(224,82,82,.22); box-shadow: 0 6px 16px rgba(214,58,58,.25); }
+.act-scene.v-pravo .act-btn-white { background: #e05252; border-color: #e05252; color: #fff; }
+.act-scene.v-pravo .act-btn-white:hover { background: #c94444; border-color: #c94444; box-shadow: 0 8px 22px rgba(214,58,58,.4); }
+.act-scene.v-pravo .act-link { color: #fff; border-color: rgba(255,255,255,.45); }
+.act-scene.v-pravo .act-link:hover { border-color: #fff; background: rgba(255,255,255,.12); box-shadow: none; }
+
+/* 02 Охрана труда (light, steel) */
+.act-scene.v-ohrana .act-fact { background: #fff; border-color: #b9d0e4; color: #27516f; }
+.act-scene.v-ohrana .act-fact:hover { box-shadow: 0 6px 14px rgba(47,111,159,.15); border-color: #7fb4e8; }
+.act-scene.v-ohrana .act-link { color: #27516f; border-color: #b9d0e4; background: #fff; }
+.act-scene.v-ohrana .act-link:hover { border-color: #2f6f9f; background: #eaf2fa; }
+
+/* 03 Соцпартнёрство (dark, gold) */
+.act-scene.v-socpart .act-fact { background: rgba(240,194,100,.13); border-color: rgba(240,194,100,.5); color: #ffe9bd; }
+.act-scene.v-socpart .act-fact:hover { background: rgba(240,194,100,.22); box-shadow: 0 6px 16px rgba(240,194,100,.2); }
+.act-scene.v-socpart .act-link { color: #ffe9bd; border-color: rgba(240,194,100,.55); }
+.act-scene.v-socpart .act-link:hover { border-color: #f0c264; background: rgba(240,194,100,.15); box-shadow: none; }
+
+/* 04 Молодёжь (light, green) */
+.act-scene.v-molodezh .act-fact { background: #fff; border-color: #bfe2c9; color: #2b6b3d; }
+.act-scene.v-molodezh .act-fact:hover { box-shadow: 0 6px 14px rgba(58,166,85,.15); border-color: #63c585; }
+.act-scene.v-molodezh .act-link { color: #2b6b3d; border-color: #bfe2c9; background: #fff; }
+.act-scene.v-molodezh .act-link:hover { border-color: #2f9a4c; background: #ecf7ef; }
+
+/* 05 Международное (dark, sky) */
+.act-scene.v-mezhdunar .act-fact { background: rgba(127,180,232,.13); border-color: rgba(127,180,232,.5); color: #e2efff; }
+.act-scene.v-mezhdunar .act-fact:hover { background: rgba(127,180,232,.22); box-shadow: 0 6px 16px rgba(127,180,232,.22); }
+.act-scene.v-mezhdunar .act-link { color: #e2efff; border-color: rgba(127,180,232,.55); }
+.act-scene.v-mezhdunar .act-link:hover { border-color: #7fb4e8; background: rgba(127,180,232,.15); box-shadow: none; }
+
+/* 06 Организационная (light, amber) */
+.act-scene.v-org .act-fact { background: #fff; border-color: #dccfae; color: #6b5320; }
+.act-scene.v-org .act-fact:hover { box-shadow: 0 6px 14px rgba(179,133,46,.15); border-color: #b3852e; }
+.act-scene.v-org .act-link { color: #6b5320; border-color: #dccfae; background: #fff; }
+.act-scene.v-org .act-link:hover { border-color: #b3852e; background: #faf5e9; }
+.act-chip-themes {}
+
 /* Header search dropdown */
 .hsearch { position: relative; display: flex; align-items: center; padding: 8px 6px; }
 .hsearch-input { background: rgba(255,255,255,.10); border: 1.5px solid rgba(255,255,255,.35); color: #fff; border-radius: 10px; padding: 8px 12px; font-size: 14px; width: 210px; transition: background .2s, border-color .2s, box-shadow .2s; }
