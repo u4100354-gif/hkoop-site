@@ -84,9 +84,9 @@ export default async function Home() {
         <h2>ХКООП в цифрах</h2>
         <div className="stats">
           <div><Counter end={77} /><span>лет с 11.12.1948</span></div>
-          <div><Counter end={22} prefix="~" /><span>членских организаций*</span></div>
-          <div><Counter end={19} prefix="~" /><span>координационных советов*</span></div>
-          <div><Counter end={100} prefix="~" suffix=" тыс." /><span>членов профсоюза*</span></div>
+          <div><Counter end={20} /><span>членских организаций</span></div>
+          <div><Counter end={7} /><span>координационных советов</span></div>
+          <div><Counter end={102} suffix=" тыс." /><span>членов профсоюза</span></div>
         </div>
       </section>
 
