@@ -129,7 +129,7 @@ export default async function Home() {
           <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Полезные ссылки</p>
           <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Наши партнёры</h2>
           <div className="act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
-            <PartnersStrip items={partners as any} />
+            <PartnersStrip items={(partners as any).slice(0, 6)} />
           </div>
           <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
             <Link href="/partners" className="act-link">
