@@ -79,11 +79,27 @@ export default function About() {
               <span className="act-arrow" aria-hidden="true">→</span>
             </Link>
           </div>
-          <div className="act-flist act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
-            <a href="/docs" className="act-fact act-fact-link">Конференция — высший орган<span className="act-arrow" aria-hidden="true">→</span></a>
-            <a href="/docs" className="act-fact act-fact-link">Совет — руководство<span className="act-arrow" aria-hidden="true">→</span></a>
-            <a href="/docs" className="act-fact act-fact-link">Президиум — решения<span className="act-arrow" aria-hidden="true">→</span></a>
-            <a href="/docs" className="act-fact act-fact-link">КРК — контроль<span className="act-arrow" aria-hidden="true">→</span></a>
+          <div className="act-branches act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <svg className="act-branch-svg" viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true">
+              <g fill="none" stroke="rgba(154,230,180,.55)" strokeWidth="2" vectorEffect="non-scaling-stroke">
+                <path d="M500 0 C500 42, 125 42, 125 96" />
+                <path d="M500 0 C500 42, 375 42, 375 96" />
+                <path d="M500 0 C500 42, 625 42, 625 96" />
+                <path d="M500 0 C500 42, 875 42, 875 96" />
+              </g>
+              <g fill="rgba(154,230,180,.75)">
+                <polygon points="119,96 131,96 125,106" />
+                <polygon points="369,96 381,96 375,106" />
+                <polygon points="619,96 631,96 625,106" />
+                <polygon points="869,96 881,96 875,106" />
+              </g>
+            </svg>
+            <div className="act-orggrid">
+              <div className="act-orgcard"><b>Конференция</b><span>Высший орган; направления 2025–2030</span></div>
+              <div className="act-orgcard"><b>Совет</b><span>Руководство между конференциями</span></div>
+              <div className="act-orgcard"><b>Президиум</b><span>Оперативные решения</span></div>
+              <div className="act-orgcard"><b>КРК</b><span>Контроль финансов и устава</span></div>
+            </div>
           </div>
         </div>
       </section>
