@@ -13,7 +13,7 @@ export default async function Partners() {
         </div>
       </div>
 
-      <section id="intro" className="act-scene act-dark v-pravo" style={{ minHeight: "480px" }}>
+      <section id="intro" className="act-scene act-dark v-pravo">
         <div className="container act-inner">
           <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>01</p>
           <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Партнёрство</p>
