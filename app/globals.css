@@ -57,7 +57,7 @@ a { color: #1a3a6b; }
 .links a:active { transform: scale(.96); }
 /* ---- Страница «Деятельность»: полные сцены (Apple-style) ---- */
 .act-page { }
-.act-scene { position: relative; padding: clamp(40px, 7vh, 76px) 0; min-height: clamp(360px, 52svh, 600px); display: flex; align-items: center; scroll-margin-top: 64px; }
+.act-scene { position: relative; padding: clamp(34px, 5.5vh, 64px) 0; min-height: clamp(300px, 40svh, 520px); display: flex; align-items: center; scroll-margin-top: 64px; }
 .act-scene.act-dark { background: linear-gradient(165deg, var(--navy) 0%, #2b3560 70%, #2f3a66 100%); color: #fff; }
 
 
@@ -193,7 +193,7 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-inner { position: relative; z-index: 1; }
 
 body.vi-mode .act-heroimg { display: none !important; }
-.act-nums { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; max-width: 960px; margin: 0 auto 26px; }
+.act-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 14px; max-width: 960px; margin: 0 auto 26px; }
 @media (max-width: 960px) { .act-nums { grid-template-columns: repeat(2, 1fr); max-width: 560px; } .act-nums .act-num-item:last-child:nth-child(odd) { grid-column: 1 / -1; } }
 .act-num-item { border: 1.5px solid rgba(240,194,100,.45); background: rgba(240,194,100,.10); border-radius: 14px; padding: 18px 12px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
 .act-num-item b { font-size: clamp(24px, 2.6vw, 36px); font-weight: 800; color: #ffe9bd; letter-spacing: -.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
