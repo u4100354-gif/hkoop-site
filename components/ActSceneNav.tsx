@@ -7,6 +7,7 @@ type Scene = { id: string; label: string; accent: string };
 export default function ActSceneNav({ scenes }: { scenes: Scene[] }) {
   const [active, setActive] = useState<string | null>(null);
   const [onLight, setOnLight] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     const sections = scenes
@@ -28,21 +29,16 @@ export default function ActSceneNav({ scenes }: { scenes: Scene[] }) {
     );
     sections.forEach((el) => io.observe(el));
 
-    // Параллакс: фон-слои сцен ползут чуть медленнее прокрутки
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Кружки появляются только когда докрутили до первой сцены
+    // (на главной вверху слайдер — точки не должны его перекрывать)
     let ticking = false;
     const update = () => {
       ticking = false;
-      const vh = window.innerHeight;
-      for (const el of sections) {
-        const r = el.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > vh) continue;
-        const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
-        el.style.setProperty("--py", p.toFixed(3));
-      }
+      const first = sections[0];
+      setHidden(window.scrollY < first.offsetTop - 120);
     };
     const onScroll = () => {
-      if (ticking || reduced) return;
+      if (ticking) return;
       ticking = true;
       requestAnimationFrame(update);
     };
@@ -56,7 +52,10 @@ export default function ActSceneNav({ scenes }: { scenes: Scene[] }) {
   }, [scenes]);
 
   return (
-    <nav className={`act-nav ${onLight ? "on-light" : ""}`} aria-label="Разделы страницы">
+    <nav
+      className={`act-nav ${onLight ? "on-light" : ""} ${hidden ? "off" : ""}`}
+      aria-label="Разделы страницы"
+    >
       {scenes.map((s) => (
         <Link
           key={s.id}
