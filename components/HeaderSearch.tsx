@@ -82,6 +82,9 @@ export default function HeaderSearch({ onGo, placeholder, chips }: { onGo?: () =
   return (
     <div className="hsearch" ref={box}>
       <div className="hsearch-box">
+      <span className="hsearch-lupa" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </span>
       <input
         ref={input}
         className="hsearch-input"

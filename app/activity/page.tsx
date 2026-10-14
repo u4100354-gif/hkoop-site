@@ -25,8 +25,8 @@ const scenes: {
       { label: "Бесплатно для членов" },
     ],
     ctas: [
-      { href: "/news?category=novosti", label: "Новости направления →" },
-      { href: "/contacts", label: "Задать вопрос →" },
+      { href: "/news?category=novosti", label: "Новости направления" },
+      { href: "/contacts", label: "Задать вопрос" },
     ],
   },
   {
@@ -47,7 +47,7 @@ const scenes: {
       { label: "Проверки на предприятиях" },
     ],
     ctas: [
-      { href: "/news?category=ohrana-truda", label: "Новости направления →", filled: true },
+      { href: "/news?category=ohrana-truda", label: "Новости направления", filled: true },
     ],
   },
   {
@@ -68,7 +68,7 @@ const scenes: {
       { label: "КРК" },
     ],
     ctas: [
-      { href: "/docs", label: "Текст соглашений →", filled: true },
+      { href: "/docs", label: "Текст соглашений", filled: true },
     ],
   },
   {
@@ -89,7 +89,7 @@ const scenes: {
       { label: "Свои проекты" },
     ],
     ctas: [
-      { href: "/news?category=molodezh", label: "Новости направления →", filled: true },
+      { href: "/news?category=molodezh", label: "Новости направления", filled: true },
     ],
   },
   {
@@ -111,7 +111,7 @@ const scenes: {
       { label: "Обмен делегациями" },
     ],
     ctas: [
-      { href: "/news?category=mezhdunarodnoe", label: "Новости направления →", filled: true },
+      { href: "/news?category=mezhdunarodnoe", label: "Новости направления", filled: true },
     ],
   },
   {
@@ -132,8 +132,8 @@ const scenes: {
       { label: "Поддержка первичек" },
     ],
     ctas: [
-      { href: "/organizations", label: "Членские организации →" },
-      { href: "/docs", label: "Планы и положения →" },
+      { href: "/organizations", label: "Членские организации" },
+      { href: "/docs", label: "Планы и положения" },
     ],
   },
 ];
@@ -148,15 +148,26 @@ export default function Activity() {
         </div>
       </div>
       <ActSceneNav scenes={scenes.map((x) => ({ id: x.id, label: x.eyebrow, accent: x.accent }))} />
-      {scenes.map((s, i) => (
+      {scenes.map(() => null)}
+      {scenes.map((s) => (
         <section key={s.id} id={s.id} className={`act-scene ${s.theme === "dark" ? "act-dark" : "act-light"} ${s.v}`}>
-          <span className="act-wm" aria-hidden="true">{s.num}</span>
-          <span className="act-glow" aria-hidden="true" />
           <div className="container act-inner">
             <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>{s.num}</p>
             <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>{s.eyebrow}</p>
             <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>{s.title}</h2>
-            <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+              {s.ctas.map((c) => (
+                <Link
+                  key={c.href + c.label}
+                  href={c.href}
+                  className={s.theme !== "light" && c.filled ? "act-btn-white" : "act-link"}
+                >
+                  {c.label}
+                  <span className="act-arrow" aria-hidden="true">→</span>
+                </Link>
+              ))}
+            </div>
+            <div className="act-text act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
               {s.text.map((p, j) => (
                 <p key={j}>{p}</p>
               ))}
@@ -168,18 +179,6 @@ export default function Activity() {
                 ) : (
                   <span key={f.label} className="act-fact reveal" style={{ "--i": k } as React.CSSProperties}>{f.label}</span>
                 )
-              ))}
-            </div>
-            <div className="act-ctas act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
-              {s.ctas.map((c) => (
-                <Link
-                  key={c.href + c.label}
-                  href={c.href}
-                  className={s.theme !== "light" && ("filled" in c && c.filled) ? "act-btn-white" : "act-link"}
-                >
-                  {c.label.replace(" →", "")}
-                  <span className="act-arrow" aria-hidden="true">→</span>
-                </Link>
               ))}
             </div>
           </div>
