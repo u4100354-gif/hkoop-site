@@ -27,7 +27,32 @@ export default function ActSceneNav({ scenes }: { scenes: Scene[] }) {
       { threshold: 0.35 }
     );
     sections.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+
+    // Параллакс: фон-слои сцен ползут чуть медленнее прокрутки
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const vh = window.innerHeight;
+      for (const el of sections) {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) continue;
+        const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+        el.style.setProperty("--py", p.toFixed(3));
+      }
+    };
+    const onScroll = () => {
+      if (ticking || reduced) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [scenes]);
 
   return (

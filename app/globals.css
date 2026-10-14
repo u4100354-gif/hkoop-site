@@ -106,7 +106,7 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-fact { border-color: color-mix(in srgb, var(--act-accent) 55%, transparent); }
 
 /* 01 Правозащита — базовый navy + зелёный (по умолчанию) */
-.act-scene.v-pravo { background: radial-gradient(120% 90% at 85% 22%, rgba(214,58,58,.18) 0%, rgba(214,58,58,0) 55%), linear-gradient(165deg, var(--navy) 0%, #2b3560 70%, #2f3a66 100%); --act-accent: #e05252; }
+.act-scene.v-pravo { background: linear-gradient(165deg, var(--navy) 0%, #2b3560 70%, #2f3a66 100%); --act-accent: #e05252; }
 .act-scene.v-pravo .act-eyebrow { color: #ff8b8b; }
 .act-scene.v-pravo .act-eyebrow::after { background: linear-gradient(90deg, #ffffff 0 33.4%, #2f5ea8 33.4% 66.7%, #d63a3a 66.7% 100%); opacity: 1; }
 
@@ -121,7 +121,7 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-scene.v-molodezh { background: linear-gradient(160deg, #17422d 0%, #2e7a4f 100%); --act-accent: #9ae6b4; }
 
 /* 05 Международное — тёмный стальной север, голубой */
-.act-scene.v-mezhdunar { background: radial-gradient(110% 80% at 15% 30%, rgba(127,224,200,.14) 0%, rgba(127,224,200,0) 55%), linear-gradient(160deg, #0e3b3a 0%, #1c5f57 100%); --act-accent: #7fe0c8; }
+.act-scene.v-mezhdunar { background: linear-gradient(160deg, #0e3b3a 0%, #1c5f57 100%); --act-accent: #7fe0c8; }
 .act-scene.v-mezhdunar .act-fact { border-color: rgba(127,180,232,.55); }
 
 /* 06 Организационная — тёплый песочный, янтарный */
@@ -211,6 +211,18 @@ html.js .act-scene .act-fact.in { opacity: 1; transform: none; }
 .act-scene.v-org::after { --act-next: #1a2138; height: 0; }
 /* контент сцены поверх моста */
 .act-scene .act-inner { position: relative; z-index: 1; }
+
+/* ---- act-depth: водяные цифры и параллакс-отсветы ---- */
+.act-wm { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(190px, 26vw, 340px); font-weight: 800; letter-spacing: -.04em; color: #fff; opacity: .05; pointer-events: none; user-select: none; transform: translateY(calc((var(--py, 0) - .5) * -55px)); }
+.act-scene.act-light .act-wm { color: var(--navy); opacity: .06; }
+.act-glow { position: absolute; inset: -12% 0; pointer-events: none; transform: translateY(calc((var(--py, 0) - .5) * -80px)); }
+.act-scene.v-pravo .act-glow { background: radial-gradient(52% 42% at 78% 20%, rgba(214,58,58,.22) 0%, rgba(214,58,58,0) 62%); }
+.act-scene.v-mezhdunar .act-glow { background: radial-gradient(48% 40% at 18% 28%, rgba(127,224,200,.18) 0%, rgba(127,224,200,0) 62%); }
+.act-scene.v-socpart .act-glow { background: radial-gradient(50% 40% at 82% 24%, rgba(240,194,100,.12) 0%, rgba(240,194,100,0) 60%); }
+.act-scene.v-molodezh .act-glow { background: radial-gradient(50% 40% at 22% 22%, rgba(154,230,180,.12) 0%, rgba(154,230,180,0) 60%); }
+@media (prefers-reduced-motion: reduce) {
+  .act-wm, .act-glow { transform: none !important; }
+}
 
 /* Header search dropdown */
 .hsearch { position: relative; display: flex; align-items: center; padding: 8px 6px; }

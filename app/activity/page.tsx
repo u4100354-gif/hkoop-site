@@ -106,7 +106,9 @@ export default function Activity() {
       <ActSceneNav scenes={scenes.map((x) => ({ id: x.id, label: x.eyebrow, accent: x.accent }))} />
       {scenes.map((s, i) => (
         <section key={s.id} id={s.id} className={`act-scene ${s.theme === "dark" ? "act-dark" : "act-light"} ${s.v}`}>
-          <div className="container act-inner">
+          <span className="act-wm" aria-hidden="true">{s.num}</span>
+            <span className="act-glow" aria-hidden="true" />
+            <div className="container act-inner">
             <p className="act-num act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>{s.num}</p>
             <p className="act-eyebrow act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>{s.eyebrow}</p>
             <h2 className="act-title act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>{s.title}</h2>
