@@ -307,8 +307,9 @@ body.vi-mode .act-arrow { background: #fff !important; color: #000 !important; b
 
 /* Header search dropdown */
 .hsearch { position: relative; display: flex; align-items: center; padding: 8px 6px; }
-.hsearch-lupa { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; opacity: .75; pointer-events: none; }
+.hsearch-lupa { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: rgba(255,255,255,.85); pointer-events: none; }
 .hsearch-lupa svg { display: block; width: 100%; height: 100%; }
+body.vi-mode .hsearch-lupa { color: #000 !important; }
 .hsearch-input { background: rgba(255,255,255,.13); border: 1.5px solid rgba(255,255,255,.42); color: #fff; border-radius: 999px; padding: 9px 14px 9px 38px; font-size: 14px; width: 240px; min-height: 40px; transition: background .25s cubic-bezier(0.32,0.72,0,1), border-color .25s, box-shadow .25s; }
 .hsearch-input::placeholder { color: rgba(255,255,255,.75); }
 .hsearch-input:hover { background: rgba(255,255,255,.22); border-color: #fff; }
