@@ -177,7 +177,8 @@ export default function Activity() {
                   href={c.href}
                   className={s.theme !== "light" && ("filled" in c && c.filled) ? "act-btn-white" : "act-link"}
                 >
-                  {c.label}
+                  {c.label.replace(" →", "")}
+                  <span className="act-arrow" aria-hidden="true">→</span>
                 </Link>
               ))}
             </div>

@@ -9,6 +9,7 @@ import MetricsGate from "../components/MetricsGate";
 import ScrollFx from "../components/ScrollFx";
 
 export const metadata: Metadata = {
+  themeColor: "#252e4f",
   title: "ХКООП — Хабаровское краевое объединение организаций профсоюзов",
   description: "Официальный сайт Союза ХКООП: новости, документы, деятельность, книга почёта, бесплатная консультация.",
 };

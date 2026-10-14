@@ -85,7 +85,7 @@ export default function HeaderSearch({ onGo, placeholder, chips }: { onGo?: () =
       <input
         ref={input}
         className="hsearch-input"
-        placeholder={placeholder ?? "🔍 Поиск"}
+        placeholder={placeholder ?? "Поиск"}
         value={q}
         maxLength={200}
         name="hkoop-q"

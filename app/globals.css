@@ -76,7 +76,7 @@ a { color: #1a3a6b; }
 .act-scene.act-dark .act-fact { border-color: rgba(255,255,255,.35); }
 .act-scene.act-light .act-fact { border-color: #cfd8e6; color: var(--navy); background: #fff; }
 .act-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.act-link { color: #1a3a6b; text-decoration: none; font-weight: 800; border: 2px solid #d5dce8; border-radius: 12px; padding: 12px 20px; transition: border-color .2s, background .2s, transform .15s, box-shadow .2s; }
+.act-link { color: #1a3a6b; text-decoration: none; font-weight: 800; border: 2px solid #d5dce8; border-radius: 12px; padding: 12px 20px; transition: border-color .3s cubic-bezier(0.32,0.72,0,1), background .3s cubic-bezier(0.32,0.72,0,1), transform .25s cubic-bezier(0.32,0.72,0,1), box-shadow .3s cubic-bezier(0.32,0.72,0,1); }
 .act-link:hover { border-color: var(--navy); background: #eaf1fb; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37,46,79,.12); }
 .act-dark .act-link { color: #fff; border-color: rgba(255,255,255,.45); }
 .act-dark .act-link:hover { border-color: #fff; background: rgba(255,255,255,.12); box-shadow: none; }
@@ -98,7 +98,7 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 }
 
 /* full-bleed: сцены во всю ширину окна (main обёрнут в .container) */
-.act-page { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); width: 100vw; }
+.act-page { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); width: 100vw; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
 /* вариации сцен: каждая — свой акцент и оттенок */
 .act-scene { --act-accent: var(--act-green, var(--green)); }
 .act-eyebrow { color: var(--act-accent); }
@@ -131,7 +131,7 @@ body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; 
 .act-btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(10,14,32,.35); }
 
 /* ---- act-chip-themes: заполненные фоны чипов и стилевые CTA по сценам ---- */
-.act-fact { transition: background .2s, transform .15s, box-shadow .2s; cursor: default; }
+.act-fact { transition: background .25s cubic-bezier(0.32,0.72,0,1), transform .2s cubic-bezier(0.32,0.72,0,1), box-shadow .25s cubic-bezier(0.32,0.72,0,1); cursor: default; }
 .act-fact:hover { transform: translateY(-1px); }
 
 /* 01 Правозащита (dark, red) */
@@ -293,6 +293,14 @@ body.vi-mode.vi-scheme-yb .act-pagehead h1, body.vi-mode.vi-scheme-yb .act-pageh
 .act-fact-link { color: inherit; text-decoration: none; cursor: pointer; transition: background .2s, transform .15s, box-shadow .2s; }
 .act-fact-link:hover { transform: translateY(-1px); }
 body.vi-mode .act-fact-link { background: #fff !important; border-color: #000 !important; color: #000 !important; }
+/* CTA: стрелка в собственном кружке (button-in-button) */
+.act-arrow { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.14); margin-left: 10px; margin-right: -8px; transition: transform .35s cubic-bezier(0.34,1.56,0.64,1), background .25s; }
+.act-btn-white .act-arrow, .act-scene.act-light .act-arrow, .act-scene.v-org .act-arrow { background: rgba(37,46,79,.08); }
+.act-btn-white:hover .act-arrow, .act-link:hover .act-arrow, .act-btn-white:focus-visible .act-arrow, .act-link:focus-visible .act-arrow { transform: translateX(3px) scale(1.08); background: rgba(255,255,255,.24); }
+.act-scene.act-light .act-btn-white:hover .act-arrow, .act-scene.v-org .act-link:hover .act-arrow { background: rgba(37,46,79,.14); }
+body.vi-mode .act-arrow { background: #fff !important; color: #000 !important; border: 1px solid #000 !important; }
+
+
 /* Header search dropdown */
 .hsearch { position: relative; display: flex; align-items: center; padding: 8px 6px; }
 .hsearch-input { background: rgba(255,255,255,.10); border: 1.5px solid rgba(255,255,255,.35); color: #fff; border-radius: 10px; padding: 8px 12px; font-size: 14px; width: 210px; transition: background .2s, border-color .2s, box-shadow .2s; }

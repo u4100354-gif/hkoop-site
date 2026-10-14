@@ -21,9 +21,9 @@ const catLabels: Record<string, string> = {
   podderzhka: "Поддержка",
 };
 
-export default function NewsFilter({ items }: { items: N[] }) {
+export default function NewsFilter({ items, initialCat }: { items: N[]; initialCat?: string }) {
   const [q, setQ] = useState("");
-  const [cat, setCat] = useState("all");
+  const [cat, setCat] = useState(initialCat && ["all", ...Array.from(new Set(items.map((i) => i.category)))].includes(initialCat) ? initialCat : "all");
   const [limit, setLimit] = useState(24);
   const cats = useMemo(() => ["all", ...Array.from(new Set(items.map((i) => i.category)))], [items]);
   const filtered = items.filter((n) => {

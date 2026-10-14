@@ -44,7 +44,7 @@ export default function Header() {
               <strong>Меню</strong>
               <button className="drawer-close" onClick={() => setOpen(false)} aria-label="Закрыть меню">✕</button>
             </div>
-            <HeaderSearch onGo={() => setOpen(false)} placeholder="🔍 Поиск по сайту…" chips={["Новости", "Документы", "Мероприятия", "Контакты"]} />
+            <HeaderSearch onGo={() => setOpen(false)} placeholder="Поиск по сайту…" chips={["Новости", "Документы", "Мероприятия", "Контакты"]} />
             {nav.map((n) => (
               <Link key={n.href} href={n.href} className={active(n.href) ? "active" : ""} onClick={() => setOpen(false)}>
                 {n.label}
