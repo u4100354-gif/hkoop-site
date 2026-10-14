@@ -6,6 +6,7 @@ const scenes = [
     id: "pravo",
     num: "01",
     theme: "dark",
+    accent: "#e05252",
     v: "v-pravo",
     eyebrow: "Правозащита",
     title: "Право — на вашей стороне",
@@ -23,6 +24,7 @@ const scenes = [
     id: "ohrana",
     num: "02",
     theme: "dark",
+    accent: "#ff9d9d",
     v: "v-ohrana",
     eyebrow: "Охрана труда",
     title: "Безопасное рабочее место — не привилегия",
@@ -37,6 +39,7 @@ const scenes = [
     id: "socpart",
     num: "03",
     theme: "dark",
+    accent: "#f0c264",
     v: "v-socpart",
     eyebrow: "Социальное партнёрство",
     title: "Договариваемся на равных",
@@ -51,6 +54,7 @@ const scenes = [
     id: "molodezh",
     num: "04",
     theme: "dark",
+    accent: "#9ae6b4",
     v: "v-molodezh",
     eyebrow: "Молодёжный совет",
     title: "Молодёжь решает",
@@ -65,6 +69,7 @@ const scenes = [
     id: "mezhdunar",
     num: "05",
     theme: "dark",
+    accent: "#7fe0c8",
     v: "v-mezhdunar",
     eyebrow: "Международное сотрудничество",
     title: "Соседи по Амуру",
@@ -79,6 +84,7 @@ const scenes = [
     id: "org",
     num: "06",
     theme: "light",
+    accent: "#b8860b",
     v: "v-org",
     eyebrow: "Организационная работа",
     title: "Профсоюз — это организация людей",
@@ -97,7 +103,7 @@ const scenes = [
 export default function Activity() {
   return (
     <div className="act-page">
-      <ActSceneNav scenes={scenes.map((x) => ({ id: x.id, label: x.eyebrow }))} />
+      <ActSceneNav scenes={scenes.map((x) => ({ id: x.id, label: x.eyebrow, accent: x.accent }))} />
       {scenes.map((s, i) => (
         <section key={s.id} id={s.id} className={`act-scene ${s.theme === "dark" ? "act-dark" : "act-light"} ${s.v}`}>
           <div className="container act-inner">

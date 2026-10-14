@@ -59,9 +59,8 @@ a { color: #1a3a6b; }
 .act-page { }
 .act-scene { position: relative; padding: clamp(64px, 9vh, 110px) 0; }
 .act-scene.act-dark { background: linear-gradient(165deg, var(--navy) 0%, #2b3560 70%, #2f3a66 100%); color: #fff; }
-.act-scene.act-dark + .act-scene.act-dark { border-top: 1px solid rgba(255,255,255,.08); }
-.act-scene.act-dark + .act-scene.act-light,
-.act-scene.act-light + .act-scene.act-dark { border-top: 1px solid rgba(37,46,79,.10); }
+
+
 .act-inner { max-width: 780px; text-align: center; }
 .act-num { font-size: clamp(13px, 1.4vw, 16px); font-weight: 800; letter-spacing: .35em; opacity: .55; margin: 0 0 6px; font-variant-numeric: tabular-nums; }
 .act-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 13px; font-weight: 800; opacity: .75; margin: 0 0 14px; color: var(--green); }
@@ -186,15 +185,32 @@ html.js .act-scene .act-fact.in { opacity: 1; transform: none; }
 }
 /* боковой навигатор по сценам */
 .act-nav { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 30; }
-.act-nav a { display: flex; align-items: center; gap: 8px; text-decoration: none; opacity: .85; }
-.act-nav .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.45); border: 1px solid rgba(255,255,255,.6); transition: transform .25s, background .25s, box-shadow .25s; }
-.act-nav .lbl { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .04em; opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; white-space: nowrap; text-shadow: 0 1px 6px rgba(10,14,32,.5); }
+.act-nav a { position: relative; display: flex; align-items: center; justify-content: flex-end; text-decoration: none; opacity: .85; transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+.act-nav .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.4); border: 1px solid rgba(255,255,255,.6); transition: transform .3s cubic-bezier(.34,1.56,.64,1), background .25s, box-shadow .3s; }
+.act-nav .lbl { position: absolute; right: 24px; top: 50%; margin-top: -0.6em; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .04em; opacity: 0; transform: translateX(10px); transition: opacity .25s, transform .3s cubic-bezier(.34,1.56,.64,1); white-space: nowrap; text-shadow: 0 1px 6px rgba(10,14,32,.5); pointer-events: none; }
 .act-nav a:hover .lbl, .act-nav a.on .lbl { opacity: 1; transform: none; }
-.act-nav a.on .dot { background: #fff; transform: scale(1.5); box-shadow: 0 0 0 4px rgba(255,255,255,.18); }
+.act-nav a:hover { transform: translateX(-6px); opacity: 1; }
+.act-nav a:hover .dot { background: var(--nva, #fff); border-color: var(--nva, #fff); transform: scale(1.45); box-shadow: 0 0 0 5px color-mix(in srgb, var(--nva, #fff) 25%, transparent); }
+.act-nav a.on .dot { transform: scale(1.3); }
+.act-nav a:active { transform: translateX(-2px) scale(.94); }
+.act-nav a.on .dot { background: var(--nva, #fff); border-color: var(--nva, #fff); box-shadow: 0 0 0 4px color-mix(in srgb, var(--nva, #fff) 28%, transparent); }
 .act-nav.on-light .lbl { color: var(--navy); text-shadow: none; }
+.act-nav.on-light a:hover .dot { box-shadow: 0 0 0 5px color-mix(in srgb, var(--nva, var(--navy)) 22%, transparent); }
 .act-nav.on-light .dot { background: rgba(37,46,79,.35); border-color: rgba(37,46,79,.5); }
-.act-nav.on-light a.on .dot { background: var(--navy); box-shadow: 0 0 0 4px rgba(37,46,79,.12); }
+.act-nav.on-light a.on .dot { background: var(--nva, var(--navy)); box-shadow: 0 0 0 4px rgba(37,46,79,.12); }
 @media (max-width: 1200px) { .act-nav { display: none; } }
+
+/* ---- act-bridge: плавные переходы между сценами ---- */
+.act-scene { position: relative; }
+.act-scene::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 110px; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--act-next) 100%); opacity: .9; }
+.act-scene.v-pravo::after { --act-next: #3a1420; }
+.act-scene.v-ohrana::after { --act-next: #232c55; }
+.act-scene.v-socpart::after { --act-next: #17422d; }
+.act-scene.v-molodezh::after { --act-next: #0e3b3a; }
+.act-scene.v-mezhdunar::after { --act-next: #faf7f0; }
+.act-scene.v-org::after { --act-next: #1a2138; height: 0; }
+/* контент сцены поверх моста */
+.act-scene .act-inner { position: relative; z-index: 1; }
 
 /* Header search dropdown */
 .hsearch { position: relative; display: flex; align-items: center; padding: 8px 6px; }

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-type Scene = { id: string; label: string };
+type Scene = { id: string; label: string; accent: string };
 
 export default function ActSceneNav({ scenes }: { scenes: Scene[] }) {
   const [active, setActive] = useState<string | null>(null);
@@ -16,7 +16,6 @@ export default function ActSceneNav({ scenes }: { scenes: Scene[] }) {
 
     const io = new IntersectionObserver(
       (entries) => {
-        // ближайшая к верхнему краю видимая сцена — активная
         const vis = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
@@ -33,8 +32,13 @@ export default function ActSceneNav({ scenes }: { scenes: Scene[] }) {
 
   return (
     <nav className={`act-nav ${onLight ? "on-light" : ""}`} aria-label="Сцены страницы">
-      {scenes.map((s) => (
-        <Link key={s.id} href={`#${s.id}`} className={active === s.id ? "on" : ""}>
+      {scenes.map((s, i) => (
+        <Link
+          key={s.id}
+          href={`#${s.id}`}
+          className={active === s.id ? "on" : ""}
+          style={{ "--nva": s.accent, "--nvi": i } as React.CSSProperties}
+        >
           <span className="dot" aria-hidden="true" />
           <span className="lbl">{s.label}</span>
         </Link>
