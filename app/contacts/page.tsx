@@ -12,12 +12,6 @@ export default async function Contacts() {
   const mx = safeHref(s.social_max);
   return (
     <div className="act-page">
-      <div className="act-pagehead">
-        <div className="container">
-          <h1>Контакты</h1>
-          <p>{s.address || "680000, г. Хабаровск, ул. Муравьева-Амурского, 4"}</p>
-        </div>
-      </div>
 
       <section id="nayti" className="act-scene act-dark v-about">
         <div className="container act-inner">
