@@ -650,6 +650,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--navy); box-shado
 
 /* Footer */
 .footer { margin-top: 36px; background: var(--navy-dark); color: #cfd8e6; padding: 26px 0 20px; font-size: 14px; }
+/* на странице «Деятельность» сцены идут впритык к подвалу */
+body:has(.act-page) .footer { margin-top: 0; }
 .footer a { color: #a9c6f2; text-decoration: none; border-bottom: 1px dotted transparent; transition: opacity .2s, filter .2s, border-color .2s; overflow-wrap: anywhere; }
 .footer a:hover { opacity: 1; filter: brightness(1.2); border-bottom-color: #a9c6f2; }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr auto; gap: 24px; text-align: left; align-items: start; }
