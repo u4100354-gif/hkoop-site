@@ -56,7 +56,7 @@ export default async function Contacts() {
 
       <section id="konsult" className="act-scene act-dark v-socpart">
         <div className="container act-inner">
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Бесплатно для членов</p>
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Бесплатно для членов профсоюза</p>
           <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Консультация юриста</h2>
           <div className="act-form-card act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
             <ConsultForm />
