@@ -8,7 +8,6 @@ export default function About() {
         { id: "intro", label: "О Союзе", accent: "#3aa655" },
         { id: "cifry", label: "В цифрах", accent: "#f0c264" },
         { id: "organy", label: "Органы", accent: "#9ae6b4" },
-        { id: "napravleniya", label: "Направления", accent: "#8a6a12" },
       ]} />
       <div className="act-pagehead">
         <div className="container">
@@ -85,27 +84,6 @@ export default function About() {
             <span className="act-fact">Совет — руководство</span>
             <span className="act-fact">Президиум — решения</span>
             <span className="act-fact">КРК — контроль</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="napravleniya" className="act-scene act-light v-org">
-        <div className="container act-inner">
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>2025–2030</p>
-          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Основные направления</h2>
-          <div className="act-ctas act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
-            <Link href="/activity" className="act-link">
-              Все направления подробно
-              <span className="act-arrow" aria-hidden="true">→</span>
-            </Link>
-          </div>
-          <div className="act-facts">
-            <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>Правозащита</span>
-            <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>Охрана труда</span>
-            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Социальное партнёрство</span>
-            <span className="act-fact reveal" style={{ "--i": 2 } as React.CSSProperties}>Молодёжная политика</span>
-            <span className="act-fact reveal" style={{ "--i": 3 } as React.CSSProperties}>Международное сотрудничество</span>
-            <span className="act-fact reveal" style={{ "--i": 4 } as React.CSSProperties}>Организационная работа</span>
           </div>
         </div>
       </section>
