@@ -61,7 +61,9 @@ a { color: #1a3a6b; }
 .act-scene.act-dark { background: linear-gradient(165deg, var(--navy) 0%, #2b3560 70%, #2f3a66 100%); color: #fff; }
 
 
-.act-inner { max-width: 780px; text-align: center; margin: 0 auto; }
+.act-inner { max-width: 780px; text-align: center; margin: 0 auto; display: flex; flex-direction: column; }
+/* кнопки — всегда в самом низу блока сцены */
+.act-inner > .act-ctas { order: 9; margin-top: 22px; }
 .act-num { font-size: clamp(13px, 1.4vw, 16px); font-weight: 800; letter-spacing: .35em; opacity: .55; margin: 0 0 6px; font-variant-numeric: tabular-nums; }
 .act-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 13px; font-weight: 800; opacity: 1; margin: 0 0 12px; color: var(--green); }
 .act-eyebrow::after { content: ""; display: block; width: 46px; height: 2px; background: var(--green); margin: 10px auto 0; opacity: .9; }
