@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Slider from "../components/Slider";
 import ConsultForm from "../components/ConsultForm";
 import PartnersStrip from "../components/PartnersStrip";
 import Counter from "../components/Counter";
@@ -47,40 +48,14 @@ export default async function Home() {
   const docHref = (d: any) => safeHref(d.file_local) || safeHref(d.file_old) || "/docs";
   return (
     <div className="act-page">
+      <Slider />
       <ActSceneNav scenes={[
-        { id: "hero", label: "Профобъединение", accent: "#3aa655" },
         { id: "news", label: "Новости", accent: "#8a6a12" },
         { id: "cifry", label: "В цифрах", accent: "#f0c264" },
         { id: "docs", label: "Документы", accent: "#9ae6b4" },
         { id: "links", label: "Партнёры", accent: "#8a6a12" },
         { id: "konsult", label: "Консультация", accent: "#f0c264" },
       ]} />
-
-      <section id="hero" className="act-scene act-dark v-about">
-        <div className="act-heroimg" aria-hidden="true" style={{ backgroundImage: "url(/images/banners/banner-1.JPG)" }} />
-        <div className="container act-inner">
-          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Союз профсоюзов Хабаровского края</p>
-          <h1 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Хабаровское Профобъединение</h1>
-          <div className="act-ctas act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
-            <Link href="/activity" className="act-btn-white">
-              Наши направления
-              <span className="act-arrow" aria-hidden="true">→</span>
-            </Link>
-            <Link href="/news" className="act-link">
-              Все новости
-              <span className="act-arrow" aria-hidden="true">→</span>
-            </Link>
-          </div>
-          <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
-            <p>77 лет на страже прав трудящихся. Объединяем 20 профсоюзных организаций края: защита труда, правовая помощь, социальное партнёрство.</p>
-          </div>
-          <div className="act-facts">
-            <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>С 11.12.1948</span>
-            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Член ФНПР</span>
-            <span className="act-fact reveal" style={{ "--i": 2 } as React.CSSProperties}>Хабаровск</span>
-          </div>
-        </div>
-      </section>
 
       <section id="news" className="act-scene act-light v-org">
         <div className="container act-inner-wide">

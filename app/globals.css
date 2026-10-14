@@ -305,6 +305,9 @@ body.vi-mode .act-fact-link { background: #fff !important; border-color: #000 !i
 
 
 /* Список-закладки со стеклом (как чипы сцен) */
+/* черта по стороне заголовка: слева по умолчанию */
+.act-eyebrow::after { margin-left: 0; margin-right: auto; }
+.act-inner .act-eyebrow::after { margin-left: auto; margin-right: auto; }
 .act-flist { display: flex; flex-wrap: nowrap; justify-content: center; gap: 12px; margin-top: 18px; }
 .act-flist .act-fact { flex: none; display: inline-flex; align-items: center; gap: 10px; padding: 11px 14px 11px 22px; white-space: nowrap; }
 .act-flist .act-arrow { width: 26px; height: 26px; margin: 0; background: rgba(154,230,180,.16); transition: transform .35s cubic-bezier(0.34,1.56,0.64,1), background .25s; }
