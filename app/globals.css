@@ -331,6 +331,12 @@ body.vi-mode .act-branch-svg { display: none; }
 @media (max-width: 760px) { .act-orggrid { grid-template-columns: 1fr; } }
 
 
+/* Главная: сетка документов в сцене */
+.act-docgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 4px; }
+@media (max-width: 1000px) { .act-docgrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 760px) { .act-docgrid { grid-template-columns: 1fr; } }
+
+
 /* CTA: стрелка в собственном кружке (button-in-button) */
 .act-arrow { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.14); margin-left: 10px; margin-right: -8px; transition: transform .35s cubic-bezier(0.34,1.56,0.64,1), background .25s; }
 .act-btn-white .act-arrow, .act-scene.act-light .act-arrow, .act-scene.v-org .act-arrow { background: rgba(37,46,79,.08); }

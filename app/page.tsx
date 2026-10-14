@@ -1,8 +1,9 @@
-import Slider from "../components/Slider";
+import Link from "next/link";
 import ConsultForm from "../components/ConsultForm";
 import PartnersStrip from "../components/PartnersStrip";
 import Counter from "../components/Counter";
-import { q, parseTags } from "../lib/db";
+import ActSceneNav from "../components/ActSceneNav";
+import { q } from "../lib/db";
 import { safeHref, safeImgSrc } from "../lib/url";
 
 const catLabels: Record<string, string> = {
@@ -45,81 +46,140 @@ export default async function Home() {
   ]);
   const docHref = (d: any) => safeHref(d.file_local) || safeHref(d.file_old) || "/docs";
   return (
-    <>
-      <Slider />
+    <div className="act-page">
+      <ActSceneNav scenes={[
+        { id: "hero", label: "Профобъединение", accent: "#3aa655" },
+        { id: "news", label: "Новости", accent: "#8a6a12" },
+        { id: "cifry", label: "В цифрах", accent: "#f0c264" },
+        { id: "docs", label: "Документы", accent: "#9ae6b4" },
+        { id: "links", label: "Партнёры", accent: "#8a6a12" },
+        { id: "konsult", label: "Консультация", accent: "#f0c264" },
+      ]} />
 
-      <div className="main-grid reveal">
-        <section className="section" style={{ margin: 0 }}>
-          <div className="section-head">
-            <h2>Новости</h2>
-            <a href="/news" className="more">Все новости →</a>
+      <section id="hero" className="act-scene act-dark v-about">
+        <div className="act-heroimg" aria-hidden="true" style={{ backgroundImage: "url(/images/banners/banner-1.JPG)" }} />
+        <div className="container act-inner">
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Союз профсоюзов Хабаровского края</p>
+          <h1 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Хабаровское Профобъединение</h1>
+          <div className="act-ctas act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
+            <Link href="/activity" className="act-btn-white">
+              Наши направления
+              <span className="act-arrow" aria-hidden="true">→</span>
+            </Link>
+            <Link href="/news" className="act-link">
+              Все новости
+              <span className="act-arrow" aria-hidden="true">→</span>
+            </Link>
           </div>
-          <div className="grid">
-            {(news as any[]).slice(0, 4).map((n) => (
-              <article key={n.id} className="card news-card">
-                <div className="thumb">
-                  <img src={safeImgSrc(n.image) || newsImages[n.id] || catFallback[n.category] || "/images/i-1.webp"} alt={n.title} loading="lazy" width={400} height={250} />
-                  <span className="date-badge">{n.date}</span>
-                </div>
+          <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <p>77 лет на страже прав трудящихся. Объединяем 20 профсоюзных организаций края: защита труда, правовая помощь, социальное партнёрство.</p>
+          </div>
+          <div className="act-facts">
+            <span className="act-fact reveal" style={{ "--i": 0 } as React.CSSProperties}>С 11.12.1948</span>
+            <span className="act-fact reveal" style={{ "--i": 1 } as React.CSSProperties}>Член ФНПР</span>
+            <span className="act-fact reveal" style={{ "--i": 2 } as React.CSSProperties}>Хабаровск</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="news" className="act-scene act-light v-org">
+        <div className="container act-inner-wide">
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Информируем</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Новости</h2>
+          <div className="act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
+            <div className="grid">
+              {(news as any[]).slice(0, 4).map((n) => (
+                <article key={n.id} className="card news-card">
+                  <div className="thumb">
+                    <img src={safeImgSrc(n.image) || newsImages[n.id] || catFallback[n.category] || "/images/i-1.webp"} alt={n.title} loading="lazy" width={400} height={250} />
+                    <span className="date-badge">{n.date}</span>
+                  </div>
+                  <div className="card-body">
+                    <small className="cat">{catLabels[n.category] || n.category}</small>
+                    <h3><a href={`/news/${n.id}`}>{n.title}</a></h3>
+                    <p>{n.excerpt}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <Link href="/news" className="act-link">
+              Все новости
+              <span className="act-arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="cifry" className="act-scene act-dark v-socpart">
+        <div className="container act-inner">
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>ХКООП в цифрах</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Сила — в единстве</h2>
+          <div className="act-nums act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
+            <div className="act-num-item"><b><Counter end={77} /></b><span>лет с 11.12.1948</span></div>
+            <div className="act-num-item"><b><Counter end={20} /></b><span>членских организаций</span></div>
+            <div className="act-num-item"><b><Counter end={7} /></b><span>координационных советов</span></div>
+            <div className="act-num-item"><b><Counter end={102} suffix=" тыс." /></b><span>членов профсоюза</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="docs" className="act-scene act-dark v-molodezh">
+        <div className="container act-inner">
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>База документов</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Планы и соглашения</h2>
+          <div className="act-docgrid act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
+            {(docs as any[]).slice(0, 4).map((d) => (
+              <a key={d.id} className="card doc-card" href={docHref(d)} target={d.file_local ? undefined : "_blank"} rel="noreferrer">
                 <div className="card-body">
-                  <small className="cat">{catLabels[n.category] || n.category}</small>
-                  <h3><a href={`/news/${n.id}`}>{n.title}</a></h3>
-                  <p>{n.excerpt}</p>
+                  <span className="doc-icon">PDF</span>
+                  <strong>{d.title}</strong>
+                  <div><small>{typeLabels[d.type] || d.type} · {d.year}</small></div>
                 </div>
-              </article>
+              </a>
             ))}
           </div>
-        </section>
-        <aside className="side-list">
-          <strong>Быстрые ссылки</strong>
-          <a href="/docs">Наши планы на сентябрь →</a>
-          <a href="/docs">Справочник мер поддержки СВО →</a>
-          <a href="/docs">XII съезд: Программа ФНПР →</a>
-          <a href="/docs">Трёхстороннее соглашение 2026–2028 →</a>
-          <a href="/contacts" className="hotline">Горячая линия по трудовому праву →</a>
-        </aside>
-      </div>
-
-      <section className="section stats-band reveal">
-        <h2>ХКООП в цифрах</h2>
-        <div className="stats">
-          <div><Counter end={77} /><span>лет с 11.12.1948</span></div>
-          <div><Counter end={20} /><span>членских организаций</span></div>
-          <div><Counter end={7} /><span>координационных советов</span></div>
-          <div><Counter end={102} suffix=" тыс." /><span>членов профсоюза</span></div>
+          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <Link href="/docs" className="act-btn-white">
+              Все документы
+              <span className="act-arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="section reveal">
-        <div className="section-head">
-          <h2>Документы</h2>
-          <a href="/docs" className="more">Все документы →</a>
-        </div>
-        <div className="grid">
-          {(docs as any[]).slice(0, 4).map((d) => (
-            <div key={d.id} className="card doc-card"><div className="card-body">
-              <span className="doc-icon">PDF</span>
-              <strong>{d.title}</strong>
-              <div><small>{typeLabels[d.type] || d.type} · {d.year}</small></div>
-              <div className="btn-row"><a className="btn btn-ghost" href={docHref(d)} target={d.file_local ? undefined : "_blank"} rel="noreferrer">Открыть →</a></div>
-            </div></div>
-          ))}
+      <section id="links" className="act-scene act-light v-org">
+        <div className="container act-inner-wide">
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Полезные ссылки</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Наши партнёры</h2>
+          <div className="act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
+            <PartnersStrip items={partners as any} />
+          </div>
+          <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <Link href="/partners" className="act-link">
+              Подробнее о партнёрстве
+              <span className="act-arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="section reveal">
-        <h2>Полезные ссылки</h2>
-        <PartnersStrip items={partners as any} />
-      </section>
-
-      <section className="section consult-band reveal">
-        <div>
-          <h2>Бесплатная консультация</h2>
-          <p>Горячая линия по вопросам трудового законодательства для членов профсоюза. Ответим в рабочее время: Пн-Чт 9:00–18:00, Пт 9:00–16:20.</p>
-          <p><b>8 (4212) 32-87-18</b> · ksps-priem@mail.ru</p>
+      <section id="konsult" className="act-scene act-dark v-socpart">
+        <div className="container act-inner">
+          <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Бесплатно для членов профсоюза</p>
+          <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Консультация юриста</h2>
+          <div className="act-ctas act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
+            <a href="tel:+784212328718" className="act-btn-white">8 (4212) 32-87-18</a>
+          </div>
+          <div className="act-text act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
+            <p>Горячая линия по вопросам трудового законодательства. Пн-Чт 9:00–18:00, Пт 9:00–16:20 · ksps-priem@mail.ru</p>
+          </div>
+          <div className="act-form-card act-r reveal" style={{ "--i": 4 } as React.CSSProperties}>
+            <ConsultForm />
+          </div>
         </div>
-        <div className="card"><div className="card-body"><ConsultForm /></div></div>
       </section>
-    </>
+    </div>
   );
 }
