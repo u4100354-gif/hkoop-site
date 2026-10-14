@@ -55,6 +55,49 @@ a { color: #1a3a6b; }
 .links a { color: #fff; text-decoration: none; font-weight: 700; transition: background .2s, transform .15s; }
 .links a:hover { background: rgba(255,255,255,.08); }
 .links a:active { transform: scale(.96); }
+/* ---- Страница «Деятельность»: полные сцены (Apple-style) ---- */
+.act-page { }
+.act-scene { position: relative; padding: clamp(64px, 9vh, 110px) 0; }
+.act-scene.act-dark { background: linear-gradient(165deg, var(--navy) 0%, #2b3560 70%, #2f3a66 100%); color: #fff; }
+.act-scene.act-dark + .act-scene.act-dark { border-top: 1px solid rgba(255,255,255,.08); }
+.act-scene.act-dark + .act-scene.act-light,
+.act-scene.act-light + .act-scene.act-dark { border-top: 1px solid rgba(37,46,79,.10); }
+.act-inner { max-width: 780px; text-align: center; }
+.act-num { font-size: clamp(13px, 1.4vw, 16px); font-weight: 800; letter-spacing: .35em; opacity: .55; margin: 0 0 6px; font-variant-numeric: tabular-nums; }
+.act-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 13px; font-weight: 800; opacity: .75; margin: 0 0 14px; color: var(--green); }
+.act-eyebrow::after { content: ""; display: block; width: 46px; height: 2px; background: var(--green); margin: 10px auto 0; opacity: .9; }
+.act-title { font-size: clamp(30px, 4.2vw, 52px); line-height: 1.1; letter-spacing: -.02em; font-weight: 800; margin: 0 0 22px; }
+.act-scene.act-light .act-title { color: var(--navy); }
+.act-text { max-width: 640px; margin: 0 auto 26px; display: grid; gap: 14px; }
+.act-text p { margin: 0; font-size: clamp(16px, 1.6vw, 19px); line-height: 1.65; }
+.act-scene.act-dark .act-text p { color: rgba(255,255,255,.88); }
+.act-scene.act-light .act-text p { color: #3c475e; }
+.act-facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 30px; }
+.act-fact { border: 1.5px solid rgba(255,255,255,.35); border-radius: 999px; padding: 8px 15px; font-size: 13.5px; font-weight: 700; white-space: nowrap; }
+.act-scene.act-dark .act-fact { border-color: rgba(255,255,255,.35); }
+.act-scene.act-light .act-fact { border-color: #cfd8e6; color: var(--navy); background: #fff; }
+.act-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.act-link { color: #1a3a6b; text-decoration: none; font-weight: 800; border: 2px solid #d5dce8; border-radius: 12px; padding: 12px 20px; transition: border-color .2s, background .2s, transform .15s, box-shadow .2s; }
+.act-link:hover { border-color: var(--navy); background: #eaf1fb; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37,46,79,.12); }
+.act-dark .act-link { color: #fff; border-color: rgba(255,255,255,.45); }
+.act-dark .act-link:hover { border-color: #fff; background: rgba(255,255,255,.12); box-shadow: none; }
+.act-ctas .btn-white { background: #fff; color: var(--navy); border: 2px solid #fff; border-radius: 12px; padding: 12px 22px; font-weight: 800; font-size: 15px; text-decoration: none; transition: transform .15s, box-shadow .2s, background .2s; }
+.act-ctas .btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(10,14,32,.35); }
+.act-ctas .btn-ghost, .act-ctas .act-link-dark { color: #fff; border-color: rgba(255,255,255,.45); border-width: 2px; border-radius: 12px; padding: 12px 18px; text-decoration: none; font-weight: 800; }
+.act-ctas .btn-ghost:hover { background: rgba(255,255,255,.12); }
+/* VI-режим: как прочие крупные блоки */
+body.vi-mode .act-scene.act-dark, body.vi-mode .act-scene.act-light { background: #fff !important; color: #000 !important; border-top: 2px solid #000 !important; }
+body.vi-mode .act-scene.act-light .act-title, body.vi-mode .act-scene.act-dark .act-title,
+body.vi-mode .act-text p, body.vi-mode .act-eyebrow, body.vi-mode .act-num { color: #000 !important; }
+body.vi-mode .act-fact { border-color: #000 !important; color: #000 !important; background: #fff !important; }
+@media (max-width: 760px) {
+  .act-scene { padding: 56px 0; }
+  .act-inner { text-align: left; }
+  .act-eyebrow::after { margin-left: 0; }
+  .act-facts { justify-content: flex-start; }
+  .act-ctas { justify-content: flex-start; }
+}
+
 /* Header search dropdown */
 .hsearch { position: relative; display: flex; align-items: center; padding: 8px 6px; }
 .hsearch-input { background: rgba(255,255,255,.10); border: 1.5px solid rgba(255,255,255,.35); color: #fff; border-radius: 10px; padding: 8px 12px; font-size: 14px; width: 210px; transition: background .2s, border-color .2s, box-shadow .2s; }
