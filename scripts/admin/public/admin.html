@@ -131,6 +131,7 @@
   .drop.on { border-color: var(--green); background: var(--green-100); }
   .prev img { max-width: 260px; max-height: 160px; object-fit: contain; border-radius: var(--r-sm); display: block; margin-top: 8px; }
   .prev img.docprev { width: 100%; max-height: 340px; background: var(--navy-50); object-fit: cover; }
+      .prev iframe.docprev { width: 100%; max-height: 340px; height: 340px; border: 1px solid rgba(30,58,95,.25); border-radius: var(--r-sm); background: #fff; }
   .fmt { display: flex; gap: 4px; flex-wrap: wrap; }
   .fmt button { border: 1px solid var(--line); background: #fff; border-radius: var(--r-sm); min-width: 38px; min-height: 34px; font-weight: 700; transition: border-color .12s var(--ease), background-color .12s var(--ease); }
   .fmt button:hover { border-color: var(--ink2); background: var(--navy-50); }
@@ -465,7 +466,7 @@ async function editDoc(id) {
     </div>
     <div class="frow">
       <div><label>Файл локально (PDF)<select id="dfile"><option value="">— не задан —</option>${await (async () => { try { const { files } = await api("/api/files?dir=docs"); return (files || []).map(f => `<option value="${esc(f)}" ${row.file_local===f?"selected":""}>${esc(f)}</option>`).join(""); } catch { return ""; } })()}</select></label>
-      <div class="prev"><img id="dociframe" class="docprev" src="${esc(row.file_local)}" alt="Первый лист PDF" style="${row.file_local?"":"display:none"}"></div></div>
+      <div class="prev"><iframe id="dociframe" class="docprev" src="${esc(row.file_local)}" title="Первый лист PDF" style="${row.file_local?"":"display:none"}"></div></div>
       <div>
         <label>Загрузить PDF (до 15 МБ)</label>
         <div class="drop" id="ddrop" tabindex="0" role="button">Перетащите PDF или нажмите</div>

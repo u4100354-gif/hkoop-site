@@ -117,7 +117,7 @@ export default function DocsFilter({ items }: { items: D[] }) {
               </div>
             ) : (
               <>
-                <iframe className="pdf-frame" src={preview.src} title={`PDF: ${preview.title}`} sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerPolicy="no-referrer" />
+                <iframe className="pdf-frame" src={preview.src} title={`PDF: ${preview.title}`} referrerPolicy="no-referrer" />
                 <p className="pdf-note">
                   Если PDF не виден — <a href={preview.src} target="_blank" rel="noreferrer">откройте файл в новой вкладке</a>.
                 </p>

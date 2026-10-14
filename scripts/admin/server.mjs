@@ -125,6 +125,21 @@ const server = http.createServer(async (req, res) => {
     }
     if (!needAuth(req, res)) return;
 
+    // статика сайта для превью (картинки и PDF) — только чтение
+    if (req.method === "GET" && (u.pathname.startsWith("/images/") || u.pathname.startsWith("/docs/"))) {
+      const p = path.normalize(path.join(SITE_ROOT, "public", u.pathname));
+      const root = path.normalize(path.join(SITE_ROOT, "public"));
+      if (p.startsWith(root + path.sep) && fs.existsSync(p) && fs.statSync(p).isFile()) {
+        const mime = { ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".gif": "image/gif", ".webp": "image/webp", ".svg": "image/svg+xml", ".pdf": "application/pdf" }[path.extname(p).toLowerCase()] || "application/octet-stream";
+        res.writeHead(200, { "Content-Type": mime, "Cache-Control": "max-age=300" });
+        res.end(fs.readFileSync(p));
+      } else {
+        res.writeHead(404, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "нет файла" }));
+      }
+      return;
+    }
+
     if (req.method === "GET" && u.pathname === "/api/news") {
       const q = (u.searchParams.get("q") || "").slice(0, 100);
       const like = `%${q}%`;
