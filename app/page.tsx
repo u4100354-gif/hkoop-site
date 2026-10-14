@@ -106,13 +106,14 @@ export default async function Home() {
           <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Планы и соглашения</h2>
           <div className="act-docgrid act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
             {(docs as any[]).slice(0, 4).map((d) => (
-              <a key={d.id} className="card doc-card" href={docHref(d)} target={d.file_local ? undefined : "_blank"} rel="noreferrer">
+              <div key={d.id} className="card doc-card">
                 <div className="card-body">
                   <span className="doc-icon">PDF</span>
                   <strong>{d.title}</strong>
                   <div><small>{typeLabels[d.type] || d.type} · {d.year}</small></div>
+                  <div className="btn-row"><a className="btn btn-ghost" href={docHref(d)} target={d.file_local ? undefined : "_blank"} rel="noreferrer">Открыть →</a></div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
           <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
