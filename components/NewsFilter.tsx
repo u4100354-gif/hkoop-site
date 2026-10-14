@@ -21,11 +21,17 @@ const catLabels: Record<string, string> = {
   podderzhka: "Поддержка",
 };
 
-export default function NewsFilter({ items, initialCat }: { items: N[]; initialCat?: string }) {
+function catFromUrl(all: string[]): string {
+  if (typeof window === "undefined") return "all";
+  const v = new URLSearchParams(window.location.search).get("category") || "all";
+  return ["all", ...all].includes(v) ? v : "all";
+}
+export default function NewsFilter({ items }: { items: N[] }) {
+  const allCats = Array.from(new Set(items.map((i) => i.category)));
   const [q, setQ] = useState("");
-  const [cat, setCat] = useState(initialCat && ["all", ...Array.from(new Set(items.map((i) => i.category)))].includes(initialCat) ? initialCat : "all");
+  const [cat, setCat] = useState(() => catFromUrl(allCats));
   const [limit, setLimit] = useState(24);
-  const cats = useMemo(() => ["all", ...Array.from(new Set(items.map((i) => i.category)))], [items]);
+  const cats = useMemo(() => ["all", ...allCats], [items, allCats]);
   const filtered = items.filter((n) => {
     const okCat = cat === "all" || n.category === cat;
     const s = (n.title + " " + n.excerpt + " " + n.tags.join(" ")).toLowerCase();
