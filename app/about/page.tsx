@@ -80,10 +80,10 @@ export default function About() {
             </Link>
           </div>
           <div className="act-flist act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
-            <span className="act-fact">Конференция — высший орган</span>
-            <span className="act-fact">Совет — руководство</span>
-            <span className="act-fact">Президиум — решения</span>
-            <span className="act-fact">КРК — контроль</span>
+            <a href="/docs" className="act-fact act-fact-link">Конференция — высший орган<span className="act-arrow" aria-hidden="true">→</span></a>
+            <a href="/docs" className="act-fact act-fact-link">Совет — руководство<span className="act-arrow" aria-hidden="true">→</span></a>
+            <a href="/docs" className="act-fact act-fact-link">Президиум — решения<span className="act-arrow" aria-hidden="true">→</span></a>
+            <a href="/docs" className="act-fact act-fact-link">КРК — контроль<span className="act-arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
