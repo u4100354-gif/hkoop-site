@@ -12,15 +12,19 @@
 
 ## Таблицы
 
-news(6), documents(6), partners(13), honor(7), events(3), site_settings(11)
+news, documents, partners(13), honor, events(3), site_settings, organizations (после применения `add_organizations.sql`).
 
-## Залить заново
+## Первичная установка / схема
 
 ```bash
 mysql -u hkoop -p hkoop < db/schema.sql
 python3 /tmp/make_seed.py
 mysql -u hkoop -p hkoop < db/seed.sql
 ```
-(пароль спросит интерактивно; хранить только в `.env.local`)
+ (пароль спросит интерактивно; хранить только в `.env.local`). Пользователь `hkoop` не имеет DDL-прав; первичную схему и миграции применяет владелец БД с привилегированным аккаунтом.
 
-Сайт пока читает `data/*.json`. Переключение Next.js на MySQL — следующий шаг.
+## Реестр членских организаций
+
+Один раз из корня репозитория применить `/opt/homebrew/opt/mariadb/bin/mariadb -u root -p hkoop < db/add_organizations.sql` (пароль спросит интерактивно). Страница `/organizations` и раздел админки используют эту таблицу; до миграции публичная страница показывает пустое состояние с контактами аппарата, без выдуманных данных.
+
+Next.js и локальная админка читают/обновляют MariaDB через настройки `.env.local`. Секреты в репозиторий не добавлять.

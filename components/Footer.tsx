@@ -20,12 +20,14 @@ function Icon({ d }: { d: string }) {
 }
 
 export default function Footer() {
-  const [vi, setVi] = useState(() => (typeof window === "undefined" ? false : localStorage.getItem("hkoop-vi") === "1"));
+  // SSR и первый клиентский рендер должны совпадать: localStorage читаем только после гидратации.
+  const [vi, setVi] = useState(false);
 
   useEffect(() => {
     const handleViChange = () => {
       setVi(localStorage.getItem("hkoop-vi") === "1");
     };
+    handleViChange();
     window.addEventListener("hkoop-vi", handleViChange);
     return () => window.removeEventListener("hkoop-vi", handleViChange);
   }, []);
@@ -67,7 +69,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span className="footer-copy">Союз «Хабаровское краевое объединение организаций профсоюзов» · Локальный прототип · <CookieSettings /></span>
+        <span className="footer-copy">Союз «Хабаровское краевое объединение организаций профсоюзов» · <CookieSettings /></span>
         <button onClick={toggleVi} className="vi-btn-footer">
           <Icon d={IC.eye} />{vi ? "Обычная версия" : "Версия для слабовидящих"}
         </button>

@@ -57,6 +57,12 @@ export default function ViProvider() {
     fn();
   };
 
+  const disableVi = () => {
+    localStorage.setItem("hkoop-vi", "0");
+    setVi(false);
+    window.dispatchEvent(new Event("hkoop-vi"));
+  };
+
   if (!vi) return null;
   return (
     <div className="vi-panel">
@@ -87,7 +93,7 @@ export default function ViProvider() {
         <button className={noimg ? "on" : ""} onClick={() => set("hkoop-vi-noimg", noimg ? "0" : "1", () => setNoimg(!noimg))}>
           {noimg ? "Картинки: выкл" : "Картинки: вкл"}
         </button>
-        <button onClick={() => setVi(false)}>Обычная версия</button>
+        <button onClick={disableVi}>Обычная версия</button>
       </div>
     </div>
   );

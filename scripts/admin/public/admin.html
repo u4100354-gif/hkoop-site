@@ -193,6 +193,25 @@
 "use strict";
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function cleanPreviewHtml(value) {
+  const allowed = new Set(["p","br","b","strong","i","em","h2","h3","ul","ol","li","a"]);
+  return String(value || "").slice(0,100000).replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<(script|style|iframe|object|embed|svg|math|template|form)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, "")
+    .replace(/<\/?([a-z][\w:-]*)\b([^>]*)>/gi, (tag,name,attrs) => {
+      name = String(name).toLowerCase();
+      if (!allowed.has(name)) return "";
+      if (name === "br") return "<br>";
+      if (/^<\//.test(tag)) return `</${name}>`;
+      if (name !== "a") return `<${name}>`;
+      const match = String(attrs).match(/\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+      const href = match?.[1] || match?.[2] || match?.[3] || "";
+      try {
+        if (href.startsWith("/") && !href.startsWith("//") && !href.includes("..")) return `<a href="${esc(href)}">`;
+        const url = new URL(href);
+        return ["http:","https:"].includes(url.protocol) ? `<a href="${esc(url.href)}">` : "<a>";
+      } catch { return "<a>"; }
+    });
+}
 
 const I = {
   news: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>`,
@@ -233,6 +252,7 @@ const SECTIONS = [
   { id: "news", label: "Новости", icon: I.news },
   { id: "docs", label: "Документы", icon: I.docs },
   { id: "events", label: "Мероприятия", icon: I.cal },
+  { id: "organizations", label: "Членские организации", icon: I.part },
   { id: "partners", label: "Партнёры", icon: I.part },
   { id: "settings", label: "Настройки", icon: I.sett },
 ];
@@ -349,8 +369,8 @@ async function editNews(id) {
       </div>
       <div>
         <label>Загрузить новое фото (до 5 МБ)</label>
-        <div class="drop" id="drop" tabindex="0" role="button">Перетащите файл или нажмите — jpg/png/webp</div>
-        <input type="file" id="f_file" accept="image/*" hidden>
+        <div class="drop" id="drop" tabindex="0" role="button">Перетащите JPG, PNG, GIF или WebP</div>
+        <input type="file" id="f_file" accept=".jpg,.jpeg,.png,.gif,.webp" hidden>
       </div>
     </div>
     <label>Краткое описание (превью до 160 знаков)<textarea id="f_excerpt" maxlength="2000">${esc(row.excerpt)}</textarea></label>
@@ -367,6 +387,7 @@ async function editNews(id) {
       <div class="prev" id="pv" hidden></div>
     </div>
     <label>Ссылка на старую новость (при переносе)<input type="text" id="f_old" value="${esc(row.old_url)}" placeholder="/index.php/news/..."></label>
+    <p class="hint">Предпросмотр доступен выше. «Сохранить» записывает изменения в локальную БД; на общий сайт они попадут после проверки и команды «обнови сайт».</p>
     <div class="err" id="ederr" role="alert"></div>
     <div class="foot">
       <button type="button" class="btn btn-w" id="edcancel">Отмена</button>
@@ -385,7 +406,7 @@ async function editNews(id) {
   fi.onchange = () => upload(f_ => { $("f_img").appendChild(new Option(f_.url, f_.url)); $("f_img").value = f_.url; updPrevN(); }, fi, false);
   $("fmt").onclick = (e) => {
     const b = e.target.closest("button"); if (!b) return;
-    if (b.dataset.t === "pv") { const pv = $("pv"); pv.hidden = !pv.hidden; pv.innerHTML = pv.hidden ? "" : `<strong style="font-size:13px;color:var(--muted)">Предпросмотр на сайте</strong><div class="card-body article-body" style="border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:8px">${$("f_body").value || "<i>пусто</i>"}</div>`; return; }
+     if (b.dataset.t === "pv") { const pv = $("pv"); pv.hidden = !pv.hidden; pv.innerHTML = pv.hidden ? "" : `<strong style="font-size:13px;color:var(--muted)">Предпросмотр на сайте</strong><div class="card-body article-body" style="border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:8px">${cleanPreviewHtml($("f_body").value || "<i>пусто</i>")}</div>`; return; }
     const ta = $("f_body"), s = ta.selectionStart, en = ta.selectionEnd, sel = ta.value.slice(s, en) || "текст";
     let ins = sel;
     if (b.dataset.t === "b") ins = `<b>${sel}</b>`;
@@ -464,6 +485,9 @@ async function editDoc(id) {
       <label>Тип<select id="dtype">${docTypes.map(x => `<option value="${x[0]}" ${row.type===x[0]?"selected":""}>${x[1]}</option>`).join("")}</select></label>
       <label>Год<input type="number" id="dyear" min="1990" max="2100" value="${row.year}"></label>
     </div>
+    <label>Ссылка на прежний файл<input type="url" id="doldfile" maxlength="500" value="${esc(row.file_old||"")}" placeholder="https://… (необязательно)"></label>
+    <label>Ссылка на старый документ<input type="url" id="doldurl" maxlength="500" value="${esc(row.old_url||"")}" placeholder="https://… (необязательно)"></label>
+    <p class="hint">Загрузка и сохранение меняют локальные файлы и БД. Общий сайт обновится после проверки и команды «обнови сайт».</p>
     <div class="frow">
       <div><label>Файл локально (PDF)<select id="dfile"><option value="">— не задан —</option>${await (async () => { try { const { files } = await api("/api/files?dir=docs"); return (files || []).map(f => `<option value="${esc(f)}" ${row.file_local===f?"selected":""}>${esc(f)}</option>`).join(""); } catch { return ""; } })()}</select></label>
       <div class="prev"><iframe id="dociframe" class="docprev" src="${esc(row.file_local)}" title="Первый лист PDF" style="${row.file_local?"":"display:none"}"></div></div>
@@ -490,6 +514,7 @@ async function editDoc(id) {
       await api("/api/docs/save", { method: "POST", body: JSON.stringify({
         id: row.id, isNew: !id, title: $("dt").value.trim(), type: $("dtype").value,
         year: Number($("dyear").value), file_local: $("dfile").value,
+        file_old: $("doldfile").value.trim(), old_url: $("doldurl").value.trim(),
       }) });
       ; toast("Документ сохранён"); loadDocs();
     } catch (e) { $("derr").textContent = e.message; btn.disabled = false; btn.textContent = "Сохранить"; }
@@ -499,6 +524,8 @@ async function editDoc(id) {
 async function delDoc(id) { if (!await ask("Удалить документ из каталога? (файл на диске останется)")) return; await api("/api/docs/del", { method: "POST", body: JSON.stringify({ id }) }); toast("Удалено"); loadDocs(); }
 
 /* --- мероприятия --- */
+const EVENT_TYPES = [["consultation","Горячая линия"],["forum","Форум"],["monitoring","Мониторинг"]];
+const eventTypeLabel = (type) => (EVENT_TYPES.find(x => x[0] === type) || [null, type || "Событие"])[1];
 async function events() {
   const c = $("content");
   c.innerHTML = pageHead("Мероприятия", "Анонсы и события",
@@ -516,7 +543,7 @@ async function loadEvents() {
     t.innerHTML = `<table><thead><tr><th>Дата</th><th>Событие</th><th>Тип</th><th style="width:96px"></th></tr></thead><tbody>` +
       rows.map(r => `<tr><td class="num" style="white-space:nowrap;color:var(--muted)">${esc(r.date)}</td>
         <td class="ttitle" title="${esc(r.title)}">${esc(r.title)}</td>
-        <td><span class="chip ${r.date >= today ? "ok" : ""}">${r.date >= today ? "анонс" : "в архиве"}</span></td>
+        <td><span class="chip">${esc(eventTypeLabel(r.type))}</span> <span class="chip ${r.date >= today ? "ok" : ""}">${r.date >= today ? "анонс" : "в архиве"}</span></td>
         <td><div class="tactions"><button class="ibtn" data-e="${esc(r.id)}" title="Править" aria-label="Править">${I.edit}</button><button class="ibtn del" data-d="${esc(r.id)}" title="Удалить" aria-label="Удалить">${I.del}</button></div></td></tr>`).join("") + `</tbody></table>`;
     t.querySelectorAll("[data-e]").forEach(b => b.onclick = () => editEvent(b.dataset.e));
     t.querySelectorAll("[data-d]").forEach(b => b.onclick = () => delEvent(b.dataset.d));
@@ -524,13 +551,16 @@ async function loadEvents() {
 }
 async function editEvent(id) {
   const form = $("edform");
-  let row = { title: "", date: new Date().toISOString().slice(0, 10), type: "document", old_url: "", id: "" };
+  let row = { title: "", date: new Date().toISOString().slice(0, 10), type: "", old_url: "", id: "" };
   if (id) { const d = await api("/api/events/one?id=" + encodeURIComponent(id)).catch(() => ({ row: null })); if (d.row) row = d.row; }
   form.innerHTML = `
     <div class="dlg-header"><h3>${id ? "Править событие" : "Новое событие"}</h3><button type="button" class="ibtn" id="c" aria-label="Закрыть">✕</button></div>
     <label>Название<input type="text" id="evt_t" required maxlength="500" value="${esc(row.title)}"></label>
     <div class="frow">
       <label>Дата<input type="date" id="evt_d" required value="${esc(row.date||"")}"></label>
+      <label>Тип события<select id="evt_type" required><option value="" ${row.type?"":"selected"} disabled>Выберите тип</option>${EVENT_TYPES.map(([value,label]) => `<option value="${value}" ${row.type===value?"selected":""}>${label}</option>`).join("")}</select></label>
+    </div>
+    <div class="frow">
       <label>Ссылка на старый анонс<input type="text" id="evt_o" value="${esc(row.old_url)}"></label>
     </div>
     <div class="err" id="eve" role="alert"></div>
@@ -540,13 +570,68 @@ async function editEvent(id) {
   $("evs").onclick = async () => {
     const btn = $("evs"); btn.disabled = true; btn.textContent = "Сохраняем…";
     try {
-      await api("/api/events/save", { method: "POST", body: JSON.stringify({ id: row.id, isNew: !id, title: $("evt_t").value.trim(), date: $("evt_d").value, old_url: $("evt_o").value.trim() }) });
+      await api("/api/events/save", { method: "POST", body: JSON.stringify({ id: row.id, isNew: !id, title: $("evt_t").value.trim(), date: $("evt_d").value, type: $("evt_type").value, old_url: $("evt_o").value.trim() }) });
       ; toast("Событие сохранено"); loadEvents();
     } catch (e) { $("eve").textContent = e.message; btn.disabled = false; btn.textContent = "Сохранить"; }
   };
   openModal();
 }
 async function delEvent(id) { if (!await ask("Удалить событие?")) return; await api("/api/events/del", { method: "POST", body: JSON.stringify({ id }) }); toast("Удалено"); loadEvents(); }
+
+/* --- каталог членских организаций --- */
+async function organizations() {
+  const c = $("content");
+  c.innerHTML = pageHead("Членские организации", "Контакты, территория и сфера деятельности",
+    `<button class="btn btn-p" id="addOrg">+ Добавить организацию</button>`)
+    + `<div class="toolbar"><input id="oq" placeholder="Поиск по названию, району, сфере…" aria-label="Поиск организаций"><span class="count" id="ocount"></span></div><div id="otbl"></div>`;
+  $("addOrg").onclick = () => editOrganization(null);
+  $("oq").oninput = () => loadOrganizations();
+  await loadOrganizations();
+}
+async function loadOrganizations() {
+  const t = $("otbl"); if (!t) return;
+  t.innerHTML = skel();
+  try {
+    const { rows } = await api("/api/organizations");
+    const q = $("oq").value.trim().toLocaleLowerCase("ru");
+    const filtered = rows.filter(r => [r.name,r.district,r.sphere,r.chair].join(" ").toLocaleLowerCase("ru").includes(q));
+    $("ocount").textContent = `Показано ${filtered.length} из ${rows.length}`;
+    if (!filtered.length) {
+      t.innerHTML = emptyBox(rows.length ? "Совпадений нет" : "Реестр пока пуст", rows.length ? "Измените запрос или добавьте организацию." : "Добавьте подтверждённые аппаратом контакты — они появятся в каталоге на сайте.", `<button class="btn btn-p" id="orgFirst">+ Добавить организацию</button>`);
+      $("orgFirst").onclick = () => editOrganization(null); return;
+    }
+    t.innerHTML = `<table><thead><tr><th>Название</th><th>Территория</th><th>Сфера</th><th>Контакт</th><th style="width:96px"></th></tr></thead><tbody>` +
+      filtered.map(r => `<tr><td class="ttitle" title="${esc(r.name)}">${esc(r.name)}<br><span class="chip">${r.kind === "council" ? "Совет" : "Организация"}</span></td><td>${esc(r.district||"—")}</td><td>${esc(r.sphere||"—")}</td><td>${esc(r.phone||r.email||"—")}</td><td><div class="tactions"><button class="ibtn" data-e="${esc(r.id)}" title="Править" aria-label="Править">${I.edit}</button><button class="ibtn del" data-d="${esc(r.id)}" title="Удалить" aria-label="Удалить">${I.del}</button></div></td></tr>`).join("") + `</tbody></table>`;
+    t.querySelectorAll("[data-e]").forEach(b => b.onclick = () => editOrganization(rows.find(r => r.id === b.dataset.e)));
+    t.querySelectorAll("[data-d]").forEach(b => b.onclick = () => delOrganization(b.dataset.d));
+  } catch (e) { t.innerHTML = errBox(e.message, loadOrganizations); bindRetry(loadOrganizations); }
+}
+function editOrganization(row) {
+  const r = row || { id:"", name:"", kind:"org", district:"", sphere:"", chair:"", phone:"", email:"", address:"" };
+  $("edform").innerHTML = `<div class="dlg-header"><h3>${row ? "Править организацию" : "Новая организация"}</h3><button type="button" class="ibtn" id="c" aria-label="Закрыть">✕</button></div>
+    <label>Название<input id="oname" required maxlength="300" value="${esc(r.name)}"></label>
+    <div class="frow"><label>Тип<select id="okind"><option value="org" ${r.kind==="org"?"selected":""}>Членская организация</option><option value="council" ${r.kind==="council"?"selected":""}>Координационный совет</option></select></label><label>Район / муниципалитет<input id="odistrict" maxlength="128" value="${esc(r.district)}" placeholder="Только подтверждённые данные"></label></div>
+    <label>Сфера / отрасль<input id="osphere" maxlength="128" value="${esc(r.sphere)}"></label>
+    <label>Председатель<input id="ochair" maxlength="255" value="${esc(r.chair)}"></label>
+    <div class="frow"><label>Телефон<input id="ophone" type="tel" maxlength="64" value="${esc(r.phone)}"></label><label>Email<input id="oemail" type="email" maxlength="255" value="${esc(r.email)}"></label></div>
+    <label>Адрес<input id="oaddress" maxlength="300" value="${esc(r.address)}"></label>
+    <p class="hint">Указывайте только актуальные сведения, подтверждённые аппаратом. Сохранение меняет локальную БД; общий каталог обновится после проверки и команды «обнови сайт».</p>
+    <div class="err" id="oerr" role="alert"></div><div class="foot"><button type="button" class="btn btn-w" id="ocancel">Отмена</button><button type="button" class="btn btn-p" id="osave">Сохранить</button></div>`;
+  $("c").onclick = $("ocancel").onclick = () => closeModal();
+  $("osave").onclick = async () => {
+    const btn = $("osave"); btn.disabled = true; btn.textContent = "Сохраняем…"; $("oerr").textContent = "";
+    try {
+      await api("/api/organizations/save", { method:"POST", body:JSON.stringify({ id:r.id, name:$("oname").value, kind:$("okind").value, district:$("odistrict").value, sphere:$("osphere").value, chair:$("ochair").value, phone:$("ophone").value, email:$("oemail").value, address:$("oaddress").value }) });
+      closeModal(); toast("Организация сохранена"); loadOrganizations();
+    } catch (e) { $("oerr").textContent = e.message; btn.disabled = false; btn.textContent = "Сохранить"; }
+  };
+  openModal();
+}
+async function delOrganization(id) {
+  if (!await ask("Удалить организацию из каталога? Это действие сразу отразится на сайте.")) return;
+  try { await api("/api/organizations/del", { method:"POST", body:JSON.stringify({id}) }); toast("Организация удалена"); loadOrganizations(); }
+  catch (e) { toast(e.message, true); }
+}
 
 /* --- партнёры --- */
 async function partners() {

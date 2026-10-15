@@ -47,3 +47,16 @@ CREATE TABLE IF NOT EXISTS site_settings (
   `key` VARCHAR(128) PRIMARY KEY,
   value TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Каталог членских организаций и координационных советов (фильтры: район, сфера)
+CREATE TABLE IF NOT EXISTS organizations (
+  id VARCHAR(128) PRIMARY KEY,
+  name VARCHAR(300) NOT NULL,
+  kind VARCHAR(32) NOT NULL DEFAULT 'org',
+  district VARCHAR(128) NOT NULL DEFAULT '',
+  sphere VARCHAR(128) NOT NULL DEFAULT '',
+  chair VARCHAR(255) NOT NULL DEFAULT '',
+  phone VARCHAR(64) NOT NULL DEFAULT '',
+  email VARCHAR(255) NOT NULL DEFAULT '',
+  address VARCHAR(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

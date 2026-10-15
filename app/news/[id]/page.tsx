@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { q, parseTags } from "../../../lib/db";
 import Crumbs from "../../../components/Crumbs";
 import { safeImgSrc } from "../../../lib/url";
+import { sanitizeNewsHtml } from "../../../lib/sanitize-news-html";
 
 const catLabels: Record<string, string> = {
   molodezh: "Молодёжь",
@@ -52,7 +53,7 @@ export default async function NewsDetail({ params }: { params: Promise<{ id: str
         <div className="card"><div className="card-body article-page-body">
           {img && <img src={img} alt="" className="article-img" width={1200} height={675} />}
           {n.body ? (
-            <div className="article-body" dangerouslySetInnerHTML={{ __html: String(n.body) }} />
+            <div className="article-body" dangerouslySetInnerHTML={{ __html: sanitizeNewsHtml(n.body) }} />
           ) : (
             <>
               <p>{n.excerpt}</p>

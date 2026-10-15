@@ -4,18 +4,18 @@ import { safeHref, safeImgSrc } from "../lib/url";
 
 type P = { id: string; name: string; url: string; logo: string };
 
-function Logo({ p }: { p: P }) {
+function Logo({ p, compact = false }: { p: P; compact?: boolean }) {
   const [err, setErr] = useState(false);
   const src = safeImgSrc(p.logo);
   return (
-    <span style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, width: "100%" }}>
-      <span className="plogo">{!err && src && <img src={src} alt={p.name} loading="lazy" width={130} height={72} onError={() => setErr(true)} />}</span>
-      <span style={{ fontSize: 12, fontWeight: 700, textAlign: "center", lineHeight: 1.25 }}>{p.name}</span>
+    <span style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: compact ? 6 : 8, width: "100%" }}>
+      <span className="plogo">{!err && src && <img src={src} alt={p.name} loading="lazy" width={compact ? 104 : 130} height={compact ? 52 : 72} onError={() => setErr(true)} />}</span>
+      <span style={{ fontSize: compact ? 11.5 : 12, fontWeight: 700, textAlign: "center", lineHeight: 1.25 }}>{p.name}</span>
     </span>
   );
 }
 
-export default function PartnersStrip({ items }: { items: P[] }) {
+export default function PartnersStrip({ items, compact = false }: { items: P[]; compact?: boolean }) {
   return (
     <div className="partners-grid">
       {items.map((p) => {
@@ -23,12 +23,12 @@ export default function PartnersStrip({ items }: { items: P[] }) {
         if (!href)
           return (
             <span key={p.id} className="partner-card" title={p.name}>
-              <Logo p={p} />
+              <Logo p={p} compact={compact} />
             </span>
           );
         return (
           <a key={p.id} className="partner-card" href={href} target="_blank" rel="noreferrer" title={p.name}>
-            <Logo p={p} />
+            <Logo p={p} compact={compact} />
           </a>
         );
       })}

@@ -92,11 +92,13 @@ export default async function Home() {
           <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>ХКООП в цифрах</p>
           <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Сила — в единстве</h2>
           <div className="act-nums act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
-            <div className="act-num-item"><b><Counter end={77} /></b><span>лет с 11.12.1948</span></div>
-            <div className="act-num-item"><b><Counter end={20} /></b><span>членских организаций</span></div>
-            <div className="act-num-item"><b><Counter end={7} /></b><span>координационных советов</span></div>
-            <div className="act-num-item"><b><Counter end={102} suffix=" тыс." /></b><span>членов профсоюза</span></div>
+            <div className="act-num-item"><Counter end={77} /><span>лет с 11.12.1948</span></div>
+            <div className="act-num-item"><Counter end={20} /><span>членских организаций</span></div>
+            <div className="act-num-item"><Counter end={677} /><span>первичных профсоюзных организаций</span></div>
+            <div className="act-num-item"><Counter end={102576} /><span>членов профсоюза</span></div>
+            <div className="act-num-item"><Counter end={7} /><span>координационных советов</span></div>
           </div>
+          <p className="act-note act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>Данные на 1 января 2026 года: 14 краевых, 4 территориальные, 1 бассейновая и 1 первичная организация в составе Союза, а также 9 городских и районных организаций профсоюзов.</p>
         </div>
       </section>
 
@@ -129,8 +131,8 @@ export default async function Home() {
         <div className="container act-inner-wide">
           <p className="act-eyebrow act-r reveal" style={{ "--i": 0 } as React.CSSProperties}>Полезные ссылки</p>
           <h2 className="act-title act-r reveal" style={{ "--i": 1 } as React.CSSProperties}>Наши партнёры</h2>
-          <div className="act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
-            <PartnersStrip items={(partners as any).slice(0, 6)} />
+          <div className="act-partners-home act-r reveal" style={{ "--i": 2 } as React.CSSProperties}>
+            <PartnersStrip items={partners as any[]} compact />
           </div>
           <div className="act-ctas act-r reveal" style={{ "--i": 3 } as React.CSSProperties}>
             <Link href="/partners" className="act-link">

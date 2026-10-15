@@ -27,7 +27,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" suppressHydrationWarning className={manrope.variable}>
       <body>
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <a className="skip" href="#content">Перейти к содержанию</a>
         <ViProvider />
         <Header />

@@ -7,7 +7,7 @@ node_modules/
 db/phpmyadmin/
 out/
 graphify-out/cache/
-".claude/worktrees/"
+.claude/worktrees/
 scripts/parse-report.json
 tsconfig.tsbuildinfo
 dev.log

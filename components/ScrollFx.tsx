@@ -13,6 +13,11 @@ export default function ScrollFx() {
   const [top, setTop] = useState(false);
   const path = usePathname();
 
+  // Не вставляем raw <script> из Server Component: класс анимаций включается уже после гидратации.
+  useEffect(() => {
+    document.documentElement.classList.add("js");
+  }, []);
+
   useEffect(() => {
     const els = Array.from(document.querySelectorAll(".reveal:not(.in)"));
     const io = new IntersectionObserver(

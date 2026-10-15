@@ -50,5 +50,7 @@ export default function Counter({ end, prefix = "", suffix = "" }: { end: number
     return () => io.disconnect();
   }, [end]);
 
-  return <b ref={ref}>{prefix}{v}{suffix}</b>;
+  // группировка разрядов неразрывным пробелом: 102576 → «102 576»
+  const fmt = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0");
+  return <b ref={ref}>{prefix}{fmt(v)}{suffix}</b>;
 }
