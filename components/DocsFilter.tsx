@@ -73,8 +73,8 @@ export default function DocsFilter({ items }: { items: D[] }) {
               <div className="doc-foot">
                 <small>{typeLabels[d.type] || d.type} · {d.year}</small>
                 <div className="btn-row">
-                  {safePreview(d.file_local) && <button className="btn btn-ghost" onClick={() => setPreview({ src: safePreview(d.file_local)!, title: d.title })}>Смотреть</button>}
                   {safeHref(d.file_old) && <a className="btn btn-ghost" href={safeHref(d.file_old)!} target="_blank" rel="noreferrer">PDF</a>}
+                  {safePreview(d.file_local) && <button className="btn btn-ghost" onClick={() => setPreview({ src: safePreview(d.file_local)!, title: d.title })}>Смотреть</button>}
                   {!safePreview(d.file_local) && !safeHref(d.file_old) && <span className="doc-missing">файл уточняется</span>}
                 </div>
               </div>

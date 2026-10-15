@@ -359,7 +359,7 @@ body.vi-mode .act-branch-svg { display: none; }
 .act-inner.act-inner-docs { max-width: 1120px; }
 /* строка «тип · год» прижата к низу карточки — на одной высоте во всех карточках */
 .act-docgrid .doc-meta { margin-top: auto; padding-top: 2px; }
-.act-docgrid .doc-card .btn-row { margin-top: 0; }
+.act-docgrid .doc-card .btn-row { width: 100%; margin-top: 0; justify-content: flex-end; }
 
 
 /* Консультация: две колонки (инфо слева, форма справа) */
@@ -780,7 +780,7 @@ button:active { transform: scale(.96); }
 .doc-card .btn-row { margin-top: auto; padding-top: 10px; }
 .doc-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; margin-top: auto; padding-top: 10px; flex-wrap: wrap; }
 .doc-foot > small { padding-bottom: 10px; }
-.doc-foot .btn-row { margin-top: 0; padding-top: 0; }
+.doc-foot .btn-row { margin: 0 0 0 auto; padding-top: 0; justify-content: flex-end; }
 .doc-missing { font-size: 13px; color: var(--muted); white-space: nowrap; padding-bottom: 10px; }
 .card img { display: block; }
 .card h3 { margin: 8px 0; font-size: 16px; line-height: 1.35; }
