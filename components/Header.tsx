@@ -10,6 +10,7 @@ const nav = [
   { href: "/about", label: "О нас" },
   { href: "/activity", label: "Деятельность" },
   { href: "/docs", label: "Документы" },
+  { href: "/events", label: "Календарь" },
   { href: "/honor", label: "Книга Почета" },
   { href: "/partners", label: "Партнеры" },
   { href: "/contacts", label: "Контакты" },

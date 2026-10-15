@@ -100,6 +100,7 @@ const validDate = (v) => {
   const d = new Date(`${v}T00:00:00.000Z`);
   return !Number.isNaN(d.valueOf()) && d.toISOString().slice(0, 10) === v;
 };
+const validTime = (v) => /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(String(v || ""));
 const localFile = (v, dir, ext) => {
   const s = String(v || "").trim();
   return !s || (s.startsWith(`/${dir}/`) && !s.includes("..") && !s.includes("\\") && ext.test(s)) ? s : "";
@@ -125,6 +126,22 @@ function sanitizeNewsHtml(value) {
 }
 
 const pool = mysql.createPool({ ...DB, waitForConnections: true, connectionLimit: 4 });
+async function eventTimeColumns() {
+  try {
+    await pool.query("SELECT event_time,event_end_time FROM events LIMIT 0");
+    return { start: true, end: true };
+  } catch (e) {
+    if (e.code !== "ER_BAD_FIELD_ERROR") throw e;
+  }
+  try {
+    await pool.query("SELECT event_time FROM events LIMIT 0");
+    return { start: true, end: false };
+  } catch (e) {
+    if (e.code === "ER_BAD_FIELD_ERROR") return { start: false, end: false };
+    throw e;
+  }
+}
+const eventTimeSelect = (columns, field) => columns[field] ? `TIME_FORMAT(${field === "start" ? "event_time" : "event_end_time"},'%H:%i')` : "NULL";
 
 const server = http.createServer(async (req, res) => {
   const u = new URL(req.url, "http://x");
@@ -301,12 +318,14 @@ const server = http.createServer(async (req, res) => {
 
     // ---- мероприятия ----
     if (req.method === "GET" && u.pathname === "/api/events/one") {
-      const [rows] = await pool.query("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,type,old_url FROM events WHERE id=?", [u.searchParams.get("id")]);
+      const columns = await eventTimeColumns();
+      const [rows] = await pool.query(`SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,${eventTimeSelect(columns, "start")} AS event_time,${eventTimeSelect(columns, "end")} AS event_end_time,type,old_url FROM events WHERE id=?`, [u.searchParams.get("id")]);
       json(res, 200, { row: rows[0] || null });
       return;
     }
     if (req.method === "GET" && u.pathname === "/api/events") {
-      const [rows] = await pool.query("SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,type,old_url FROM events ORDER BY date DESC LIMIT 200");
+      const columns = await eventTimeColumns();
+      const [rows] = await pool.query(`SELECT id,title,DATE_FORMAT(date,'%Y-%m-%d') AS date,${eventTimeSelect(columns, "start")} AS event_time,${eventTimeSelect(columns, "end")} AS event_end_time,type,old_url FROM events ORDER BY date DESC,event_time DESC LIMIT 200`);
       json(res, 200, { rows });
       return;
     }
@@ -314,7 +333,16 @@ const server = http.createServer(async (req, res) => {
       const b = JSON.parse(await readBody(req));
       const title = textValue(b.title, 500);
       const date = String(b.date || "");
+      const eventTime = textValue(b.event_time, 5);
+      const eventEndTime = textValue(b.event_end_time, 5);
       if (!title || !validDate(date) || !EVENT_TYPES.has(b.type)) { json(res, 400, { error: "Укажите название, корректную дату и тип события" }); return; }
+      if (!validTime(eventTime) || !validTime(eventEndTime)) { json(res, 400, { error: "Укажите подтверждённые время начала и окончания в формате ЧЧ:ММ" }); return; }
+      if (eventEndTime <= eventTime) { json(res, 400, { error: "Время окончания должно быть позже времени начала" }); return; }
+      const columns = await eventTimeColumns();
+      if (!columns.start || !columns.end) {
+        json(res, 503, { error: "Для сохранения времени примените миграции db/add_event_time.sql и db/add_event_end_time.sql от пользователя root." });
+        return;
+      }
       const type = b.type;
       const oldUrl = safeHrefCheck(b.old_url) || "";
       if (b.isNew) {
@@ -325,12 +353,12 @@ const server = http.createServer(async (req, res) => {
           if (ex.length === 0) break;
           id = `${base}-${k}`;
         }
-        await pool.query("INSERT INTO events (id,title,date,type,old_url) VALUES (?,?,?,?,?)", [id, title, date, type, oldUrl || null]);
+        await pool.query("INSERT INTO events (id,title,date,event_time,event_end_time,type,old_url) VALUES (?,?,?,?,?,?,?)", [id, title, date, eventTime, eventEndTime, type, oldUrl || null]);
       } else {
         const id = textValue(b.id, 128);
         const [existing] = await pool.query("SELECT id FROM events WHERE id=?", [id]);
         if (!existing.length) { json(res, 404, { error: "Мероприятие не найдено" }); return; }
-        await pool.query("UPDATE events SET title=?,date=?,type=?,old_url=? WHERE id=?", [title, date, type, oldUrl || null, id]);
+        await pool.query("UPDATE events SET title=?,date=?,event_time=?,event_end_time=?,type=?,old_url=? WHERE id=?", [title, date, eventTime, eventEndTime, type, oldUrl || null, id]);
       }
       regenIndex();
       json(res, 200, { ok: true });

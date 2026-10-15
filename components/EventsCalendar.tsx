@@ -6,6 +6,8 @@ export type CalendarEvent = {
   id: string;
   title: string;
   date: string;
+  event_time?: string | null;
+  event_end_time?: string | null;
   type: string;
 };
 
@@ -43,8 +45,23 @@ function labelDate(value: string, options: Intl.DateTimeFormatOptions = { day: "
   return new Intl.DateTimeFormat("ru-RU", options).format(dateFromIso(value));
 }
 
+function eventTimeLabel(event: CalendarEvent) {
+  if (event.event_time && event.event_end_time) return `${event.event_time}–${event.event_end_time} · Хабаровск`;
+  if (event.event_time) return `${event.event_time} · Хабаровск`;
+  if (event.event_end_time) return `до ${event.event_end_time} · Хабаровск`;
+  return "Время не указано";
+}
+
+function EventTime({ event }: { event: CalendarEvent }) {
+  return event.event_time || event.event_end_time
+    ? <time className="events-item-time" dateTime={event.event_time ? `${event.date}T${event.event_time}` : undefined}>{eventTimeLabel(event)}</time>
+    : <span className="events-item-time">{eventTimeLabel(event)}</span>;
+}
+
 export default function EventsCalendar({ items, initialMonth }: { items: CalendarEvent[]; initialMonth: string }) {
-  const sortedItems = useMemo(() => [...items].sort((a, b) => b.date.localeCompare(a.date)), [items]);
+  const sortedItems = useMemo(() => [...items].sort((a, b) =>
+    b.date.localeCompare(a.date) || (a.event_time || "99:99").localeCompare(b.event_time || "99:99")
+  ), [items]);
   const [month, setMonth] = useState(() => sortedItems[0]?.date.slice(0, 7) || initialMonth);
   const [selectedDate, setSelectedDate] = useState(() => sortedItems[0]?.date || `${initialMonth}-01`);
   const [type, setType] = useState("all");
@@ -105,7 +122,7 @@ export default function EventsCalendar({ items, initialMonth }: { items: Calenda
                 if (!cell) return <span className="events-day events-day-empty" key={`empty-${index}`} aria-hidden="true" />;
                 const dayEvents = monthEvents.filter((event) => event.date === cell.date);
                 const selected = selectedDate === cell.date;
-                const accessibleLabel = `${cell.day} ${labelDate(cell.date, { month: "long" })}${dayEvents.length ? ` — ${dayEvents.map((event) => event.title).join("; ")}` : " — событий нет"}`;
+                const accessibleLabel = `${cell.day} ${labelDate(cell.date, { month: "long" })}${dayEvents.length ? ` — ${dayEvents.map((event) => `${event.event_time || event.event_end_time ? `${eventTimeLabel(event)}, ` : ""}${event.title}`).join("; ")}` : " — событий нет"}`;
                 return (
                   <button type="button" key={cell.date} className={`events-day${selected ? " selected" : ""}${dayEvents.length ? " has-events" : ""}`} aria-label={accessibleLabel} aria-pressed={selected} onClick={() => setSelectedDate(cell.date)}>
                     <span className="events-day-number">{cell.day}</span>
@@ -127,7 +144,7 @@ export default function EventsCalendar({ items, initialMonth }: { items: Calenda
             </div>
             {selectedEvents.length ? selectedEvents.map((event) => (
               <article className="events-item" key={event.id}>
-                <span className="events-item-type">{TYPE_LABELS[event.type] || event.type}</span>
+                <div className="events-item-meta"><span className="events-item-type">{TYPE_LABELS[event.type] || event.type}</span><EventTime event={event} /></div>
                 <h3>{event.title}</h3>
               </article>
             )) : <div className="events-empty-day"><strong>Событий нет</strong><p>На выбранную дату мероприятий не запланировано.</p></div>}
@@ -138,7 +155,7 @@ export default function EventsCalendar({ items, initialMonth }: { items: Calenda
           {monthEvents.length ? monthEvents.map((event) => (
             <article className="events-list-item" key={event.id}>
               <div className="events-list-date"><strong>{dateFromIso(event.date).getDate()}</strong><span>{labelDate(event.date, { month: "short" })}</span></div>
-              <div className="events-list-content"><span className="events-item-type">{TYPE_LABELS[event.type] || event.type}</span><h2>{event.title}</h2></div>
+              <div className="events-list-content"><div className="events-item-meta"><span className="events-item-type">{TYPE_LABELS[event.type] || event.type}</span><EventTime event={event} /></div><h2>{event.title}</h2></div>
               <button type="button" className="events-select-link" onClick={() => { setSelectedDate(event.date); setView("calendar"); }}>В календаре →</button>
             </article>
           )) : <div className="events-empty-day"><strong>В этом месяце событий нет</strong><p>Перейдите к другому месяцу или измените фильтр.</p></div>}

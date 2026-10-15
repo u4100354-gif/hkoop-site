@@ -56,7 +56,7 @@
   .kbtn { display: flex; width: 100%; align-items: center; gap: 10px; background: none; border: 0; color: var(--navy-100); font: inherit; font-weight: 600; padding: 10px 12px 10px 18px; border-radius: var(--r-sm); }
   .kbtn:hover { background: var(--navy-600); color: #fff; }
 
-  .content { padding: var(--s-4) var(--s-6) var(--s-6); max-width: 1160px; width: 100%; }
+  .content { padding: var(--s-4) var(--s-6) var(--s-6); max-width: 1160px; width: 100%; min-width: 0; }
   .page-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: var(--s-4); flex-wrap: wrap; }
   .page-head .meta { color: var(--muted); font-size: 13px; margin-top: 2px; }
 
@@ -161,7 +161,9 @@
     .shell { grid-template-columns: 1fr; }
     .sidebar { position: fixed; inset: 0 auto 0 0; width: 232px; z-index: 50; translate: -100% 0; transition: translate .2s var(--ease); padding-top: 16px; }
     .sidebar.open { translate: none; box-shadow: var(--sh-3); }
-    .content { padding: var(--s-3) var(--s-4) var(--s-6); }
+    .content { padding: 64px var(--s-4) var(--s-6); }
+    #evt { max-width: 100%; overflow-x: auto; }
+    #evt table { min-width: 560px; }
     .frow { grid-template-columns: 1fr; }
     .ttitle { max-width: 220px; }
     .statline { gap: var(--s-4); }
@@ -526,10 +528,15 @@ async function delDoc(id) { if (!await ask("Удалить документ из
 /* --- мероприятия --- */
 const EVENT_TYPES = [["consultation","Горячая линия"],["forum","Форум"],["monitoring","Мониторинг"]];
 const eventTypeLabel = (type) => (EVENT_TYPES.find(x => x[0] === type) || [null, type || "Событие"])[1];
+const eventTimeLabel = (event) => event.event_time && event.event_end_time
+  ? `${event.event_time}–${event.event_end_time} · Хабаровск`
+  : event.event_time ? `${event.event_time} · Хабаровск`
+  : event.event_end_time ? `до ${event.event_end_time} · Хабаровск`
+  : "Время не указано";
 async function events() {
   const c = $("content");
   c.innerHTML = pageHead("Мероприятия", "Анонсы и события",
-      `<button class="btn btn-p" id="addEv">+ Новое событие</button><div id="evt" style="width:100%"></div>`);
+      `<button class="btn btn-p" id="addEv">+ Новое событие</button>`) + `<div id="evt"></div>`;
   $("addEv").onclick = () => editEvent(null);
   await loadEvents();
 }
@@ -540,8 +547,8 @@ async function loadEvents() {
     const { rows } = await api("/api/events");
     if (!rows.length) { t.innerHTML = emptyBox("Событий нет", "Добавьте первое мероприятие.", `<button class="btn btn-p" id="ev1">Новое событие</button>`); $("ev1").onclick = () => editEvent(null); return; }
     const today = new Date().toISOString().slice(0,10);
-    t.innerHTML = `<table><thead><tr><th>Дата</th><th>Событие</th><th>Тип</th><th style="width:96px"></th></tr></thead><tbody>` +
-      rows.map(r => `<tr><td class="num" style="white-space:nowrap;color:var(--muted)">${esc(r.date)}</td>
+    t.innerHTML = `<table><thead><tr><th>Дата и время</th><th>Событие</th><th>Тип</th><th style="width:96px"></th></tr></thead><tbody>` +
+      rows.map(r => `<tr><td class="num" style="white-space:nowrap;color:var(--muted)">${esc(r.date)}<span style="display:block;font:inherit;font-size:12px">${esc(eventTimeLabel(r))}</span></td>
         <td class="ttitle" title="${esc(r.title)}">${esc(r.title)}</td>
         <td><span class="chip">${esc(eventTypeLabel(r.type))}</span> <span class="chip ${r.date >= today ? "ok" : ""}">${r.date >= today ? "анонс" : "в архиве"}</span></td>
         <td><div class="tactions"><button class="ibtn" data-e="${esc(r.id)}" title="Править" aria-label="Править">${I.edit}</button><button class="ibtn del" data-d="${esc(r.id)}" title="Удалить" aria-label="Удалить">${I.del}</button></div></td></tr>`).join("") + `</tbody></table>`;
@@ -551,15 +558,20 @@ async function loadEvents() {
 }
 async function editEvent(id) {
   const form = $("edform");
-  let row = { title: "", date: new Date().toISOString().slice(0, 10), type: "", old_url: "", id: "" };
+  let row = { title: "", date: new Date().toISOString().slice(0, 10), event_time: "", event_end_time: "", type: "", old_url: "", id: "" };
   if (id) { const d = await api("/api/events/one?id=" + encodeURIComponent(id)).catch(() => ({ row: null })); if (d.row) row = d.row; }
   form.innerHTML = `
     <div class="dlg-header"><h3>${id ? "Править событие" : "Новое событие"}</h3><button type="button" class="ibtn" id="c" aria-label="Закрыть">✕</button></div>
     <label>Название<input type="text" id="evt_t" required maxlength="500" value="${esc(row.title)}"></label>
     <div class="frow">
       <label>Дата<input type="date" id="evt_d" required value="${esc(row.date||"")}"></label>
+      <label>Время начала · Хабаровск<input type="time" id="evt_time" required value="${esc(row.event_time||"")}"></label>
+    </div>
+    <div class="frow">
+      <label>Время окончания · Хабаровск<input type="time" id="evt_end_time" required value="${esc(row.event_end_time||"")}"></label>
       <label>Тип события<select id="evt_type" required><option value="" ${row.type?"":"selected"} disabled>Выберите тип</option>${EVENT_TYPES.map(([value,label]) => `<option value="${value}" ${row.type===value?"selected":""}>${label}</option>`).join("")}</select></label>
     </div>
+    <p class="hint">Укажите подтверждённое время начала и окончания по Хабаровску. Для старых событий расписание нужно уточнить у организаторов.</p>
     <div class="frow">
       <label>Ссылка на старый анонс<input type="text" id="evt_o" value="${esc(row.old_url)}"></label>
     </div>
@@ -568,9 +580,10 @@ async function editEvent(id) {
   $("c").onclick = () => closeModal();
   $("evc").onclick = () => closeModal();
   $("evs").onclick = async () => {
+    if (!$("evt_time").reportValidity() || !$("evt_end_time").reportValidity()) return;
     const btn = $("evs"); btn.disabled = true; btn.textContent = "Сохраняем…";
     try {
-      await api("/api/events/save", { method: "POST", body: JSON.stringify({ id: row.id, isNew: !id, title: $("evt_t").value.trim(), date: $("evt_d").value, type: $("evt_type").value, old_url: $("evt_o").value.trim() }) });
+      await api("/api/events/save", { method: "POST", body: JSON.stringify({ id: row.id, isNew: !id, title: $("evt_t").value.trim(), date: $("evt_d").value, event_time: $("evt_time").value, event_end_time: $("evt_end_time").value, type: $("evt_type").value, old_url: $("evt_o").value.trim() }) });
       ; toast("Событие сохранено"); loadEvents();
     } catch (e) { $("eve").textContent = e.message; btn.disabled = false; btn.textContent = "Сохранить"; }
   };
@@ -741,7 +754,7 @@ function tdhash(id) { if (location.hash !== "#/" + id) location.hash = "#/" + id
 async function render() {
   await shell();
   const cur = current();
-  const fn = { dash, news, docs, events, partners, settings }[cur] || dash;
+  const fn = { dash, news, docs, events, organizations, partners, settings }[cur] || dash;
   await fn();
 }
 async function boot() {
